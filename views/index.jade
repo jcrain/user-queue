@@ -1,0 +1,18 @@
+html(ng-app="windowApp")
+	head
+		script(src="/socket.io/socket.io.js")
+		script(src="/javascript/WindowApp_IO.js")
+		script(src="/javascript/controllers.js")
+		script(src="/javascript/angular.min.js")
+	body
+		div(ng-controller="AddUserForm")
+			form(name="myForm",ng-submit="addUser()")
+				input(placeholder="Enter Your Name", type="text", id="user-name", ng-model="user.name")
+				br
+				input(placeholder="Enter Your Email", type="text", id="user-email", ng-model="user.email")
+				br
+				input(type="hidden", ng-model="user.id", value="123")
+				button submit!
+			p this is a paragraph and {{ data.message }}
+			each user, i in userlist
+				li= user.name 
