@@ -24,7 +24,7 @@ socket.on('upNext', function(data){
 });
 
 socket.on('newUser', function(data){
-	console.log('A NEW USER HAS BEEN ADDED')
+	console.log('A NEW USER HAS BEEN ADDED');
 });
 
 socket.on('connect', function(){

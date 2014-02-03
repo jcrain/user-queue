@@ -19,9 +19,12 @@ function AddUserForm($scope, $http){
 			/*newUser.$save(function(p, resp){
 
 			});*/
-			$http.post('/addUser', thisUser, function(){
+			$http.post('/addUser', thisUser).success(function(data, status, headers, config){
 				console.log('are we saving this now?????');
-
+				// Maaaaybe here we can call socket
+				socket.emit('newUser', data.name, function(){
+					console.log('we have a new user in the clients brower');
+				});
 			});
 		
 		}
