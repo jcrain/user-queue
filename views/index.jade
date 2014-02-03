@@ -2,8 +2,10 @@ html(ng-app="windowApp")
 	head
 		script(src="/socket.io/socket.io.js")
 		script(src="/javascript/WindowApp_IO.js")
-		script(src="/javascript/controllers.js")
 		script(src="/javascript/angular.min.js")
+		script(src="/javascript/app.js")
+		script(src="/javascript/controllers.js")
+		script(src="/javascript/services.js")
 	body
 		div(ng-controller="AddUserForm")
 			form(name="myForm",ng-submit="addUser()")

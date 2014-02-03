@@ -10,7 +10,9 @@ app.factory('socket', function ($rootScope) {
       });
     },
     emit: function (eventName, data, callback) {
+      console.log('EMITEMIT EMIT EMIT EMIT');
       socket.emit(eventName, data, function () {
+        console.log('inside the emit event');
         var args = arguments;
         $rootScope.$apply(function () {
           if (callback) {

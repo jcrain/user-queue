@@ -1,4 +1,4 @@
-function AddUserForm($scope, $http){
+function AddUserForm($scope, $http, socket){
 	$scope.data = { message: "hello"};
 	//alert('running add user');
 
@@ -30,4 +30,6 @@ function AddUserForm($scope, $http){
 		}
 
 	};
+
+	
 }

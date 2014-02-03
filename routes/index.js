@@ -50,7 +50,6 @@ exports.addUser = function(req, res){
 	// get the users details
 	// save them to db
 	// update all screens connected
-	console.log(req.body.id);
 
 
 	var reqBody = req.body,
@@ -67,9 +66,6 @@ exports.addUser = function(req, res){
 			throw 'Error';
 		} else {
 			res.json(doc);
-			/*socket.emit('newUser', reqBody.name, function(){
-				console.log('we have a new user in the clients brower');
-			});*/
 		}		
 	});
 };
@@ -81,6 +77,28 @@ exports.userDone = function(req, res){
 };
 
 
+
+exports.socketsLogic = function(socket){
+	// SOCKET STUFF
+	socket.emit('yourId', socket.id);
+
+	// handle disconnected socket here we bind events to the socket connection
+	socket.on('disconnect', function(socket){
+		console.log('this shit be hella disconnected');
+	});
+
+	socket.on('disClient', function(){
+		console.log('we have a DISCONNECTED client with id : ' + socket.id);
+	});
+
+	socket.on('saveId', function(data){
+		console.log('this is the socket ID i am adding to keep track of sockets: '+data);
+	});
+
+	socket.on('newUser', function(data){
+		console.log('NEW USER EVENT');
+	});
+};
 
 
 

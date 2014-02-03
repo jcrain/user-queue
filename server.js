@@ -3,6 +3,7 @@ var express = require('express'),
 	routes 	= require('./routes'),
 	path 	= require('path'),
  	fs   	= require('fs'),
+ 	lessMiddleware = require('less-middleware'),
  	app 	= express(),
  	server 	= http.createServer(app),
  	io 		= require('socket.io').listen(server);
@@ -19,12 +20,16 @@ app.configure(function(){
 	app.use(express.static(path.join(__dirname, 'public')));
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
+	app.use(lessMiddleware({ src: __dirname + '/public', force: true, paths: './vendor/twitter/bootstrap/less' }));
 });
 
 // get the routes object with property index
 app.get('/', routes.index);
 app.post('/addUser', routes.addUser);
 app.post('/userDone', routes.userDone);
+
+// We will put out event bindings in a controller
+io.sockets.on('connection', routes.socketsLogic);
 // Get user list
 
 // App Settings
@@ -32,7 +37,7 @@ app.post('/userDone', routes.userDone);
 
 // SOCKET IO STUFF
 //=============================================
-io.on('disconnect', function(){
+/*io.on('disconnect', function(){
 	console.log('we have lost the connection');
 	console.log('lets try to connect in 10 seconsd');
     /*socketConnectTimeInterval = setInterval(function () {
@@ -42,10 +47,10 @@ io.on('disconnect', function(){
       	console.log('we are reconnected after being disconnected');
       }
     }, 3000);*/
-});
+//}); -> uncomment this
 
 
-io.sockets.on('connection', function(socket){
+/*io.sockets.on('connection', function(socket){
 	console.log('this is the session id for this specific socket :' + socket.id);
 	socket.emit('yourId', socket.id);
 	clients[socket.id] = socket;
@@ -54,7 +59,7 @@ io.sockets.on('connection', function(socket){
 	}, 3000);*/
 
 	// handle disconnected socket here we bind events to the socket connection
-	socket.on('disconnect', function(socket){
+/*	socket.on('disconnect', function(socket){
 		console.log('this shit be hella disconnected');
 	});
 	socket.on('disClient', function(){
@@ -74,7 +79,7 @@ io.on('youAreUpNext', function(socket){
 
 io.on('reClient', function(socket){
 	console.log('RECONNECT biatchhhhh client id: '+ socket.id);
-});
+});*/
 
 
 
