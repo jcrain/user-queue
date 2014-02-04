@@ -1,5 +1,6 @@
 html(ng-app="windowApp")
 	head
+		link(rel='stylesheet', href='/stylesheets/style.css')
 		script(src="/socket.io/socket.io.js")
 		script(src="/javascript/WindowApp_IO.js")
 		script(src="/javascript/angular.min.js")
@@ -7,14 +8,15 @@ html(ng-app="windowApp")
 		script(src="/javascript/controllers.js")
 		script(src="/javascript/services.js")
 	body
-		div(ng-controller="AddUserForm")
+		div.container.main-container(ng-controller="AddUserForm")
 			form(name="myForm",ng-submit="addUser()")
 				input(placeholder="Enter Your Name", type="text", id="user-name", ng-model="user.name")
 				br
 				input(placeholder="Enter Your Email", type="text", id="user-email", ng-model="user.email")
 				br
-				input(type="hidden", ng-model="user.id", value="123")
-				button submit!
+				input(id="user_id", type="hidden", ng-model="user.id")
+				button.btn.btn-primary submit!
 			p this is a paragraph and {{ data.message }}
-			each user, i in userlist
-				li= user.name 
+				ol
+					each user, i in userlist
+						li= user.name 

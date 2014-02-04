@@ -12,55 +12,29 @@ if (process.env.VCAP_SERVICES) {
 var NewUser = require('../models/User.js').NewUser; // get our schema
 var User = db.model('users', NewUser); // get the data that should be based on the schema 
 
-User.find({}, 'name', function(error, polls) {
-		if(error){ throw error; }
-		console.log('this is the polls results '+polls);
-	});
+// Get User schema and model to save the Que user
+var QueUser = require('../models/User.js').QueUser; // get our schema
+var Que = db.model('que', QueUser); 
 
-// Main application view
-/*exports.index = function(req, res) {
-	res.render('index');
-	console.log('here is the socket call back in index');
-};*/
-
-/*exports.index = function(db){
-	return function(req, res) {
-		var collection = db.get('usercollection');
-		collection.find({}, {}, function(e, docs){
-			res.render('index');
-			console.log('here is the socket call back in index');
-		});
-	};
-};*/
- 
 exports.index  = function(req, res) {
 	User.find({},'name', function(e, docs){
-		console.log("this is returning nothing! " +docs);
 		res.render('index', {
 			"userlist": docs
 		});
-		console.log('here is the socket call back in index');
 	});
-
-	
 };
 
 // API to save user to database
 exports.addUser = function(req, res){
 	// get the users details
-	// save them to db
-	// update all screens connected
-
-
 	var reqBody = req.body,
 			// Build up poll object to save
 			userObj = {id: reqBody.id, name: reqBody.name, email: reqBody.email};
-	//console.log(reqBody.id);
 				
 	// Create poll model from built up poll object
 	var user = new User(userObj);
 	
-	// Save poll to DB
+	// Save poll to DB with all users
 	user.save(function(err, doc) {
 		if(err || !doc) {
 			throw 'Error';
@@ -68,10 +42,30 @@ exports.addUser = function(req, res){
 			res.json(doc);
 		}		
 	});
+
+	// We also need to save the user to the db for the que
+	var queDoc = { id: reqBody.id, name: reqBody.name };
+	var addQue = new Que(queDoc);
+	// Save poll to DB with all users
+	addQue.save(function(err, doc) {
+		if(err || !doc) {
+			throw 'Error';
+		} else {
+			res.json(doc);
+		}		
+	});
+
 };
 
-exports.userDone = function(req, res){
+// Remove certain user from Que list
+exports.removeUserFromQue = function(req, res){
+	console.log('REMOVE DAT BIATCH');
 	// remove the current user from the Que
+	var user = req.query.id;
+	Que.remove({id: user}, function(err, docs){
+		console.log(docs);
+		res.send('So fucking removed!');
+	});
 	// give the current user the last screen with the share button
 	// update all screens connected with the new que
 };
@@ -81,6 +75,7 @@ exports.userDone = function(req, res){
 exports.socketsLogic = function(socket){
 	// SOCKET STUFF
 	socket.emit('yourId', socket.id);
+	
 
 	// handle disconnected socket here we bind events to the socket connection
 	socket.on('disconnect', function(socket){
@@ -95,8 +90,13 @@ exports.socketsLogic = function(socket){
 		console.log('this is the socket ID i am adding to keep track of sockets: '+data);
 	});
 
+	// After saving the user we will trigger a new user event on the client side and let 
+	// everyone else know that there is a new user
 	socket.on('newUser', function(data){
 		console.log('NEW USER EVENT');
+		socket.broadcast.emit('updateUserList',data, function(){
+			console.log('We have a mew user and it is :'+data);
+		});
 	});
 };
 

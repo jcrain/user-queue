@@ -12,6 +12,7 @@ socket.on('yourId', function(data){
 	// we get our id here
 	userId = data;
 	socket.emit('saveId', userId);
+	document.getElementById('user_id').setAttribute("value", userId);
 	// 
 	/*setTimeout(function(){
 		console.log('we should have a disconnected socket');
@@ -23,8 +24,9 @@ socket.on('upNext', function(data){
 	console.log(data);
 });
 
-socket.on('newUser', function(data){
+socket.on('udpateUserList', function(data){
 	console.log('A NEW USER HAS BEEN ADDED');
+	
 });
 
 socket.on('connect', function(){
