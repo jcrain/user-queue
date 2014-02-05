@@ -15,4 +15,5 @@ exports.NewUser = new mongoose.Schema({
 exports.QueUser = new mongoose.Schema ({
 	id		: { type: String, required: true },
 	name	: { type: String, required: true },
+	socket	: { type: String, required: true }
 });

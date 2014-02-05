@@ -1,14 +1,14 @@
-var host = location.host.split(':');
+/*var host = location.host.split(':');
 
 var socket = io.connect('http://'+host[0]+':3000/');
 //var socket = io.connect('http://localhost:8080/');
 console.log(socket);
 
-var userId;
+var userId;*/
 
 
-socket.on('yourId', function(data){
-	alert(data);
+/*socket.on('yourId', function(data){
+	//alert(data);
 	// we get our id here
 	userId = data;
 	socket.emit('saveId', userId);
@@ -18,9 +18,9 @@ socket.on('yourId', function(data){
 		console.log('we should have a disconnected socket');
 		socket.disconnect();
 	}, 9000);*/
-});
+//});
 
-socket.on('upNext', function(data){
+/*socket.on('upNext', function(data){
 	console.log(data);
 });
 
@@ -48,4 +48,4 @@ socket.on('disconnect', function(){
 
 socket.on('reconnect', function(){
 	socket.emit('reClient');
-});
+});*/

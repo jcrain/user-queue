@@ -7,16 +7,26 @@ html(ng-app="windowApp")
 		script(src="/javascript/app.js")
 		script(src="/javascript/controllers.js")
 		script(src="/javascript/services.js")
-	body
-		div.container.main-container(ng-controller="AddUserForm")
+	body(ng-controller="WindowGame")
+		div.container.welcome-screen(ng-show="data.showWelcomeMessage")
+			p Welcome to the awesome game!
+			button.btn.btn-primary(ng-click="showForm()") Start playing! 
+
+		div.container.sign-up-form(ng-show="data.showSignUp")
+			p Sign up to play the coolest game ever
 			form(name="myForm",ng-submit="addUser()")
-				input(placeholder="Enter Your Name", type="text", id="user-name", ng-model="user.name")
+				input(class="sign-up", placeholder="Enter Your Name", type="text", id="user-name", ng-model="user.name")
 				br
-				input(placeholder="Enter Your Email", type="text", id="user-email", ng-model="user.email")
+				input(class="sign-up" ,placeholder="Enter Your Email", type="text", id="user-email", ng-model="user.email")
 				br
 				input(id="user_id", type="hidden", ng-model="user.id")
 				button.btn.btn-primary submit!
-			p this is a paragraph and {{ data.message }}
+
+		div.container.user-que(ng-show="data.showUserQue")
+			p Up Next! 
 				ol
 					each user, i in userlist
 						li= user.name 
+		div.container.playing-game(ng-show="data.showGameScreen")
+			p Get ready to play!!
+			img(src="/images/running_guy.gif")

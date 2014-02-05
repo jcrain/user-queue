@@ -10,8 +10,11 @@ var express = require('express'),
  	fs   	= require('fs'),
  	lessMiddleware = require('less-middleware'),
  	app 	= express(),
- 	server 	= http.createServer(app),
- 	io 		= require('socket.io').listen(server);
+ 	server 	= http.createServer(app);
+ 	
+
+io 		= require('socket.io').listen(server);
+openConnections = {};
 
 
 
@@ -31,6 +34,9 @@ app.configure(function(){
 // get the routes object with property index
 app.get('/', routes.index);
 app.get('/deleteUser', routes.removeUserFromQue);
+app.get('/userFinishedGame', routes.userFinishedGame);
+app.get('/getNextUser', routes.getNextUser);
+app.get('/socketShowGameScreen', routes.socketShowGameScreen);
 app.post('/addUser', routes.addUser);
 //app.post('/userDone', routes.userDone);
 

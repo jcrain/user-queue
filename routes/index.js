@@ -43,8 +43,10 @@ exports.addUser = function(req, res){
 		}		
 	});
 
+	console.log('this is how many we have in our que: ' + Que.find('name').count());
+
 	// We also need to save the user to the db for the que
-	var queDoc = { id: reqBody.id, name: reqBody.name };
+	var queDoc = { id: reqBody.id, name: reqBody.name, socket: reqBody.id };
 	var addQue = new Que(queDoc);
 	// Save poll to DB with all users
 	addQue.save(function(err, doc) {
@@ -54,6 +56,12 @@ exports.addUser = function(req, res){
 			res.json(doc);
 		}		
 	});
+	
+
+	// TODO:
+	// -> add check to see if this is the first person to sign up 
+	// -> If is it the first person we need to get the server to update this
+	//    users screen
 
 };
 
@@ -70,12 +78,12 @@ exports.removeUserFromQue = function(req, res){
 	// update all screens connected with the new que
 };
 
-
+//exports.openConnections = {};
 
 exports.socketsLogic = function(socket){
 	// SOCKET STUFF
 	socket.emit('yourId', socket.id);
-	
+
 
 	// handle disconnected socket here we bind events to the socket connection
 	socket.on('disconnect', function(socket){
@@ -87,7 +95,7 @@ exports.socketsLogic = function(socket){
 	});
 
 	socket.on('saveId', function(data){
-		console.log('this is the socket ID i am adding to keep track of sockets: '+data);
+		console.log('this is the socket ID i am adding to keep track of sockets: ' + data);
 	});
 
 	// After saving the user we will trigger a new user event on the client side and let 
@@ -95,13 +103,39 @@ exports.socketsLogic = function(socket){
 	socket.on('newUser', function(data){
 		console.log('NEW USER EVENT');
 		socket.broadcast.emit('updateUserList',data, function(){
-			console.log('We have a mew user and it is :'+data);
+			console.log('We have a mew user and it is :' + data);
 		});
 	});
+
+	//exports.openConnections[socket.id] = socket;
+	openConnections[socket.id] = socket;
+	console.log(openConnections[socket.id]);
 };
 
+exports.socketShowGameScreen = function(socket){
+	// get the next socket id who is up
+	// send them the event to show the running gif
+	var myCurrentUser = Que.findOne(function(err, doc){
+		console.log('SOCKET ID FOR SHOW RUNNING SCREEN ' + doc.socket);
+		console.log(doc.socket);
+		//console.log(openConnections);
+		console.log(openConnections[doc.socket]);
+		io.sockets.socket(openConnections[doc.socket]).emit('timeToPlay');
+	});
+}
 
 
+exports.userFinishedGame = function(req, res){
+	// remove the current user from the que
+	console.log(globalNess);
+	Que.find({}, {"id":currentUser}, function(err, docs){
+		console.log('this is the socket connection :' + docs.socket);
+	});
+}
+
+exports.getNextUser = function(req, res){
+
+};
 
 
 
