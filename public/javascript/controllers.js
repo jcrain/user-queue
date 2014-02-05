@@ -60,11 +60,15 @@ function WindowGame($scope, $http, socket){
 		socket.disconnect();
 	}, 9000);*/
 	});
+
+	socket.on('alert', function(data){
+		alert('this is the post alert')
+	})
 	
 	socket.on('timeToPlay', function(data){
 		$scope.data.showGameScreen = true;
 		$scope.data.showUserQue = false;
-		console.log('WE ARE RUNNING TIME TO PLAY')
+		//alert('WE ARE RUNNING TIME TO PLAY')
 	});
 	
 	socket.on('udpateUserList', function(data){

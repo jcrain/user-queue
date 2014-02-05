@@ -119,9 +119,15 @@ exports.socketShowGameScreen = function(socket){
 		console.log('SOCKET ID FOR SHOW RUNNING SCREEN ' + doc.socket);
 		console.log(doc.socket);
 		//console.log(openConnections);
-		console.log(openConnections[doc.socket]);
-		io.sockets.socket(openConnections[doc.socket]).emit('timeToPlay');
+		//console.log(openConnections[doc.socket]);
+		//socket(openConnections[doc.socket]).emit('timeToPlay', {thing: "asdfsdaf"});
+		//socket.broadcast.emit('timeToPlay');
+		//console.log(socket);
+		io.sockets.socket(doc.socket).emit('timeToPlay', function(){
+			console.log('these event is working somewhere');
+		});
 	});
+	
 }
 
 
