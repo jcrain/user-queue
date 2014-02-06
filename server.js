@@ -14,7 +14,7 @@ var express = require('express'),
  	
 
 io 		= require('socket.io').listen(server);
-openConnections = {};
+openConnections = {}; // This did not work when exported from index.js
 
 
 
@@ -33,6 +33,7 @@ app.configure(function(){
 
 // get the routes object with property index
 app.get('/', routes.index);
+app.get('/getQue', routes.getQue);
 app.get('/deleteUser', routes.removeUserFromQue);
 app.get('/userFinishedGame', routes.userFinishedGame);
 app.get('/getNextUser', routes.getNextUser);

@@ -24,9 +24,11 @@ html(ng-app="windowApp")
 
 		div.container.user-que(ng-show="data.showUserQue")
 			p Up Next! 
-				ol
+				//ol
 					each user, i in userlist
 						li= user.name 
+				ol
+					li(ng-repeat="users in userlist.userlist") {{ users.name }}
 		div.container.playing-game(ng-show="data.showGameScreen")
 			p Get ready to play!!
 			img(src="/images/running_guy.gif")

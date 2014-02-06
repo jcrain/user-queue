@@ -17,10 +17,13 @@ var QueUser = require('../models/User.js').QueUser; // get our schema
 var Que = db.model('que', QueUser); 
 
 exports.index  = function(req, res) {
+		res.render('index');
+};
+
+// API to get users in Que
+exports.getQue = function(req, res){
 	User.find({},'name', function(e, docs){
-		res.render('index', {
-			"userlist": docs
-		});
+		res.json({ "userlist" : docs });
 	});
 };
 
@@ -30,10 +33,8 @@ exports.addUser = function(req, res){
 	var reqBody = req.body,
 			// Build up poll object to save
 			userObj = {id: reqBody.id, name: reqBody.name, email: reqBody.email};
-				
 	// Create poll model from built up poll object
 	var user = new User(userObj);
-	
 	// Save poll to DB with all users
 	user.save(function(err, doc) {
 		if(err || !doc) {
@@ -56,13 +57,13 @@ exports.addUser = function(req, res){
 			res.json(doc);
 		}		
 	});
-	
+
+	// Update The user's list of people and tell everyone else
 
 	// TODO:
 	// -> add check to see if this is the first person to sign up 
 	// -> If is it the first person we need to get the server to update this
 	//    users screen
-
 };
 
 // Remove certain user from Que list
@@ -84,6 +85,11 @@ exports.socketsLogic = function(socket){
 	// SOCKET STUFF
 	socket.emit('yourId', socket.id);
 
+	// Tell everyone when someone new signs up
+	socket.on('newUserAdded', function(data){
+		socket.broadcast.emit('addUserToQue', data);
+		console.log('SERVERSIDE: New user being fired');
+	})
 
 	// handle disconnected socket here we bind events to the socket connection
 	socket.on('disconnect', function(socket){

@@ -12,9 +12,14 @@ function WindowGame($scope, $http, socket){
 		'name'	: '',
 		'email'	: ''
 	};
-	console.log($scope.user);
 
-	console.log(socket);
+	$scope.userlist
+	$http.get('/getQue').success(function(data){
+		$scope.userlist = data;
+		console.log(data);
+	});
+
+
 
 	/*
 	 * STEP 1 CLICK TO PLAY
@@ -40,6 +45,7 @@ function WindowGame($scope, $http, socket){
 			$http.post('/addUser', thisUser).success(function(data, status, headers, config){
 				$scope.data.showSignUp = false;
 				$scope.data.showUserQue = true;
+				socket.emit('newUserAdded', thisUser.name); // Now 
 			});
 		}
 		
@@ -61,6 +67,12 @@ function WindowGame($scope, $http, socket){
 	}, 9000);*/
 	});
 
+	// Event when user is added
+	socket.on('addUserToQue', function(data){
+		$scope.userlist.users.push({"name":data});
+		console.log('add user to que fired');
+	});
+
 	socket.on('alert', function(data){
 		alert('this is the post alert')
 	})
@@ -68,12 +80,6 @@ function WindowGame($scope, $http, socket){
 	socket.on('timeToPlay', function(data){
 		$scope.data.showGameScreen = true;
 		$scope.data.showUserQue = false;
-		//alert('WE ARE RUNNING TIME TO PLAY')
-	});
-	
-	socket.on('udpateUserList', function(data){
-		console.log('A NEW USER HAS BEEN ADDED');
-		
 	});
 	
 	socket.on('connect', function(){
