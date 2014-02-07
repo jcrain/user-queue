@@ -1,0 +1,14 @@
+div.container.sign-up-form(ng-show="data.showSignUp")
+	h1 Give colon cancer the smackdown
+	form(name="myForm",ng-submit="addUser()")
+		input(class="sign-up", placeholder="Player Name", type="text", id="user-name", ng-model="user.name")
+		br
+		input(class="sign-up" ,placeholder="Email address", type="text", id="user-email", ng-model="user.email")
+		span.why-email(ng-click="showEmailReason()") ?
+		br
+		input(id="user_id", type="hidden", ng-model="user.id")
+		p.ts-and-cs 
+			| I accept the game 
+			span.terms-link(ng-click="showTerms()") terms and conditions
+			| &nbsp; by submitting my informations
+		button.btn.btn-primary Enter to Play 

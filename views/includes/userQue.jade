@@ -1,0 +1,16 @@
+div.container.user-que(ng-show="data.showUserQue")
+	h3 Alright {{user.name}} 
+	p 
+		strong Don't go away, you're 5th to play 
+	p In the mean time practice which exercise moves you'll do for the 15 seconds 
+	div 
+		span.placeholder-box
+		| or
+		span.placeholder-box
+	button(ng-click="playSound()") make sound
+	div(id="sound")
+		//ol
+			each user, i in userlist
+				li= user.name 
+		//ol
+			li(ng-repeat="users in userlist.userlist") {{ users.name }}

@@ -1,11 +1,27 @@
 @import "bootstrap.less";
+@import "responsive.less";
 
 body 										{ margin-top: 20px;
-	p 										{ font-size: 40px; }
+	p 										{ font-size: 13px; }
 	input									{
-		&.sign-up 					{ height: 35px; margin: 5px 0; }
+		&.sign-up 							{ height: 35px; margin: 5px 0; }
 	}
 }
 
-.main-container 				{ margin-top: 30px; }
+.ts-and-cs 									{ font-size: 13px; line-height: 20px; }
+.main-container 							{ margin-top: 30px; }
 
+.why-email 									{ width: 40px; height: 40px; border-radius: 20px; background: #eee; display: inline-block; text-align: center; }
+
+.terms-link 								{ text-decoration: underline; }
+.placeholder-box 							{ width: 50px; height: 50px; background: #eee; display: inline-block; margin-left: 15px; }
+
+@media only screen and (min-width : 767px){
+	.desktop 								{ display: block; }
+	.game 									{ display: none; }
+}
+
+@media only screen and (max-width : 767px){
+	.game 									{ display: block; }
+	.desktop 								{ display: none; }
+}

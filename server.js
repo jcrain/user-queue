@@ -34,12 +34,11 @@ app.configure(function(){
 // get the routes object with property index
 app.get('/', routes.index);
 app.get('/getQue', routes.getQue);
-app.get('/deleteUser', routes.removeUserFromQue);
-app.get('/userFinishedGame', routes.userFinishedGame);
-app.get('/getNextUser', routes.getNextUser);
+app.get('/deleteUser', routes.removeUserFromQue); // this will likely be for timeouts 
+app.get('/userFinishedGame', routes.userFinishedGame); // we need to remove the user from the que and then show the end screen
+app.get('/getNextUser', routes.getNextUser); 
 app.get('/socketShowGameScreen', routes.socketShowGameScreen);
 app.post('/addUser', routes.addUser);
-//app.post('/userDone', routes.userDone);
 
 // We will put out event bindings in a controller
 io.sockets.on('connection', routes.socketsLogic);

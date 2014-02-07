@@ -1,0 +1,9 @@
+div.container.playing-game(ng-show="data.showGameScreen")
+	h3 It's your turn {{ data.name }}! 
+	p Pick which exercise move you'll do for the 15 seconds and tap PLAY when you're ready...
+	span.placeholder-box
+	| or
+	span.placeholder-box
+	br
+	button.btn.btn-primary(ng-click="playGame()") PLAY
+	//img(src="/images/running_guy.gif")

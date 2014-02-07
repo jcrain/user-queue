@@ -1,0 +1,13 @@
+Window TODO
+-> Remove inactive users
+-> First person in que just gets sent to game screen
+-> Send notification when user done url hit
+-> Get user's place in the que 
+-> Handle disconnected stuff
+-> Handle global connections socket
+-> Add share functionality
+-> Animations if time. 
+-> Desktop screen
+-> Make counter for how many days are left
+-> Build user finished endpoint
+-> Need to send the tron new data when new users appear

@@ -66,9 +66,8 @@ exports.addUser = function(req, res){
 	//    users screen
 };
 
-// Remove certain user from Que list
+// Delete User End Point 
 exports.removeUserFromQue = function(req, res){
-	console.log('REMOVE DAT BIATCH');
 	// remove the current user from the Que
 	var user = req.query.id;
 	Que.remove({id: user}, function(err, docs){
@@ -136,13 +135,25 @@ exports.socketShowGameScreen = function(socket){
 	
 }
 
-
+// API to give the current player the end screen
 exports.userFinishedGame = function(req, res){
 	// remove the current user from the que
-	console.log(globalNess);
-	Que.find({}, {"id":currentUser}, function(err, docs){
-		console.log('this is the socket connection :' + docs.socket);
+	var player;
+	var myCurrentUser = Que.findOne(function(err, doc){
+		console.log('SOCKET ID FOR SHOW RUNNING SCREEN ' + doc.socket);
+		//console.log(doc.socket);
+
+		io.sockets.socket(doc.socket).emit('showEndScreen', function(){
+			console.log('these event is working somewhere');
+		});
+		//console.log(doc);
+		player = doc;
+		console.log(player);
+		Que.remove( { id : player.id }, function(){
+			console.log("we are in the call back from remove");
+		});
 	});
+	
 }
 
 exports.getNextUser = function(req, res){
