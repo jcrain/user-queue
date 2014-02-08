@@ -1,4 +1,5 @@
 // Connect to MongoDB using Mongoose
+//=============================================
 var mongoose = require('mongoose');
 var db;
 if (process.env.VCAP_SERVICES) {
@@ -9,6 +10,7 @@ if (process.env.VCAP_SERVICES) {
 }
 
 // Get User schema and model so we can query data
+//================================================
 var NewUser = require('../models/User.js').NewUser; // get our schema
 var User = db.model('users', NewUser); // get the data that should be based on the schema 
 
@@ -16,11 +18,36 @@ var User = db.model('users', NewUser); // get the data that should be based on t
 var QueUser = require('../models/User.js').QueUser; // get our schema
 var Que = db.model('que', QueUser); 
 
+
+
+// Set up date object to have a date count down
+//=================================================
+var launchDay = new Date('Feburary 1, 2014 00:00:00');
+
+var getDayObj = function(){
+
+	var today = new Date();
+	today.setHours(0, 0, 0, 0);
+
+	// TODO: just calculate how many days since launch day have passed then
+	var dateDiff = today.getTime() - launchDay.getTime();
+	var dayDiff = Math.ceil(dateDiff / (1000 * 3600 * 24));
+
+	return dayDiff;	
+};
+var day = getDayObj();
+day = 30 - day;
+console.log('this is the day' + day );
+
+// Lemme get an index pageeeee
+//================================================
 exports.index  = function(req, res) {
-		res.render('index');
+		res.render('index', { daysLeft: day});
+		console.log(day);
 };
 
 // API to get users in Que
+//=================================================
 exports.getQue = function(req, res){
 	User.find({},'name', function(e, docs){
 		res.json({ "userlist" : docs });
@@ -28,6 +55,7 @@ exports.getQue = function(req, res){
 };
 
 // API to save user to database
+//=================================================
 exports.addUser = function(req, res){
 	// get the users details
 	var reqBody = req.body,
@@ -40,11 +68,9 @@ exports.addUser = function(req, res){
 		if(err || !doc) {
 			throw 'Error';
 		} else {
-			res.json(doc);
+			//res.json(doc);
 		}		
 	});
-
-	console.log('this is how many we have in our que: ' + Que.find('name').count());
 
 	// We also need to save the user to the db for the que
 	var queDoc = { id: reqBody.id, name: reqBody.name, socket: reqBody.id };
@@ -54,13 +80,23 @@ exports.addUser = function(req, res){
 		if(err || !doc) {
 			throw 'Error';
 		} else {
-			res.json(doc);
+			Que.count(function(err, count){
+				console.log(count);
+				if ( count > 1 ){
+					res.json({ isFirst: false, queNumber: count });
+				} else {
+					res.json({ isFirst: true });
+				}
+			});
+			//res.json(doc);
 		}		
 	});
 
 	// Update The user's list of people and tell everyone else
 
 	// TODO:
+	
+	
 	// -> add check to see if this is the first person to sign up 
 	// -> If is it the first person we need to get the server to update this
 	//    users screen
@@ -117,7 +153,7 @@ exports.socketsLogic = function(socket){
 	console.log(openConnections[socket.id]);
 };
 
-exports.socketShowGameScreen = function(socket){
+exports.socketShowGameScreen = function(req, res, next){
 	// get the next socket id who is up
 	// send them the event to show the running gif
 	var myCurrentUser = Que.findOne(function(err, doc){
@@ -132,7 +168,8 @@ exports.socketShowGameScreen = function(socket){
 			console.log('these event is working somewhere');
 		});
 	});
-	
+	res.send({ message: "success"});
+
 }
 
 // API to give the current player the end screen
@@ -153,11 +190,13 @@ exports.userFinishedGame = function(req, res){
 			console.log("we are in the call back from remove");
 		});
 	});
-	
+	res.send({ message: "a user was delted"});
 }
 
-exports.getNextUser = function(req, res){
-
+exports.userTimedOut = function(req, res){
+	// Show user the time out message
+	// remove them from the que list
+	// 
 };
 
 

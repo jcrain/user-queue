@@ -1,13 +1,15 @@
 Window TODO
--> Remove inactive users
--> First person in que just gets sent to game screen
--> Send notification when user done url hit
--> Get user's place in the que 
--> Handle disconnected stuff
--> Handle global connections socket
--> Add share functionality
--> Animations if time. 
--> Desktop screen
 -> Make counter for how many days are left
--> Build user finished endpoint
+-> Handle disconnected stuff
 -> Need to send the tron new data when new users appear
+-> How does "play again" work?
+-> Add share functionality
+-> set up URL for game and desktop
+-> Desktop screen
+-> stop constant reconnecting on dropped client connection
+
+
+
+Nice to have
+-> Add sound to notify to the user 
+-> Animations between screens 

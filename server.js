@@ -36,7 +36,7 @@ app.get('/', routes.index);
 app.get('/getQue', routes.getQue);
 app.get('/deleteUser', routes.removeUserFromQue); // this will likely be for timeouts 
 app.get('/userFinishedGame', routes.userFinishedGame); // we need to remove the user from the que and then show the end screen
-app.get('/getNextUser', routes.getNextUser); 
+app.get('/userTimedOut', routes.userTimedOut);
 app.get('/socketShowGameScreen', routes.socketShowGameScreen);
 app.post('/addUser', routes.addUser);
 

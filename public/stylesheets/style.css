@@ -5980,6 +5980,16 @@ body input.sign-up {
   display: inline-block;
   margin-left: 15px;
 }
+.css-form input .ng-invalid.ng-dirty {
+  background-color: #FA787E;
+  border-color: red;
+}
+.css-form input .ng-valid.ng-dirty {
+  background-color: #78FA89;
+}
+.css-form .error-message {
+  color: red;
+}
 @media only screen and (min-width: 767px) {
   .desktop {
     display: block;

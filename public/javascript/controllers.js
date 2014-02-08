@@ -1,6 +1,8 @@
 function WindowGame($scope, $http, socket){
+	// Booleans for showing the different views
 	$scope.data = { 
 		  message: "hello"
+		, userPlaceQue: '' 
 		, showSignUp: true 
 		, showUserQue: false
 		, showGameScreen: false
@@ -10,6 +12,7 @@ function WindowGame($scope, $http, socket){
 		, showEndScreen: false
 		, show404: false
 		, showUserTimedOut: false
+		, isTimedOut: false
 	};
 
 	$scope.user = {
@@ -17,12 +20,6 @@ function WindowGame($scope, $http, socket){
 		'name'	: '',
 		'email'	: ''
 	};
-
-	$scope.userlist
-	$http.get('/getQue').success(function(data){
-		$scope.userlist = data;
-		console.log(data);
-	});
 
 
 
@@ -38,11 +35,34 @@ function WindowGame($scope, $http, socket){
 		if (thisUser.name.length > 0 && thisUser.email.length > 0 && thisUser.id.length > 0){
 			// we need to save the user to the server
 			$http.post('/addUser', thisUser).success(function(data, status, headers, config){
-				$scope.data.showSignUp = false;
-				$scope.data.showUserQue = true;
-				socket.emit('newUserAdded', thisUser.name); // Now 
+				if (data.isFirst){
+					$scope.data.showSignUp = false;
+					$scope.data.showGameScreen = true;
+					$scope.setGameTimer();
+					$scope.playSound();
+				} else{
+					$scope.data.showSignUp = false;
+					$scope.data.showUserQue = true;
+					$scope.data.userPlaceQue = data.queNumber;
+				}
+				
+				//socket.emit('newUserAdded', thisUser.name); // Now 
 			});
 		}
+	};
+
+	/*
+	 * VALIDATE USER INPUT
+	 */
+	$scope.master = {};
+ 
+	$scope.update = function(user) {
+		$scope.master = angular.copy(user);
+	};
+ 
+ 
+	$scope.isUnchanged = function(user) {
+	return angular.equals(user, $scope.master);
 	};
 
 	/*
@@ -68,45 +88,57 @@ function WindowGame($scope, $http, socket){
 	$scope.playGame = function(){
 		$scope.data.showPlayingGame = true;
 		$scope.data.showGameScreen = false;
+		clearTimeout($scope.isTimedOut);
 	};
+
+	$scope.setGameTimer = function(){
+		$scope.isTimedOut = setTimeout(function(){ // We give the user 30 seconds to hit the play game button
+			$scope.data.showGameScreen = false;
+			$scope.data.showUserTimedOut = true;
+			$scope.playSound();
+			//alert('we shoudl have a time out screen');
+			$scope.$apply();
+		}, 3000);
+	}
 	
 
 	// Socket Listeners
 	//=====================================================
 	socket.on('yourId', function(data){
-	//alert(data);
 	// we get our id here
-	userId = data;
-	socket.emit('saveId', userId);
-	document.getElementById('user_id').setAttribute("value", userId);
-	// 
-	/*setTimeout(function(){
-		console.log('we should have a disconnected socket');
-		socket.disconnect();
-	}, 9000);*/
+		userId = data;
+		socket.emit('saveId', userId);
+		document.getElementById('user_id').setAttribute("value", userId);
+		/*setTimeout(function(){
+			console.log('we should have a disconnected socket');
+			socket.disconnect();
+		}, 9000);*/
 	});
 
+
 	// Event when user is added
+	//=====================================================
 	socket.on('addUserToQue', function(data){
 		$scope.userlist.users.push({"name":data});
 		console.log('add user to que fired');
 	});
-
-	socket.on('alert', function(data){
-		alert('this is the post alert')
-	})
 	
 	// Show the user they are about to play
+	//=====================================================
 	socket.on('timeToPlay', function(data){
 		$scope.data.showGameScreen = true;
 		$scope.data.showUserQue = false;
 		console.log('we are hitting the time to play event')
+		$scope.playSound();
+		$scope.setGameTimer();	
 	});
 
 	// Show the user the end screen
+	//=====================================================
 	socket.on('showEndScreen', function(){
 		$scope.data.showEndScreen = true;
 		$scope.data.showPlayingGame = false; 
+		$scope.playSound();
 	});
 	
 	socket.on('connect', function(){
@@ -114,14 +146,12 @@ function WindowGame($scope, $http, socket){
 	});
 	
 	socket.on('disconnect', function(){
-		console.log('this is the disconnect event');
 		console.log(socket.socket);
 		//socket.emit('disClient');
 		socketConnectTimeInterval = setInterval(function () {
 	  		socket.socket.reconnect();
 	  		if(socket.socket.connected) {
 	  			clearInterval(socketConnectTimeInterval);
-	  			console.log('we are reconnected after being disconnected');
 	  		}
 		}, 3000);
 	});
@@ -135,7 +165,6 @@ function WindowGame($scope, $http, socket){
 	 * Code for playing audio on socket event
 	 */
 	$scope.playSound = function(filename){   
-		console.log('we are in playsoundl');
     	document.getElementById("sound").innerHTML=
     	'<audio autoplay="autoplay">'+
     		'<source src="/media/ding.mp3" type="audio/mpeg" />'+
