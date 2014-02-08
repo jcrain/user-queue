@@ -1,5 +1,6 @@
-// Connect to MongoDB using Mongoose
-//=============================================
+/* 
+ * Connect to MongoDB using Mongoose
+ */
 var mongoose = require('mongoose');
 var db;
 if (process.env.VCAP_SERVICES) {
@@ -12,11 +13,11 @@ if (process.env.VCAP_SERVICES) {
 // Get User schema and model so we can query data
 //================================================
 var NewUser = require('../models/User.js').NewUser; // get our schema
-var User = db.model('users', NewUser); // get the data that should be based on the schema 
+var User 	= db.model('users', NewUser); // get the data that should be based on the schema 
 
 // Get User schema and model to save the Que user
 var QueUser = require('../models/User.js').QueUser; // get our schema
-var Que = db.model('que', QueUser); 
+var Que 	= db.model('que', QueUser); 
 
 
 
@@ -25,19 +26,16 @@ var Que = db.model('que', QueUser);
 var launchDay = new Date('Feburary 1, 2014 00:00:00');
 
 var getDayObj = function(){
-
 	var today = new Date();
 	today.setHours(0, 0, 0, 0);
-
 	// TODO: just calculate how many days since launch day have passed then
 	var dateDiff = today.getTime() - launchDay.getTime();
 	var dayDiff = Math.ceil(dateDiff / (1000 * 3600 * 24));
-
 	return dayDiff;	
 };
+
 var day = getDayObj();
 day = 30 - day;
-console.log('this is the day' + day );
 
 // Lemme get an index pageeeee
 //================================================
@@ -57,21 +55,18 @@ exports.getQue = function(req, res){
 // API to save user to database
 //=================================================
 exports.addUser = function(req, res){
-	// get the users details
-	var reqBody = req.body,
-			// Build up poll object to save
-			userObj = {id: reqBody.id, name: reqBody.name, email: reqBody.email};
-	// Create poll model from built up poll object
-	var user = new User(userObj);
-	// Save poll to DB with all users
-	user.save(function(err, doc) {
-		if(err || !doc) {
-			throw 'Error';
-		} else {
-			//res.json(doc);
-		}		
-	});
-
+	var reqBody = req.body;
+	if (!req.body.isPlayingAgain){ // if we are playing for the first time save to both DBs
+		var userObj = {id: reqBody.id, name: reqBody.name, email: reqBody.email};
+		var user = new User(userObj); // Lets save a new user to the DB :D
+		user.save(function(err, doc) { // Add user to users collection
+			if(err || !doc) {
+				throw 'Error';
+			} else {
+				//res.json(doc);
+			}		
+		});
+	} 
 	// We also need to save the user to the db for the que
 	var queDoc = { id: reqBody.id, name: reqBody.name, socket: reqBody.id };
 	var addQue = new Que(queDoc);
@@ -82,7 +77,7 @@ exports.addUser = function(req, res){
 		} else {
 			Que.count(function(err, count){
 				console.log(count);
-				if ( count > 1 ){
+				if ( count > 1 ){ 
 					res.json({ isFirst: false, queNumber: count });
 				} else {
 					res.json({ isFirst: true });
@@ -91,27 +86,17 @@ exports.addUser = function(req, res){
 			//res.json(doc);
 		}		
 	});
-
-	// Update The user's list of people and tell everyone else
-
-	// TODO:
-	
-	
-	// -> add check to see if this is the first person to sign up 
-	// -> If is it the first person we need to get the server to update this
-	//    users screen
 };
 
 // Delete User End Point 
 exports.removeUserFromQue = function(req, res){
-	// remove the current user from the Que
-	var user = req.query.id;
-	Que.remove({id: user}, function(err, docs){
-		console.log(docs);
-		res.send('So fucking removed!');
+	var myCurrentUser = Que.findOne(function(err, doc){
+		player = doc;
+		console.log(player);
+		Que.remove( { id : player.id }, function(){
+			res.json({"message": "Your delinquent ass is being removed. suckit."});
+		});
 	});
-	// give the current user the last screen with the share button
-	// update all screens connected with the new que
 };
 
 //exports.openConnections = {};
@@ -193,11 +178,11 @@ exports.userFinishedGame = function(req, res){
 	res.send({ message: "a user was delted"});
 }
 
-exports.userTimedOut = function(req, res){
+/*exports.userTimedOut = function(req, res){
 	// Show user the time out message
 	// remove them from the que list
 	// 
-};
+};*/
 
 
 

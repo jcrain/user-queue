@@ -11,6 +11,6 @@ div.container(ng-show="data.showEndScreen")
 		| &nbsp; for more information on colon cancer or to make an online donation
 	p 
 		| You have 
-		span= daysLeft.day 
-		| days left to place the Colon-a-Tron
-	button.btn.btn-primary Place Again
+		span= daysLeft
+		| &nbsp; days left to place the Colon-a-Tron
+	button.btn.btn-primary(ng-click="playAgain()") Play Again

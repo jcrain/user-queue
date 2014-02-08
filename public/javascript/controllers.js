@@ -13,20 +13,20 @@ function WindowGame($scope, $http, socket){
 		, show404: false
 		, showUserTimedOut: false
 		, isTimedOut: false
+		, isPlayingAgain: false
 	};
 
 	$scope.user = {
 		'id'	: document.getElementById('user_id').getAttribute("value"), // there is probably a better way to do this
 		'name'	: '',
-		'email'	: ''
+		'email'	: '',
+		'isPlayingAgain': $scope.data.isPlayingAgain
 	};
-
-
 
 	/*
 	 * STEP 1 USER SIGNS UP FOR GAME QUE
+	 * TODO: app style page transitions
 	 */
-	 // TODO: app style page transitions
 	$scope.addUser = function(){
 		var thisUser = $scope.user;
 		console.log(thisUser);
@@ -45,24 +45,30 @@ function WindowGame($scope, $http, socket){
 					$scope.data.showUserQue = true;
 					$scope.data.userPlaceQue = data.queNumber;
 				}
-				
-				//socket.emit('newUserAdded', thisUser.name); // Now 
 			});
 		}
+	};
+	$scope.playAgain = function(){
+		$scope.user.isPlayingAgain = true; // the user is playing again. add them to the que but not the user list
+		$scope.data.showUserTimedOut = false;
+		$scope.data.showEndScreen = false;
+		// put into que, if not first show 
+
+		$scope.addUser();
 	};
 
 	/*
 	 * VALIDATE USER INPUT
+	 * This is boiler plate from the angular docs, http://docs.angularjs.org/guide/forms
 	 */
 	$scope.master = {};
- 
+
 	$scope.update = function(user) {
 		$scope.master = angular.copy(user);
 	};
- 
- 
+
 	$scope.isUnchanged = function(user) {
-	return angular.equals(user, $scope.master);
+		return angular.equals(user, $scope.master);
 	};
 
 	/*
@@ -72,10 +78,12 @@ function WindowGame($scope, $http, socket){
 		$scope.data.showSignUp = false;
 		$scope.data.showTerms = true;
 	}
+
 	$scope.showEmailReason = function(){
 		$scope.data.showSignUp = false;
 		$scope.data.showEmailReason = true;
 	}
+
 	$scope.backToSignUp = function(){
 		$scope.data.showSignUp = true;
 		$scope.data.showTerms = false;
@@ -91,21 +99,22 @@ function WindowGame($scope, $http, socket){
 		clearTimeout($scope.isTimedOut);
 	};
 
-	$scope.setGameTimer = function(){
-		$scope.isTimedOut = setTimeout(function(){ // We give the user 30 seconds to hit the play game button
+	$scope.setGameTimer = function(){ // The user has 30 seconds to press the play game button or they are removed
+		$scope.isTimedOut = setTimeout(function(){ 
 			$scope.data.showGameScreen = false;
 			$scope.data.showUserTimedOut = true;
 			$scope.playSound();
-			//alert('we shoudl have a time out screen');
 			$scope.$apply();
-		}, 3000);
+			// we need to remove the from the que
+			$http.post('/deleteUser').success( function(){ });
+		}, 8000);
 	}
 	
 
-	// Socket Listeners
-	//=====================================================
+	/*
+	 * Socket Listeners
+	 */
 	socket.on('yourId', function(data){
-	// we get our id here
 		userId = data;
 		socket.emit('saveId', userId);
 		document.getElementById('user_id').setAttribute("value", userId);
@@ -172,15 +181,4 @@ function WindowGame($scope, $http, socket){
     		'<embed hidden="true" autostart="true" loop="false" src="' + filename +'.mp3" />'+
     	'</audio>';
     }
-}
-
-function StartScreen($scope, $http){
-
-
-}
-
-function ShowShareScreen($scope, $http){
-	// After the user has finsihed the game
-	// we want to hide their game screen and show some sort of dropping ball 
-	// o with a share button
 }

@@ -1,10 +1,11 @@
 Window TODO
--> Make counter for how many days are left
--> Handle disconnected stuff
--> Need to send the tron new data when new users appear
--> How does "play again" work?
--> Add share functionality
+-> Set up play again logic 
 -> set up URL for game and desktop
+-> Handle disconnected stuff
+
+-> Add share functionality
+-> Need to send the tron new data when new users appear
+-> Implement designs
 -> Desktop screen
 -> stop constant reconnecting on dropped client connection
 
@@ -13,3 +14,4 @@ Window TODO
 Nice to have
 -> Add sound to notify to the user 
 -> Animations between screens 
+-> Back up DB once an hour?
