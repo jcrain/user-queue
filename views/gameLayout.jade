@@ -1,0 +1,19 @@
+extends layout
+
+block head
+	meta(charset='utf-8')
+	meta(http-equiv='X-UA-Compatible', content='IE=edge')
+	title The best Game ever
+	meta(name='description', content='')
+	meta(name='viewport', content='width=device-width, initial-scale=1')
+	link(rel='stylesheet', href='/stylesheets/style.css')
+	script(src="/socket.io/socket.io.js")
+	script(src="/javascript/WindowApp_IO.js")
+	script(src="/javascript/angular.min.js")
+	script(src="/javascript/app.js")
+	script(src="/javascript/controllers.js")
+	script(src="/javascript/services.js")
+block content
+	include includes/game
+block footer
+	include includes/gameFooter

@@ -37,18 +37,31 @@ var getDayObj = function(){
 var day = getDayObj();
 day = 30 - day;
 
+/*
+ * Show the splash screen without the game url
+ */ 
+exports.splash  = function(req, res){
+ 	res.render('splash');
+
+ };
+
+
 // Lemme get an index pageeeee
 //================================================
-exports.index  = function(req, res) {
-		res.render('index', { daysLeft: day});
+exports.game  = function(req, res) {
+		res.render('gameLayout', { daysLeft: day});
 		console.log(day);
 };
 
 // API to get users in Que
 //=================================================
 exports.getQue = function(req, res){
-	User.find({},'name', function(e, docs){
-		res.json({ "userlist" : docs });
+	Que.find({},'name', function(e, doc){
+		if(e || !doc) {
+			throw res.json({ "userlist": "none"});
+		} else {
+			res.json({ "userlist" : doc });
+		}
 	});
 };
 
@@ -94,7 +107,19 @@ exports.removeUserFromQue = function(req, res){
 		player = doc;
 		console.log(player);
 		Que.remove( { id : player.id }, function(){
-			res.json({"message": "Your delinquent ass is being removed. suckit."});
+			
+		});
+		// WE SHOULD SHOW THE NEXT PERSON THE GAME SCREEN
+		//=================================================
+		var myCurrentUser = Que.findOne(function(err, doc){
+			if (doc != null){
+				io.sockets.socket(doc.socket).emit('timeToPlay', function(){
+					console.log('these event is working somewhere');
+				});
+				res.json({"message": "user deleted from que"});
+			} else {
+				res.json({"message": "no one is que"});
+			}
 		});
 	});
 };
@@ -177,27 +202,36 @@ exports.userFinishedGame = function(req, res){
 	// remove the current user from the que
 	var player;
 	var myCurrentUser = Que.findOne(function(err, doc){
-		console.log('SOCKET ID FOR SHOW RUNNING SCREEN ' + doc.socket);
-		//console.log(doc.socket);
-
-		io.sockets.socket(doc.socket).emit('showEndScreen', function(){
-			console.log('these event is working somewhere');
-		});
-		//console.log(doc);
-		player = doc;
-		console.log(player);
-		Que.remove( { id : player.id }, function(){
-			console.log("we are in the call back from remove");
-		});
+		if (doc != null){
+			console.log('this is the the doc is :'+doc);
+			io.sockets.socket(doc.socket).emit('showEndScreen', function(){
+				console.log('User now sees the end screen');
+			});
+			if(err || !doc) {
+				throw res.json({ "message": "There was an error removeing the user"});
+			} else {
+				player = doc;
+				console.log(player);
+				Que.remove( { id : player.id }, function(){
+					console.log("we are in the call back from remove");
+				});
+				// WE SHOULD SHOW THE NEXT PERSON THE GAME SCREEN
+				//=================================================
+				var myCurrentUser = Que.findOne(function(err, doc){
+					if (doc != null){
+						io.sockets.socket(doc.socket).emit('timeToPlay', function(){
+							console.log('these event is working somewhere');
+						});
+					} 
+				});
+				res.send({ "message": "success"});
+			}
+		} else{
+			res.json({ "message" : "fail" });
+		}
 	});
-	res.send({ message: "a user was delted"});
-}
 
-/*exports.userTimedOut = function(req, res){
-	// Show user the time out message
-	// remove them from the que list
-	// 
-};*/
+}
 
 
 

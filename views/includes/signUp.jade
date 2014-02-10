@@ -1,13 +1,18 @@
-div.container.sign-up-form(ng-show="data.showSignUp")
-	h1 Give colon cancer the smackdown
-	form(name="form", class="css-form", ng-submit="addUser()", novalidate)
-		input(class="sign-up", placeholder="Player Name", type="text", id="user-name", ng-model="user.name" name="uName", required)
+div.container.sign-up-form.row(ng-show="data.showSignUp")
+	h1 
+		| READY,
+		br
+		| SET, FIGHT 
+		br 
+		| COLORECTAL CANCER
+	form(name="form", class="css-form sign-up-form", ng-submit="addUser()", novalidate)
+		input(class="sign-up form-class span", placeholder="Your Name", type="text", id="user-name", ng-model="user.name" name="uName", ng-maxlength="25" required)
 		br
 
 		div(ng-show="form.uName.$dirty && form.uName.$invalid" )
 			p(ng-show="form.uName.$error.required", class="error-message") Please Enter a Valid Name
 
-		input(class="sign-up" ,placeholder="Email address", type="email", id="user-email", ng-model="user.email" name="uEmail", required)
+		input(class="sign-up form-class span" ,placeholder="Your Email Address", type="email", id="user-email", ng-model="user.email" name="uEmail", required)
 		span.why-email(ng-click="showEmailReason()") ?
 		br
 
@@ -19,5 +24,5 @@ div.container.sign-up-form(ng-show="data.showSignUp")
 			| I accept the game 
 			span.terms-link(ng-click="showTerms()") terms and conditions
 			| &nbsp; by submitting my informations
-		button.btn.btn-primary() Enter to Play 
+		button.btn.btn-primary.span(ng-disabled="form.$invalid") submit 
 		//button.btn.btn-primary(ng-click="update(user)", ng-disabled="form.$invalid || isUnchanged(user)") Enter to Play 
