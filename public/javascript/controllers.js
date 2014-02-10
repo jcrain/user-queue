@@ -149,26 +149,37 @@ function WindowGame($scope, $http, socket){
 		$scope.data.showPlayingGame = false; 
 		$scope.playSound();
 	});
+
+	// After disconnect udpate the user's id with socket 
+	//=====================================================
+	socket.on('updateYourId', function(data){
+		$scope.user.id = data; // 
+	});
 	
 	socket.on('connect', function(){
 		console.log('we are connected onthe client');
 	});
+
+	socket.on('reconnect', function(){
+		console.log('this is reconnected and here is the id :' + socket.id);
+		socket.emit('reConnectedSocket', $scope.user.id);
+	});
 	
 	socket.on('disconnect', function(){
-		console.log(socket.socket);
+		console.log(socket);
 		//socket.emit('disClient');
-		socketConnectTimeInterval = setInterval(function () {
-	  		socket.socket.reconnect();
+		/*socketConnectTimeInterval = setInterval(function () {
+	  		//socket.socket.reconnect();
+	  		socket.connect();
 	  		if(socket.socket.connected) {
 	  			clearInterval(socketConnectTimeInterval);
+	  			// once we are reconnected 
+	  			alert('my socket id is ' + socket.id);
+	  			// we need to get the socket id
+	  			// then save this socket in the que object
 	  		}
-		}, 3000);
+		}, 3000);*/
 	});
-	
-	socket.on('reconnect', function(){
-		socket.emit('reClient');
-	});
-
 
 	/*
 	 * Code for playing audio on socket event

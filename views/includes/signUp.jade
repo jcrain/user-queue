@@ -19,4 +19,5 @@ div.container.sign-up-form(ng-show="data.showSignUp")
 			| I accept the game 
 			span.terms-link(ng-click="showTerms()") terms and conditions
 			| &nbsp; by submitting my informations
-		button.btn.btn-primary(ng-click="update(user)", ng-disabled="form.$invalid || isUnchanged(user)") Enter to Play 
+		button.btn.btn-primary() Enter to Play 
+		//button.btn.btn-primary(ng-click="update(user)", ng-disabled="form.$invalid || isUnchanged(user)") Enter to Play 

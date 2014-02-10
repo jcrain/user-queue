@@ -120,6 +120,21 @@ exports.socketsLogic = function(socket){
 		console.log('we have a DISCONNECTED client with id : ' + socket.id);
 	});
 
+	socket.on('reConnectedSocket', function(data){ // this data is the user.id that was initially set
+		var getUser = Que.find({ id : data}, function(err, doc){
+			if(err || !doc) {
+				// this user needs to have their client side id updated
+				socket.emit('updateYourId', socket.id);
+				throw 'Error';
+			} else {
+				// this user  
+				Que.update( { id: data }, { socket: socket.id}, function(){
+					console.log('this record has been updated');
+				});
+			}	
+		});	
+	});
+
 	socket.on('saveId', function(data){
 		console.log('this is the socket ID i am adding to keep track of sockets: ' + data);
 	});

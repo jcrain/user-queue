@@ -5990,19 +5990,3 @@ body input.sign-up {
 .css-form .error-message {
   color: red;
 }
-@media only screen and (min-width: 767px) {
-  .desktop {
-    display: block;
-  }
-  .game {
-    display: none;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .game {
-    display: block;
-  }
-  .desktop {
-    display: none;
-  }
-}

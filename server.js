@@ -39,7 +39,8 @@ app.configure(function(){
 
 // APP ROUTES
 //============================================= 
-app.get('/', routes.index);
+app.get('/', routes.splash);
+app.get('/game', routes.index);
 app.get('/getQue', routes.getQue); // return the user in the que for the game
 app.post('/deleteUser', routes.removeUserFromQue); // this will likely be for timeouts 
 app.get('/userFinishedGame', routes.userFinishedGame); // we need to remove the user from the que and then show the end screen
