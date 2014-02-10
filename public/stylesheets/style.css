@@ -5950,6 +5950,9 @@ body {
   background-color: #315770;
   text-align: center;
   padding: 0;
+  font-family: SaaSeriesDD !important;
+  font-weight: normal;
+  font-style: normal;
 }
 body p {
   font-size: 13px;

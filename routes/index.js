@@ -45,7 +45,6 @@ exports.splash  = function(req, res){
 
  };
 
-
 // Lemme get an index pageeeee
 //================================================
 exports.game  = function(req, res) {
@@ -177,25 +176,6 @@ exports.socketsLogic = function(socket){
 	openConnections[socket.id] = socket;
 	console.log(openConnections[socket.id]);
 };
-
-exports.socketShowGameScreen = function(req, res, next){
-	// get the next socket id who is up
-	// send them the event to show the running gif
-	var myCurrentUser = Que.findOne(function(err, doc){
-		console.log('SOCKET ID FOR SHOW RUNNING SCREEN ' + doc.socket);
-		console.log(doc.socket);
-		//console.log(openConnections);
-		//console.log(openConnections[doc.socket]);
-		//socket(openConnections[doc.socket]).emit('timeToPlay', {thing: "asdfsdaf"});
-		//socket.broadcast.emit('timeToPlay');
-		//console.log(socket);
-		io.sockets.socket(doc.socket).emit('timeToPlay', function(){
-			console.log('these event is working somewhere');
-		});
-	});
-	res.send({ message: "success"});
-
-}
 
 // API to give the current player the end screen
 exports.userFinishedGame = function(req, res){
