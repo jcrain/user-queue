@@ -1,10 +1,24 @@
-div.container.timed-out(ng-show="data.showUserTimedOut")
-	h3 You timed-out {{ data.name }}
-	p Thanks for stopping by the colon-a-tron
-	button.btn.btn-primary(ng-click="playAgain()") Play again
-	p Share this game and the facts about colon cancer
-	div
-		span.share-facebook.placeholder-box f
-		span.share-twitter.placeholder-box t
-	p learn more at 
-		a(href="") cccf.com
+div.user-que(ng-show="data.showUserTimedOut")
+	h3.que-header Sorry,
+		br 
+		| {{ user.name }}
+	img.down-arrow(src="/images/que_down_arrow.png")
+	div.container.timed-out.row
+		p.mdm.place-in-line IT LOOKS LIKE YOU TIMED OUT.
+		p.exercise-inst THANKS FOR STOPPING BY (AND FEEL FREE TO TRY AGAIN).
+		button.btn.btn-primary.span(ng-click="playAgain()") 
+			span.submit-form Play again
+		p.exercise-inst REMEMBER, THE BEST WAY TO PREVENT COLON CANCER IS TO STAY LEAN, EAT CLEAN AND GET SCREENED.
+		p.exercise-inst DAYS TO PLAY: #XX
+			br 
+			| TEXT 9999 TO DONATE $5 NOW
+		p.exercise-inst SHARE THE FACTS ABOUT 
+			br 
+			| COLORECTAL CANCER
+		div.share-box
+			span.share.facebook share 
+				img(src="/images/share_facebook.png")
+			span.share.twitter share 
+				img(src="/images/share_twitter.png")
+		p.exercise-inst learn more at 
+			a(href="") cccf.com

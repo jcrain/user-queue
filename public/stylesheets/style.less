@@ -7,7 +7,8 @@
 @grayblue   : #b4d7ee;
 @btnorange	: #f39c0d;
 
-body 										{ margin-top: 20px; background-color:@bgblue ; text-align: center; padding: 0; font-family: SaaSeriesDD !important; font-weight: normal; font-style: normal;
+body 										{ background-color:@bgblue ; text-align: center; padding: 0; 
+											  font-family: SaaSeriesDD ; font-weight: normal; font-style: normal;
 	p 										{ font-size: 13px; }
 	
 }
@@ -16,12 +17,15 @@ body 										{ margin-top: 20px; background-color:@bgblue ; text-align: center
 //===========================================
 h1, h2, h3 									{ color: @lightblue; }
 p 											{ color: @grayblue; }
+.lrg 										{ font-size: 48px; line-height: 46px; }
+.mdm 										{ font-size: 24px; }
 
 // BOOTSTRAP OVER RIDES
 //===========================================
 button 										{
 	&.btn 									{  
-		&.btn-primary 						{ border: none; background: @btnorange; color: #fff; font-size: 58px; text-transform: uppercase; line-height: 40px; border-radius: 0; }
+		&.btn-primary 						{ border: none; background: @btnorange; color: #fff; font-size: 27px; font-family: SaaSeriesDD ; font-weight: normal; font-style: normal;
+											  text-transform: uppercase; line-height: 40px; border-radius: 0; }
 	}
 }
 
@@ -30,11 +34,17 @@ button 										{
 //===========================================
 
 .main-container 							{ margin-top: 30px; }
-
+.title 										{ margin-bottom: 40px; font-size: 38.5px;  }
+.container 									{ padding: 0 20px; }
 
 
 .terms-link 								{ text-decoration: underline; color: #fff; }
-.placeholder-box 							{ width: 50px; height: 50px; background: #eee; display: inline-block; margin-left: 15px; }
+div											{
+	.placeholder-box:first-child 			{ margin-right: 10px; }
+	.placeholder-box 						{ width: 50px; height: 50px; background: #eee; display: inline-block;  
+		&.exercise-box 						{ width: 125px; height: 125px; }
+	}
+}
 
 .css-form									{									 
 	input									{ background-color: #d9ebe8; 
@@ -45,7 +55,12 @@ button 										{
 	.error-message 							{ color: red; }
 }
 
-.game 										{ padding: 0 20px; }
+.share-box 									{
+	.share:first-child 						{ margin-right: 15px; }
+	.share 									{ background: @btnorange; color: #fff; font-size: 24px; height: 45px; display: inline-block; padding: 0 10px;   }
+}
+
+.game 										{  }
 .footer 									{ background: url('../images/footer_shadow.png') repeat-x #fff; padding: 20px; margin-top: 30px;  }
 .footer-logos 								{ margin: 25px auto 0; width: 280px; }
 .footer-logo-1 								{ width: 174px; float: left; margin: 0 15px; }
@@ -56,14 +71,50 @@ button 										{
 //===========================================
 
 // SIGN UP FORM
+
 .sign-up-form 								{ position: relative; 
 	.ng-invalid 							{
-		.btn.btn-primary 					{ background: url('../images/btn_invalid_arrow.png') no-repeat 295px 0 #1d384b; }
+		.btn.btn-primary 					{ background: #1d384b; 
+			.submit-form 					{ background: url('../images/btn_invalid_arrow.png') no-repeat 94px 6px; padding-right: 40px;  }
 	}
-	.btn.btn-primary 						{ background: url('../images/btn_invalid_arrow.png') no-repeat 295px 0;}
+	}
+	.btn.btn-primary 						{ 
+		.submit-form 						{ background: url('../images/btn_valid_arrow.png') no-repeat 94px 6px; padding-right: 40px; }
+	}
+	.email 									{ position: relative; }
 }
-.why-email 									{ width: 49px; height: 49px; background: #eee; display: inline-block; text-align: center; position: absolute; top: 80px; right: 0; }
-.ts-and-cs 									{ font-size: 15px; line-height: 20px; text-transform: uppercase; }
+.submit-form 								{ background: url('../images/btn_valid_arrow.png') no-repeat 71px 6px; padding-right: 40px; }
+
+// Place holder styling
+::-webkit-input-placeholder 				{ /* WebKit browsers */ color:    #325973; text-transform: uppercase; font-family: SaaSeriesDD ; font-weight: normal; font-style: normal; font-size: 18px; 
+}
+:-moz-placeholder 							{ /* Mozilla Firefox 4 to 18 */ color:    #325973; text-transform: uppercase; font-family: SaaSeriesDD ; font-weight: normal; font-style: normal; font-size: 18px; 
+}
+::-moz-placeholder 							{ /* Mozilla Firefox 19+ */ color:    #325973; text-transform: uppercase; font-family: SaaSeriesDD ; font-weight: normal; font-style: normal; font-size: 18px; 
+}
+:-ms-input-placeholder 						{ /* Internet Explorer 10+ */ color:    #325973; text-transform: uppercase; font-family: SaaSeriesDD ; font-weight: normal; font-style: normal; font-size: 18px; 
+}
+.why-email 									{ width: 48px; height: 48px; display: inline-block; 
+											  text-align: center; position: absolute; top: 4px; right: 5px; color: #1d384b;  
+	img 									{ width: 95%; }
+}
+.ts-and-cs 									{ font-size: 15px; line-height: 20px; text-transform: uppercase; text-align: left; }
+
+
+// QUEUE SCREEN
+//===========================================
+.que-header  								{ background: #86e4f3; color: #1d384b; font-size: 30px; margin: 0; box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.35); 
+											  position: relative; z-index: 1; padding: 30px;  }
+.down-arrow									{ display: block; margin: 0 auto; }
+.place-in-line 								{ color: #fff; line-height: 30px; margin-top: 25px; }
+.exercise-inst 								{ font-size: 15px; margin-top: 19px; }
+
+
+// USER TIMED OUT
+//===========================================
+.timed-out 									{ 
+	.submit-form 							{ background-position: 155px 6px; }
+}
 
 // ANGULAR STYLES
 .ng-valid 		{  }

@@ -2,9 +2,11 @@ div.container(ng-show="data.showEndScreen")
 	h3 You win, {{user.name}}!!	
 	p Regular exercise, eating healthy, and getting screenings are you best chances to prevent colon cancer...
 	p and don't forget to share this game and facts about colon cancer
-	div
-		span.share-facebook.placeholder-box f
-		span.share-twitter.placeholder-box t
+	div.share-box
+			span.share.facebook share 
+				img(src="/images/share_facebook.png")
+			span.share.twitter share 
+				img(src="/images/share_twitter.png")
 	p
 		| Visit the 
 		span.terms-link CCCF website

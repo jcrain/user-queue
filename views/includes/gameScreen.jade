@@ -1,9 +1,13 @@
-div.container.playing-game(ng-show="data.showGameScreen")
-	h3 It's your turn {{ data.name }}! 
-	p Pick which exercise move you'll do for the 15 seconds and tap PLAY when you're ready...
-	span.placeholder-box
-	| or
-	span.placeholder-box
-	br
-	button.btn.btn-primary(ng-click="playGame()") PLAY
-	//img(src="/images/running_guy.gif")
+div.user-que(ng-show="data.showGameScreen")
+	h3.que-header Your Up
+		br
+		| {{user.name}}!
+	img.down-arrow(src="/images/que_down_arrow.png")
+	div.container.playing-game.row
+		p.exercise-inst STEP IN FRONT OF THE CAMERA IN THE WINDOW NOW. WHEN YOU’RE READY, PRESS PLAY AND PERFORM YOUR EXERCISE FOR 15 SECONDS.
+		div
+			span.placeholder-box.exercise-box
+			span.placeholder-box.exercise-box
+		br
+		button.btn.btn-primary.span(ng-click="playGame()")
+			span.submit-form PLAY
