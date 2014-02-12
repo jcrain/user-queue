@@ -11,7 +11,7 @@ function WindowGame($scope, $http, socket){
 		, showEmailReason: false
 		, showEndScreen: false
 		, show404: false
-		, showUserTimedOut: false
+		, showUserTimedOut: false 
 		, isTimedOut: false
 		, isPlayingAgain: false
 	};
@@ -22,6 +22,17 @@ function WindowGame($scope, $http, socket){
 		'email'	: '',
 		'isPlayingAgain': $scope.data.isPlayingAgain
 	};
+
+	/*
+	 * SHARE LOGIC
+	 */
+	 $scope.share = function(channel){
+	 	if ( channel == "facebook") {
+	 		window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgoogle.com','Facebook','toolbar=0,status=0,width=580,height=325');
+	 	} else {
+	 		window.open('http://twitter.com/share/?url=google.com&text=we are shareing this','Twitter','toolbar=0,status=0,width=580,height=325');
+	 	}
+	 };
 
 	/*
 	 * STEP 1 USER SIGNS UP FOR GAME QUE
@@ -165,22 +176,6 @@ function WindowGame($scope, $http, socket){
 		socket.emit('reConnectedSocket', $scope.user.id);
 	});
 	
-	socket.on('disconnect', function(){
-		console.log(socket);
-		//socket.emit('disClient');
-		/*socketConnectTimeInterval = setInterval(function () {
-	  		//socket.socket.reconnect();
-	  		socket.connect();
-	  		if(socket.socket.connected) {
-	  			clearInterval(socketConnectTimeInterval);
-	  			// once we are reconnected 
-	  			alert('my socket id is ' + socket.id);
-	  			// we need to get the socket id
-	  			// then save this socket in the que object
-	  		}
-		}, 3000);*/
-	});
-
 	/*
 	 * Code for playing audio on socket event
 	 */

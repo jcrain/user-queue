@@ -28,7 +28,6 @@ var launchDay = new Date('Feburary 1, 2014 00:00:00');
 var getDayObj = function(){
 	var today = new Date();
 	today.setHours(0, 0, 0, 0);
-	// TODO: just calculate how many days since launch day have passed then
 	var dateDiff = today.getTime() - launchDay.getTime();
 	var dayDiff = Math.ceil(dateDiff / (1000 * 3600 * 24));
 	return dayDiff;	
@@ -37,12 +36,12 @@ var getDayObj = function(){
 var day = getDayObj();
 day = 30 - day;
 
+
 /*
  * Show the splash screen without the game url
  */ 
 exports.splash  = function(req, res){
  	res.render('splash');
-
  };
 
 // Lemme get an index pageeeee
@@ -90,6 +89,20 @@ exports.addUser = function(req, res){
 			Que.count(function(err, count){
 				console.log(count);
 				if ( count > 1 ){ 
+					// We need to add the suffix the this day, ie st, nd, rd, th
+					count = function ordinal_suffix_of(count) {
+					    var j = count % 10;
+					    if (j == 1 && count != 11) {
+					        return count + "st";
+					    }
+					    if (j == 2 && count != 12) {
+					        return count + "nd";
+					    }
+					    if (j == 3 && count != 13) {
+					        return count + "rd";
+					    }
+					    return count + "th";
+					}(count);
 					res.json({ isFirst: false, queNumber: count });
 				} else {
 					res.json({ isFirst: true });
@@ -132,16 +145,6 @@ exports.socketsLogic = function(socket){
 	// Tell everyone when someone new signs up
 	socket.on('newUserAdded', function(data){
 		socket.broadcast.emit('addUserToQue', data);
-		console.log('SERVERSIDE: New user being fired');
-	})
-
-	// handle disconnected socket here we bind events to the socket connection
-	socket.on('disconnect', function(socket){
-		console.log('this shit be hella disconnected');
-	});
-
-	socket.on('disClient', function(){
-		console.log('we have a DISCONNECTED client with id : ' + socket.id);
 	});
 
 	socket.on('reConnectedSocket', function(data){ // this data is the user.id that was initially set
@@ -171,10 +174,6 @@ exports.socketsLogic = function(socket){
 			console.log('We have a mew user and it is :' + data);
 		});
 	});
-
-	//exports.openConnections[socket.id] = socket;
-	openConnections[socket.id] = socket;
-	console.log(openConnections[socket.id]);
 };
 
 // API to give the current player the end screen

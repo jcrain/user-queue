@@ -1,12 +1,9 @@
 Window TODO
--> Implement designs
--> Add share functionality
--> remove exercise-int class from p tags, move style to p tag
--> Add st, nd, rd, th to the place in line counter
+-> implement 404
+-> fix responsive game layout
+-> Update users place in line when someone is finished
 -> Need to send the tron new data when new users appear
 -> Desktop screen
--> stop constant reconnecting on dropped client connection
--> implement 404
 -> redirect to slpash page for incorrect url
 
 

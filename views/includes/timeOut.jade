@@ -17,9 +17,10 @@ div.user-que(ng-show="data.showUserTimedOut")
 			br 
 			| COLORECTAL CANCER
 		div.share-box
-			span.share.facebook share 
+			span.share.facebook(ng-click="share('facebook')") share 
 				img(src="/images/share_facebook.png")
-			span.share.twitter share 
+			span.share.twitter(ng-click="share()") share 
 				img(src="/images/share_twitter.png")
 		p.exercise-inst learn more at 
 			a(href="") cccf.com
+
