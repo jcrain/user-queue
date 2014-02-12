@@ -1,6 +1,6 @@
 function WindowGame($scope, $http, socket){
 	// Booleans for showing the different views
-	/*$scope.data = { 
+	$scope.data = { 
 		  message: "hello"
 		, userPlaceQue: '' 
 		, showSignUp: true 
@@ -12,22 +12,6 @@ function WindowGame($scope, $http, socket){
 		, showEndScreen: false
 		, show404: false
 		, showUserTimedOut: false
-		, isTimedOut: false
-		, isPlayingAgain: false
-	};*/
-
-	$scope.data = { 
-		  message: "hello"
-		, userPlaceQue: '' 
-		, showSignUp: false 
-		, showUserQue: false 
-		, showGameScreen: false 
-		, showTerms: false
-		, showPlayingGame: false 
-		, showEmailReason: false
-		, showEndScreen: true 
-		, show404: false
-		, showUserTimedOut: false 
 		, isTimedOut: false
 		, isPlayingAgain: false
 	};

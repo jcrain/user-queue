@@ -9,7 +9,8 @@ div.user-que(ng-show="data.showUserTimedOut")
 		button.btn.btn-primary.span(ng-click="playAgain()") 
 			span.submit-form Play again
 		p.exercise-inst REMEMBER, THE BEST WAY TO PREVENT COLON CANCER IS TO STAY LEAN, EAT CLEAN AND GET SCREENED.
-		p.exercise-inst DAYS TO PLAY: #XX
+		p.exercise-inst DAYS TO PLAY: #
+			span= daysLeft
 			br 
 			| TEXT 9999 TO DONATE $5 NOW
 		p.exercise-inst SHARE THE FACTS ABOUT 

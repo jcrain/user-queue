@@ -1,18 +1,20 @@
-div.container(ng-show="data.showEndScreen")
-	h3 You win, {{user.name}}!!	
-	p Regular exercise, eating healthy, and getting screenings are you best chances to prevent colon cancer...
-	p and don't forget to share this game and facts about colon cancer
-	div.share-box
-			span.share.facebook share 
-				img(src="/images/share_facebook.png")
-			span.share.twitter share 
-				img(src="/images/share_twitter.png")
-	p
-		| Visit the 
-		span.terms-link CCCF website
-		| &nbsp; for more information on colon cancer or to make an online donation
-	p 
-		| You have 
-		span= daysLeft
-		| &nbsp; days left to place the Colon-a-Tron
-	button.btn.btn-primary(ng-click="playAgain()") Play Again
+div.user-que(ng-show="data.showEndScreen")
+	h3.que-header You win, {{user.name}}!!	
+	img.down-arrow(src="/images/que_down_arrow.png")
+	div.container
+		p.exercise-inst Regular exercise, eating healthy, and getting screenings are you best chances to prevent colon cancer...
+		p.exercise-inst and don't forget to share this game and facts about colon cancer
+		div.share-box
+				span.share.facebook share 
+					img(src="/images/share_facebook.png")
+				span.share.twitter share 
+					img(src="/images/share_twitter.png")
+		p.exercise-inst
+			| Visit the 
+			a.terms-link(href="http://www.coloncancerchallenge.org/", target="_blank") CCCF website
+			| &nbsp; for more information on colon cancer or to make an online donation
+		p.exercise-inst 
+			| You have 
+			span= daysLeft
+			| &nbsp; days left to place the Colon-a-Tron
+		button.btn.btn-primary(ng-click="playAgain()") Play Again	
