@@ -25,7 +25,7 @@ p 											{ color: @grayblue; }
 button 										{
 	&.btn 									{  
 		&.btn-primary 						{ border: none; background: @btnorange; color: #fff; font-size: 27px; font-family: SaaSeriesDD ; font-weight: normal; font-style: normal;
-											  text-transform: uppercase; line-height: 40px; border-radius: 0; text-shadow: none; }
+											  text-transform: uppercase; line-height: 40px; border-radius: 0; text-shadow: none; margin-left: 0; }
 	}
 }
 
@@ -48,7 +48,7 @@ div											{
 
 .css-form									{									 
 	input									{ background-color: #d9ebe8; 
-		&.sign-up 							{ height: 50px; margin: 5px 0; border-radius: 0; }
+		&.sign-up 							{ height: 50px; margin: 0px 0 5px; border-radius: 0; padding: 0 6px; }
 		.ng-invalid.ng-dirty 				{ background-color: #FA787E; border-color: red; }
 		.ng-valid.ng-dirty 					{ background-color: #78FA89; }
 	}
@@ -128,6 +128,7 @@ div											{
 	.ng-valid-max-length 		{  }
 
 @media only screen and (min-width : 767px){
+	.container 								{ margin: 0 auto;}
 	//.desktop 								{ display: block; }
 	//.game 									{ display: none; }
 }

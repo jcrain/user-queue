@@ -5,6 +5,7 @@ function WindowGame($scope, $http, socket){
 		, userPlaceQue: '' 
 		, showSignUp: true 
 		, showUserQue: false
+		, showUpNext: false
 		, showGameScreen: false
 		, showTerms: false
 		, showPlayingGame: false
@@ -48,9 +49,11 @@ function WindowGame($scope, $http, socket){
 			$http.post('/addUser', thisUser).success(function(data, status, headers, config){
 				if (data.isFirst){
 					$scope.data.showSignUp = false;
-					$scope.data.showGameScreen = true;
-					$scope.setGameTimer();
-					$scope.playSound();
+					$scope.data.showUpNext = true;
+					// add show up next
+					// 
+					//$scope.setGameTimer();
+					//$scope.playSound();
 				} else{
 					$scope.data.showSignUp = false;
 					$scope.data.showUserQue = true;
@@ -107,6 +110,8 @@ function WindowGame($scope, $http, socket){
 	$scope.playGame = function(){
 		$scope.data.showPlayingGame = true;
 		$scope.data.showGameScreen = false;
+		// LET DASH 7 KNOW THE USER IS READY TO PLAY 
+		socket.emit('userHitPlay');
 		clearTimeout($scope.isTimedOut);
 	};
 
@@ -114,7 +119,7 @@ function WindowGame($scope, $http, socket){
 		$scope.isTimedOut = setTimeout(function(){ 
 			$scope.data.showGameScreen = false;
 			$scope.data.showUserTimedOut = true;
-			$scope.playSound();
+			//$scope.playSound();
 			$scope.$apply();
 			// we need to remove the from the que
 			$http.post('/deleteUser').success( function(){ });
@@ -135,6 +140,14 @@ function WindowGame($scope, $http, socket){
 		}, 9000);*/
 	});
 
+	// Show the user the play game screen
+	// this is called from /displayIsReady
+	//=====================================================
+	socket.on('showGameScreen', function(){
+		$scope.data.showUpNext = false;
+		$scope.data.showPlayingGame = true;
+	});
+
 
 	// Event when user is added
 	//=====================================================
@@ -146,11 +159,11 @@ function WindowGame($scope, $http, socket){
 	// Show the user they are about to play
 	//=====================================================
 	socket.on('timeToPlay', function(data){
-		$scope.data.showGameScreen = true;
+		$scope.data.showUpNext = true;
 		$scope.data.showUserQue = false;
 		console.log('we are hitting the time to play event')
-		$scope.playSound();
-		$scope.setGameTimer();	
+		//$scope.playSound();
+		//$scope.setGameTimer();	
 	});
 
 	// Show the user the end screen
@@ -158,7 +171,8 @@ function WindowGame($scope, $http, socket){
 	socket.on('showEndScreen', function(){
 		$scope.data.showEndScreen = true;
 		$scope.data.showPlayingGame = false; 
-		$scope.playSound();
+
+		//$scope.playSound();
 	});
 
 	// After disconnect udpate the user's id with socket 

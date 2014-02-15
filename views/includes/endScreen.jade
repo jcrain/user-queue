@@ -5,9 +5,9 @@ div.user-que(ng-show="data.showEndScreen")
 		p.exercise-inst Regular exercise, eating healthy, and getting screenings are you best chances to prevent colon cancer...
 		p.exercise-inst and don't forget to share this game and facts about colon cancer
 		div.share-box
-				span.share.facebook share 
+				span.share.facebook(ng-click="share('facebook')") share 
 					img(src="/images/share_facebook.png")
-				span.share.twitter share 
+				span.share.twitter(ng-click="share('')") share 
 					img(src="/images/share_twitter.png")
 		p.exercise-inst
 			| Visit the 

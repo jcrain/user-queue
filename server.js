@@ -44,10 +44,11 @@ function redirectUnmatched(req, res) {
 //============================================= 
 app.get('/', routes.splash);
 app.get('/game', routes.game);
-app.get('/getQue', routes.getQue); // return the user in the que for the game
-app.post('/deleteUser', routes.removeUserFromQue); // this will likely be for timeouts 
+app.get('/getQue', routes.getQue); // return the user in the que for the game and if they have hit the "play" button
+//app.post('/deleteUser', routes.removeUserFromQue); // this will likely be for timeouts 
 app.get('/userFinishedGame', routes.userFinishedGame); // we need to remove the user from the que and then show the end screen
-app.post('/addUser', routes.addUser);
+app.get('/displayIsReady', routes.displayIsReady); // show the user the screen to play the game
+app.post('/addUser', routes.addUser); // add a user to the que
 
 // We will put out event bindings in a controller
 io.sockets.on('connection', routes.socketsLogic);

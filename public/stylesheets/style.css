@@ -5983,6 +5983,7 @@ button.btn.btn-primary {
   line-height: 40px;
   border-radius: 0;
   text-shadow: none;
+  margin-left: 0;
 }
 .main-container {
   margin-top: 30px;
@@ -6016,8 +6017,9 @@ div .placeholder-box.exercise-box {
 }
 .css-form input.sign-up {
   height: 50px;
-  margin: 5px 0;
+  margin: 0px 0 5px;
   border-radius: 0;
+  padding: 0 6px;
 }
 .css-form input .ng-invalid.ng-dirty {
   background-color: #FA787E;
@@ -6162,3 +6164,8 @@ div .placeholder-box.exercise-box {
   background-position: 155px 6px;
 }
 /* really specific css rules applied by angular */
+@media only screen and (min-width: 767px) {
+  .container {
+    margin: 0 auto;
+  }
+}

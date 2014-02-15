@@ -37,6 +37,23 @@ var day = getDayObj();
 day = 30 - day;
 
 
+// TURN A QUEUE # INTO ST, ND, RD, TH
+//================================================ 
+var getPlaceInLine = function(num){
+	var j = num % 10;
+	if (j == 1 && num != 11) {
+	    return num + "st";
+	}
+	if (j == 2 && num != 12) {
+	    return num + "nd";
+	}
+	if (j == 3 && num != 13) {
+	    return num + "rd";
+	}
+	return num + "th";
+};
+
+
 /*
  * Show the splash screen without the game url
  */ 
@@ -54,12 +71,13 @@ exports.game  = function(req, res) {
 // API to get users in Que
 //=================================================
 exports.getQue = function(req, res){
-	Que.find({},'name', function(e, doc){
+	Que.find({}, { name: 1, userHitPlay: 1 }, function(e, doc){
 		if(e || !doc) {
 			throw res.json({ "userlist": "none"});
 		} else {
 			res.json({ "userlist" : doc });
 		}
+		console.log(doc);
 	});
 };
 
@@ -79,7 +97,7 @@ exports.addUser = function(req, res){
 		});
 	} 
 	// We also need to save the user to the db for the que
-	var queDoc = { id: reqBody.id, name: reqBody.name, socket: reqBody.id };
+	var queDoc = { id: reqBody.id, name: reqBody.name, socket: reqBody.id, userHitPlay: false};
 	var addQue = new Que(queDoc);
 	// Save poll to DB with all users
 	addQue.save(function(err, doc) {
@@ -90,19 +108,7 @@ exports.addUser = function(req, res){
 				console.log(count);
 				if ( count > 1 ){ 
 					// We need to add the suffix the this day, ie st, nd, rd, th
-					count = function ordinal_suffix_of(count) {
-					    var j = count % 10;
-					    if (j == 1 && count != 11) {
-					        return count + "st";
-					    }
-					    if (j == 2 && count != 12) {
-					        return count + "nd";
-					    }
-					    if (j == 3 && count != 13) {
-					        return count + "rd";
-					    }
-					    return count + "th";
-					}(count);
+					count = getPlaceInLine(count); 
 					res.json({ isFirst: false, queNumber: count });
 				} else {
 					res.json({ isFirst: true });
@@ -114,7 +120,7 @@ exports.addUser = function(req, res){
 };
 
 // Delete User End Point 
-exports.removeUserFromQue = function(req, res){
+/*exports.removeUserFromQue = function(req, res){
 	var myCurrentUser = Que.findOne(function(err, doc){
 		player = doc;
 		console.log(player);
@@ -133,8 +139,14 @@ exports.removeUserFromQue = function(req, res){
 				res.json({"message": "no one is que"});
 			}
 		});
+		// UPDATE EVERYONE'S QUEUE #
+		// update que positions
+		// delete user
+		// get current position
+		// update number
+		// each person in que, 
 	});
-};
+};*/
 
 //exports.openConnections = {};
 
@@ -162,6 +174,18 @@ exports.socketsLogic = function(socket){
 		});	
 	});
 
+	socket.on('userHitPlay', function(){
+		// get the first user in the que
+		// update userHitGo to true
+		var userIsReady = Que.findOne(function(err, doc){
+			if (doc != null){
+				Que.update( { id: doc.id }, { userHitPlay: true }, function(){
+					console.log('this record has been updated');
+				});
+			}
+		});
+	});
+
 	socket.on('saveId', function(data){
 		console.log('this is the socket ID i am adding to keep track of sockets: ' + data);
 	});
@@ -179,6 +203,9 @@ exports.socketsLogic = function(socket){
 // API to give the current player the end screen
 exports.userFinishedGame = function(req, res){
 	// remove the current user from the que
+	// how did the user do
+	console.log('test for showing the score' + req.query.score);
+
 	var player;
 	var myCurrentUser = Que.findOne(function(err, doc){
 		if (doc != null){
@@ -196,13 +223,13 @@ exports.userFinishedGame = function(req, res){
 				});
 				// WE SHOULD SHOW THE NEXT PERSON THE GAME SCREEN
 				//=================================================
-				var myCurrentUser = Que.findOne(function(err, doc){
+				/*var myCurrentUser = Que.findOne(function(err, doc){
 					if (doc != null){
 						io.sockets.socket(doc.socket).emit('timeToPlay', function(){
 							console.log('these event is working somewhere');
 						});
 					} 
-				});
+				});*/
 				res.send({ "message": "success"});
 			}
 		} else{
@@ -211,6 +238,46 @@ exports.userFinishedGame = function(req, res){
 	});
 
 }
+
+// API to show user game screen
+exports.displayIsReady = function(req, res){
+	// this will show current user the play screen 
+	// socket event for show
+	var player;
+	var showUserPlayScreen = Que.findOne(function(err, doc){
+		console.log('how are these docs different' + doc);
+		for (var key in doc) {
+  				console.log('here are the keys' + key);
+			}
+		if (doc != null){
+			io.sockets.socket(doc.socket).emit('showGameScreen', function(){
+			});
+			if(err || !doc) {
+				throw res.json({ "message": "Error showing play game screen"});
+			} else {
+				
+			}
+		} else{
+		}
+	});
+
+	var showNextUp = Que.find({}).skip(1).limit(1).select('socket').exec(function(err, doc){
+		if (doc != null){
+			doc =JSON.stringify(doc);
+			doc = doc.split(':');
+			doc = doc[1].split(',');
+			//doc = doc[1].split('"');
+			doc = doc[0].replace('"', '').replace('"', '');
+			io.sockets.socket(doc).emit('timeToPlay', function(){
+				console.log('why is time to play not running');
+				res.send({ "message": "success were is my fucking screen"});
+			});
+			res.send({ "message": "success user up next"});
+		} else {
+			res.send({ "message": "success no one in que"});
+		}
+	});
+};
 
 
 
