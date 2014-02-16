@@ -11,6 +11,9 @@ function WindowGame($scope, $http, socket){
 		, showPlayingGame: false
 		, showEmailReason: false
 		, showEndScreen: false
+		, showEndMessage0: false
+		, showEndMessage1: false
+		, showEndMessage2: false
 		, show404: false
 		, showUserTimedOut: false 
 		, isTimedOut: false
@@ -66,8 +69,6 @@ function WindowGame($scope, $http, socket){
 		$scope.user.isPlayingAgain = true; // the user is playing again. add them to the que but not the user list
 		$scope.data.showUserTimedOut = false;
 		$scope.data.showEndScreen = false;
-		// put into que, if not first show 
-
 		$scope.addUser();
 	};
 
@@ -107,12 +108,13 @@ function WindowGame($scope, $http, socket){
 	/*
 	 * STEP 2: User is promted to play the game
 	 */
-	$scope.playGame = function(){
+	$scope.playGame = function(){ // this is called from ng-click 
 		$scope.data.showPlayingGame = true;
 		$scope.data.showGameScreen = false;
 		// LET DASH 7 KNOW THE USER IS READY TO PLAY 
 		socket.emit('userHitPlay');
 		clearTimeout($scope.isTimedOut);
+		$scope.setPlayTimer();
 	};
 
 	$scope.setGameTimer = function(){ // The user has 30 seconds to press the play game button or they are removed
@@ -125,6 +127,14 @@ function WindowGame($scope, $http, socket){
 			$http.post('/deleteUser').success( function(){ });
 		}, 8000);
 	}
+
+	$scope.setPlayTimer = function(){ // tell the user to watch the screen after 15 seconds
+		setTimeout(function(){
+			$scope.data.showWatchGame = true;
+			$scope.data.showPlayingGame = false;
+			$scope.$apply();
+		}, 8000);
+	};
 	
 
 	/*
@@ -134,10 +144,6 @@ function WindowGame($scope, $http, socket){
 		userId = data;
 		socket.emit('saveId', userId);
 		document.getElementById('user_id').setAttribute("value", userId);
-		/*setTimeout(function(){
-			console.log('we should have a disconnected socket');
-			socket.disconnect();
-		}, 9000);*/
 	});
 
 	// Show the user the play game screen
@@ -145,7 +151,8 @@ function WindowGame($scope, $http, socket){
 	//=====================================================
 	socket.on('showGameScreen', function(){
 		$scope.data.showUpNext = false;
-		$scope.data.showPlayingGame = true;
+		$scope.data.showGameScreen = true;
+		$scope.setGameTimer();
 	});
 
 
@@ -161,17 +168,28 @@ function WindowGame($scope, $http, socket){
 	socket.on('timeToPlay', function(data){
 		$scope.data.showUpNext = true;
 		$scope.data.showUserQue = false;
-		console.log('we are hitting the time to play event')
 		//$scope.playSound();
-		//$scope.setGameTimer();	
 	});
 
-	// Show the user the end screen
+	// Show the user the different end screens end screen
 	//=====================================================
-	socket.on('showEndScreen', function(){
+	socket.on('showEndScreen', function(data){
+		console.log('your score was : ' + data);
 		$scope.data.showEndScreen = true;
-		$scope.data.showPlayingGame = false; 
+		$scope.data.showWatchGame = false; 
+		switch(data) {
+			case "0": 
+				$scope.data.showEndMessage0 = true;
+				break;
 
+			case "1": 
+				$scope.data.showEndMessage1 = true;
+				break;
+
+			case "2": 
+				$scope.data.showEndMessage2 = true;
+				break;
+		}
 		//$scope.playSound();
 	});
 

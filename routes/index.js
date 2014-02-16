@@ -96,16 +96,14 @@ exports.addUser = function(req, res){
 			}		
 		});
 	} 
-	// We also need to save the user to the db for the que
-	var queDoc = { id: reqBody.id, name: reqBody.name, socket: reqBody.id, userHitPlay: false};
+
+	var queDoc = { id: reqBody.id, name: reqBody.name, socket: reqBody.id, userHitPlay: false}; // build user doc
 	var addQue = new Que(queDoc);
-	// Save poll to DB with all users
-	addQue.save(function(err, doc) {
+	addQue.save(function(err, doc) { // save user to queue
 		if(err || !doc) {
 			throw 'Error';
 		} else {
-			Que.count(function(err, count){
-				console.log(count);
+			Que.count(function(err, count){ // we need to get the place in line
 				if ( count > 1 ){ 
 					// We need to add the suffix the this day, ie st, nd, rd, th
 					count = getPlaceInLine(count); 
@@ -114,13 +112,13 @@ exports.addUser = function(req, res){
 					res.json({ isFirst: true });
 				}
 			});
-			//res.json(doc);
 		}		
 	});
 };
 
-// Delete User End Point 
-/*exports.removeUserFromQue = function(req, res){
+// Delete User After timeout
+//=============================================
+exports.removeUserFromQue = function(req, res){
 	var myCurrentUser = Que.findOne(function(err, doc){
 		player = doc;
 		console.log(player);
@@ -139,14 +137,8 @@ exports.addUser = function(req, res){
 				res.json({"message": "no one is que"});
 			}
 		});
-		// UPDATE EVERYONE'S QUEUE #
-		// update que positions
-		// delete user
-		// get current position
-		// update number
-		// each person in que, 
 	});
-};*/
+};
 
 //exports.openConnections = {};
 
@@ -174,13 +166,11 @@ exports.socketsLogic = function(socket){
 		});	
 	});
 
-	socket.on('userHitPlay', function(){
-		// get the first user in the que
-		// update userHitGo to true
+	socket.on('userHitPlay', function(){ // Update record to show the user is ready to play
 		var userIsReady = Que.findOne(function(err, doc){
 			if (doc != null){
 				Que.update( { id: doc.id }, { userHitPlay: true }, function(){
-					console.log('this record has been updated');
+					console.log('this record has been updated to indicated user is ready');
 				});
 			}
 		});
@@ -202,34 +192,18 @@ exports.socketsLogic = function(socket){
 
 // API to give the current player the end screen
 exports.userFinishedGame = function(req, res){
-	// remove the current user from the que
-	// how did the user do
-	console.log('test for showing the score' + req.query.score);
-
+	var userScore = req.query.score;
 	var player;
-	var myCurrentUser = Que.findOne(function(err, doc){
+	var myCurrentUser = Que.findOne(function(err, doc){ // Find the current player and remove them from queue
 		if (doc != null){
-			console.log('this is the the doc is :'+doc);
-			io.sockets.socket(doc.socket).emit('showEndScreen', function(){
+			io.sockets.socket(doc.socket).emit('showEndScreen', userScore,  function(){
 				console.log('User now sees the end screen');
 			});
 			if(err || !doc) {
 				throw res.json({ "message": "There was an error removeing the user"});
 			} else {
 				player = doc;
-				console.log(player);
-				Que.remove( { id : player.id }, function(){
-					console.log("we are in the call back from remove");
-				});
-				// WE SHOULD SHOW THE NEXT PERSON THE GAME SCREEN
-				//=================================================
-				/*var myCurrentUser = Que.findOne(function(err, doc){
-					if (doc != null){
-						io.sockets.socket(doc.socket).emit('timeToPlay', function(){
-							console.log('these event is working somewhere');
-						});
-					} 
-				});*/
+				Que.remove( { id : player.id }, function(){});
 				res.send({ "message": "success"});
 			}
 		} else{
@@ -241,40 +215,31 @@ exports.userFinishedGame = function(req, res){
 
 // API to show user game screen
 exports.displayIsReady = function(req, res){
-	// this will show current user the play screen 
-	// socket event for show
-	var player;
-	var showUserPlayScreen = Que.findOne(function(err, doc){
-		console.log('how are these docs different' + doc);
-		for (var key in doc) {
+	var showUserPlayScreen = Que.findOne(function(err, doc){ // Find the next person to play
+		/*for (var key in doc) {
   				console.log('here are the keys' + key);
-			}
+			}*/
 		if (doc != null){
-			io.sockets.socket(doc.socket).emit('showGameScreen', function(){
-			});
-			if(err || !doc) {
-				throw res.json({ "message": "Error showing play game screen"});
-			} else {
-				
-			}
+			io.sockets.socket(doc.socket).emit('showGameScreen', function(){});
+			res.send({ "message": "success"});
 		} else{
+			res.send({ "message": "fail"});
 		}
 	});
 
-	var showNextUp = Que.find({}).skip(1).limit(1).select('socket').exec(function(err, doc){
+	var showNextUp = Que.find({}).skip(1).limit(1).select('socket').exec(function(err, doc){ // If we have a 2nd person in the queue they get the up next screen
 		if (doc != null){
 			doc =JSON.stringify(doc);
-			doc = doc.split(':');
-			doc = doc[1].split(',');
-			//doc = doc[1].split('"');
-			doc = doc[0].replace('"', '').replace('"', '');
-			io.sockets.socket(doc).emit('timeToPlay', function(){
-				console.log('why is time to play not running');
-				res.send({ "message": "success were is my fucking screen"});
-			});
-			res.send({ "message": "success user up next"});
-		} else {
-			res.send({ "message": "success no one in que"});
+			try{
+				doc = doc.split(':');
+				doc = doc[1].split(',');
+				doc = doc[0].replace('"', '').replace('"', '');
+			} catch(e){
+				console.log(e);
+			} finally{
+
+			}
+			io.sockets.socket(doc).emit('timeToPlay', function(){});
 		}
 	});
 };

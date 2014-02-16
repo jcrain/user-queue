@@ -1,5 +1,7 @@
 div.user-que(ng-show="data.showEndScreen")
-	h3.que-header You win, {{user.name}}!!	
+	h3.que-header(ng-show="data.showEndMessage0") You win, {{user.name}}!!	
+	h3.que-header(ng-show="data.showEndMessage1") You are okay, {{user.name}}!!	
+	h3.que-header(ng-show="data.showEndMessage2") You could use some work, {{user.name}}!!	
 	img.down-arrow(src="/images/que_down_arrow.png")
 	div.container
 		p.exercise-inst Regular exercise, eating healthy, and getting screenings are you best chances to prevent colon cancer...
