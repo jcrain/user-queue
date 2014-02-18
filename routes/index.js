@@ -64,14 +64,17 @@ exports.splash  = function(req, res){
 // Lemme get an index pageeeee
 //================================================
 exports.game  = function(req, res) {
+	if( isSystemOn ){
 		res.render('gameLayout', { daysLeft: day});
-		console.log(day);
+	} else{
+		res.render('broken', { daysLeft: day});
+	}
 };
 
 // API to get users in Que
 //=================================================
 exports.getQue = function(req, res){
-	Que.find({}, { name: 1, userHitPlay: 1 }, function(e, doc){
+	Que.find({}, { name: 1, userHitPlay: 1, timestampAdded: 1 }, function(e, doc){
 		if(e || !doc) {
 			throw res.json({ "userlist": "none"});
 		} else {
@@ -97,7 +100,8 @@ exports.addUser = function(req, res){
 		});
 	} 
 
-	var queDoc = { id: reqBody.id, name: reqBody.name, socket: reqBody.id, userHitPlay: false}; // build user doc
+	var timeStamp = (new Date).getTime();
+	var queDoc = { id: reqBody.id, name: reqBody.name, socket: reqBody.id, userHitPlay: false, timestampAdded: timeStamp }; // build user doc
 	var addQue = new Que(queDoc);
 	addQue.save(function(err, doc) { // save user to queue
 		if(err || !doc) {
@@ -242,6 +246,19 @@ exports.displayIsReady = function(req, res){
 			io.sockets.socket(doc).emit('timeToPlay', function(){});
 		}
 	});
+};
+
+
+// FLAG to turn game on and off
+exports.system = function(req, res){
+	var isOn = req.query.enable;
+	if ( isOn == "1" ){
+		isSystemOn = 0; 
+		res.send({ "message": "system is off"});
+	} else {
+		isSystemOn = 1;
+		res.send({ "message": "system is on"});
+	}
 };
 
 

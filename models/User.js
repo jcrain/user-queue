@@ -13,8 +13,9 @@ exports.NewUser = new mongoose.Schema({
 });
 
 exports.QueUser = new mongoose.Schema ({
-	id			: { type: String, required: true },
-	name		: { type: String, required: true },
-	socket		: { type: String, required: true },
-	userHitPlay : { type: Boolean, required: true} 
+	id				: { type: String, required: true },
+	name			: { type: String, required: true },
+	socket			: { type: String, required: true },
+	userHitPlay 	: { type: Boolean, required: true},
+	timestampAdded	: { type: String, required: true}
 });

@@ -2,7 +2,6 @@ Window TODO
 -> implement 404
 -> fix responsive game layout
 -> Update users place in line when someone is finished
--> Need to send the tron new data when new users appear
 -> Desktop screen
 -> redirect to slpash page for incorrect url
 
@@ -12,3 +11,26 @@ Nice to have
 -> Add sound to notify to the user 
 -> Animations between screens 
 -> Back up DB once an hour?
+
+
+HOST GATOR LOGIN
+For the billing login UN is borassi@coloncancerchallenge.org PW Challenge10*
+http://gbclient.hostgator.com/login
+Power Panel (VZ):   https://198.154.216.198:4643/vz/cp
+Your Domain:     col.colonatron.org
+Your Username:  root
+Your Password:  qgYwLXnsq8QB
+Your site's IP address:
+198.154.216.198
+ssh:
+(in terminal)  ssh root@198.154.216.198  (pw qgYwLXnsq8QB)
+
+Since you have chosen to install cPanel on your server, your information is below:
+WHM Address: http://198.154.216.198:2086
+Username: root
+Password: qgYwLXnsq8QB
+cPanel License ID: 17695587
+
+Your name servers that must be registered are:
+ns1.colonatron.org (198.154.216.198)
+ns2.colonatron.org (198.154.216.216)

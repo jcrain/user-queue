@@ -22,6 +22,9 @@ var express = require('express'),
 io 		= require('socket.io').listen(server);
 server.listen(3000);
 
+// SYSTEM WORKING GLOBAL VAR
+isSystemOn  = 1;
+
 // CONFIGURE APP 
 //=============================================
 app.configure(function(){
@@ -47,8 +50,10 @@ app.get('/game', routes.game); // Return the game
 app.get('/getQue', routes.getQue); // Return the users in the queue 
 app.get('/userFinishedGame', routes.userFinishedGame); // we need to remove the user from the que and then show the end screen
 app.get('/displayIsReady', routes.displayIsReady); // show the user the screen to play the game
+app.get('/system', routes.system); // Turn the game on and off
 app.post('/deleteUser', routes.removeUserFromQue); // called when user times out
 app.post('/addUser', routes.addUser); // add a user to the que
+
 
 // We will put out event bindings in a controller
 io.sockets.on('connection', routes.socketsLogic);
