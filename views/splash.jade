@@ -5,7 +5,51 @@ block head
 	link(rel='stylesheet', href='/stylesheets/style.css')
 
 block content
-	p this is the spalsh page
+	.dark-blue
+		.container
+			h3.georgia The one &amp; only!
+			h1 colon-o-tron
+			h4.sub-head READY, SET, FIGHT COLORECTAl cANCER
+			img(src="images/video.jpg")
+			p.video-inst really introdescription of the game - and sort of a caption for the video
+	.light-blue
+		.container.row
+			.span6
+				img(src="/images/map.jpg")
+			.span5
+				p.event-date Copy telling you it’s MARCH 1-31 &amp; to get excited  
+				p.play PLAY ANYTIME OF THE DAY
+				p.address
+					| 10 Rockefeller Plaza
+					br
+					| New York, NY 10020
+				p.address
+					span.place-icon GET DIRECTIONS
+	.dark-blue
+		.container
+			h3 SHARE THE FACTS ABOUT COLORECTAL CANCER
+			p ciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo eni
+			.row
+				.span4.over-flow
+					p
+						img.pull-left(src="/images/splash_footer_1.jpg")
+						| te natus error sit voluptatem accusantium doloremque laudantium, totam
+				.span4.over-flow
+					p
+						img.pull-left(src="/images/splash_footer_1.jpg")
+						| te natus error sit voluptatem accusantium doloremque laudantium, totam
+				.span4.over-flow
+					p
+						img.pull-left(src="/images/splash_footer_1.jpg")
+						| te natus error sit voluptatem accusantium doloremque laudantium, totam
+			div.share-box
+				span.share.facebook(ng-click="share('facebook')") share 
+					img(src="/images/share_facebook.png")
+				span.share.twitter(ng-click="share('')") share 
+					img(src="/images/share_twitter.png")
+	.bottom
+		.container
+			p learn more at coloncancerchallenge.org
 	
 block footer
 	include includes/splashFooter

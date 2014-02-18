@@ -19,4 +19,27 @@ div.user-que(ng-show="data.showEndScreen")
 			| You have 
 			span= daysLeft
 			| &nbsp; days left to place the Colon-a-Tron
-		button.btn.btn-primary(ng-click="playAgain()") Play Again	
+		button.btn.btn-primary(ng-click="playAgain()") Play Again
+
+// Alternate screen is there is an error during the game
+div.user-que(ng-show="data.showGameError")
+	h3.que-header We're Sorry {{user.name}}	
+	img.down-arrow(src="/images/que_down_arrow.png")
+	div.container
+		p.exercise-inst	The colon-a-tron needs to go to the doctor. We hope you will come back and play after it gets a check-up
+		p.exercise-inst Regular exercise, eating healthy, and getting screenings are you best chances to prevent colon cancer...
+		p.exercise-inst and don't forget to share this game and facts about colon cancer
+		div.share-box
+				span.share.facebook(ng-click="share('facebook')") share 
+					img(src="/images/share_facebook.png")
+				span.share.twitter(ng-click="share('')") share 
+					img(src="/images/share_twitter.png")
+		p.exercise-inst
+			| Visit the 
+			a.terms-link(href="http://www.coloncancerchallenge.org/", target="_blank") CCCF website
+			| &nbsp; for more information on colon cancer or to make an online donation
+		p.exercise-inst 
+			| You have 
+			span= daysLeft
+			| &nbsp; days left to place the Colon-a-Tron
+		button.btn.btn-primary(ng-click="playAgain()") Play Again		

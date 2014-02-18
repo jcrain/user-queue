@@ -5995,6 +5995,9 @@ button.btn.btn-primary {
 .container {
   padding: 0 20px;
 }
+.over-flow {
+  overflow: hidden;
+}
 .terms-link {
   text-decoration: underline;
   color: #fff;
@@ -6162,6 +6165,64 @@ div .placeholder-box.exercise-box {
 }
 .timed-out .submit-form {
   background-position: 155px 6px;
+}
+.light-blue {
+  background: #89e4ff;
+  padding: 75px 0;
+}
+.light-blue p {
+  color: #26465f;
+}
+.dark-blue {
+  padding: 75px 0;
+}
+.dark-blue h1 {
+  font-size: 100px;
+  line-height: 100px;
+  padding: 45px;
+  background: url('../images/headerBg.png') no-repeat center 19px;
+}
+.dark-blue h4 {
+  margin: 25px 0;
+}
+.bottom {
+  background: #172a3b;
+  padding: 75px 0;
+}
+.georgia {
+  font-family: Georgia, Times New Roman, Serif;
+  font-size: 30px;
+  color: #fdfe86;
+  font-weight: 100;
+  font-style: italic;
+}
+.sub-head {
+  font-size: 45px;
+  line-height: 45px;
+  color: #86e4f3;
+}
+.video-inst {
+  font-size: 26px;
+  color: #b4d7ee;
+  margin-top: 25px;
+  line-height: 26px;
+}
+.event-date {
+  font-size: 50px;
+  line-height: 46px;
+}
+.play {
+  font-size: 36px;
+  line-height: 30px;
+}
+.address {
+  font-size: 26px;
+  line-height: 26px;
+}
+.place-icon {
+  background: url('../images/place_icon.png') no-repeat 0 center;
+  padding-left: 16px;
+  text-decoration: underline;
 }
 /* really specific css rules applied by angular */
 @media only screen and (min-width: 767px) {

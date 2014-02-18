@@ -14,6 +14,7 @@ function WindowGame($scope, $http, socket){
 		, showEndMessage0: false
 		, showEndMessage1: false
 		, showEndMessage2: false
+		, showGameError: false
 		, show404: false
 		, showUserTimedOut: false 
 		, isTimedOut: false
@@ -189,7 +190,13 @@ function WindowGame($scope, $http, socket){
 			case "2": 
 				$scope.data.showEndMessage2 = true;
 				break;
+
+			case "4":
+				$scope.data.showGameError = true;
+				$scope.data.showEndScreen = false;
+				break;
 		}
+
 		//$scope.playSound();
 	});
 
