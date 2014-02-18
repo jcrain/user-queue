@@ -6220,9 +6220,34 @@ div .placeholder-box.exercise-box {
   line-height: 26px;
 }
 .place-icon {
-  background: url('../images/place_icon.png') no-repeat 0 center;
-  padding-left: 16px;
+  background: url('../images/place_icon.png') no-repeat 0 4px;
+  padding-left: 24px;
   text-decoration: underline;
+  display: inline-block;
+  height: 30px;
+}
+.share-facts {
+  font-size: 50px;
+  line-height: 50px;
+  color: #78deff;
+}
+.awareness {
+  font-size: 24px;
+  line-height: 30px;
+  color: #fff;
+  margin: 25px 0;
+}
+.fact-bubbles {
+  text-align: left;
+  margin-bottom: 35px;
+}
+.fact-bubbles img {
+  margin-right: 10px;
+}
+.fact-text {
+  padding-top: 12px;
+  width: 61%;
+  display: inline-block;
 }
 /* really specific css rules applied by angular */
 @media only screen and (min-width: 767px) {
