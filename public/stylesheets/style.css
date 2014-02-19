@@ -6185,6 +6185,14 @@ div .placeholder-box.exercise-box {
 .dark-blue h4 {
   margin: 25px 0;
 }
+.home-share {
+  position: relative;
+  top: -45px;
+  cursor: pointer;
+}
+.splash-twitter {
+  margin-left: 10px;
+}
 .bottom {
   background: #172a3b;
   padding: 75px 0;
@@ -6210,21 +6218,32 @@ div .placeholder-box.exercise-box {
 .event-date {
   font-size: 50px;
   line-height: 46px;
+  margin-bottom: 20px;
 }
 .play {
   font-size: 36px;
   line-height: 30px;
+  background: url('../images/splash_dot_title.png') no-repeat center center;
+  padding: 24px 20px;
+  margin-bottom: 25px;
 }
 .address {
   font-size: 26px;
   line-height: 26px;
 }
+.address.link {
+  margin-top: 15px;
+}
 .place-icon {
   background: url('../images/place_icon.png') no-repeat 0 4px;
   padding-left: 24px;
   text-decoration: underline;
+  color: #26465F;
   display: inline-block;
   height: 30px;
+}
+.place-icon:hover {
+  color: #0088CC;
 }
 .share-facts {
   font-size: 50px;
@@ -6247,6 +6266,47 @@ div .placeholder-box.exercise-box {
 .fact-text {
   padding-top: 12px;
   width: 61%;
+  display: inline-block;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.video {
+  position: relative;
+  margin-top: 40px;
+}
+.fly-out {
+  position: absolute;
+  color: #26465f;
+}
+.fly-out.left {
+  top: 184px;
+  padding-right: 45px;
+  left: -63px;
+  font-size: 38px;
+  line-height: 41px;
+}
+.fly-out.right {
+  font-size: 38px;
+  line-height: 30px;
+  top: 80px;
+  right: -63px;
+}
+.fly-out.right .box {
+  height: 125px;
+  padding-top: 25px;
+}
+.fly-out .box {
+  background: #89e4ff;
+  width: 175px;
+  height: 150px;
+}
+.fly-out .arrow {
+  top: 52px;
+  position: relative;
+}
+.fly-out .play-time {
+  font-size: 18px;
+  line-height: 20px;
   display: inline-block;
 }
 /* really specific css rules applied by angular */

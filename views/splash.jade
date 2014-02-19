@@ -7,24 +7,50 @@ block head
 block content
 	.dark-blue
 		.container
+			.home-share.pull-right
+				span.splash-fb
+					img(src="/images/splash_fb.png")
+				span.splash-twitter
+					img(src="/images/splash_twitter.png")
 			h3.georgia The one &amp; only!
 			h1 colon-o-tron
 			h4.sub-head READY, SET, FIGHT COLORECTAl cANCER
-			img(src="images/video.jpg")
+			.video
+				.fly-out.left
+					.box.pull-left
+						span.month March
+						br
+						| 1
+						sup st 
+						| - 31
+						sup st
+						span.play-time play any
+							br
+							|time of day
+					.arrow.pull-left
+						img(src="/images/splash_right_arrow.png")
+				img(src="images/video.jpg")
+				.fly-out.right
+					.arrow.pull-left
+						img(src="/images/splash_left_arrow.png")
+					.box.pull-left 14 DAYS LEFT TO PLAY!
+
+
 			p.video-inst really introdescription of the game - and sort of a caption for the video
 	.light-blue
-		.container.row
-			.span6
-				img(src="/images/map.jpg")
-			.span5
-				p.event-date Copy telling you it’s MARCH 1-31 &amp; to get excited  
-				p.play PLAY ANYTIME OF THE DAY
-				p.address
-					| 10 Rockefeller Plaza
-					br
-					| New York, NY 10020
-				p.address
-					span.place-icon GET DIRECTIONS
+		.container
+			.row
+				.span6
+					img(src="/images/map.jpg")
+				.span6
+					p.event-date Copy telling you it’s MARCH 1-31 &amp; to get excited  
+					p.play PLAY ANYTIME OF THE DAY
+					p.address
+						| 10 Rockefeller Plaza
+						br
+						| New York, NY 10020
+					p.address.link
+						a.place-icon(href="https://maps.google.com/maps?q=10+Rockefeller+Plaza+New+York,+NY+10020&oe=utf-8&client=firefox-a&channel=sb&hnear=10+Rockefeller+Plaza,+New+York,+10020&gl=us&t=m&z=16", target="_blank") GET DIRECTIONS
 	.dark-blue
 		.container
 			h3.share-facts SHARE THE FACTS ABOUT COLORECTAL CANCER
@@ -36,11 +62,11 @@ block content
 						span.fact-text te natus error sit voluptatem accusantium doloremque laudantium, totam
 				.span4.over-flow
 					p
-						img.pull-left(src="/images/splash_footer_1.jpg")
+						img.pull-left(src="/images/splash_footer_2.jpg")
 						span.fact-text te natus error sit voluptatem accusantium doloremque laudantium, totam
 				.span4.over-flow
 					p
-						img.pull-left(src="/images/splash_footer_1.jpg")
+						img.pull-left(src="/images/splash_footer_3.jpg")
 						span.fact-text te natus error sit voluptatem accusantium doloremque laudantium, totam
 			div.share-box
 				span.share.facebook(ng-click="share('facebook')") share 
