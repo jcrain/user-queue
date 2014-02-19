@@ -163,6 +163,13 @@ function WindowGame($scope, $http, socket){
 		$scope.userlist.users.push({"name":data});
 		console.log('add user to que fired');
 	});
+
+	// Event to update users place in line
+	//=====================================================
+	socket.on('updatePlaceInLine', function(data){
+		$scope.data.userPlaceQue = data;
+		console.log('we should have a new place called '+ data);
+	});
 	
 	// Show the user they are about to play
 	//=====================================================

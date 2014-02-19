@@ -246,6 +246,15 @@ exports.displayIsReady = function(req, res){
 			io.sockets.socket(doc).emit('timeToPlay', function(){});
 		}
 	});
+
+	var updatePlaceInLine = Que.find({}, function(err, doc){ // We need to update the user's place in line 
+		var numInLine = 0; 
+		doc.forEach(function(entry){
+			var placeInLine = getPlaceInLine(numInLine);
+			io.sockets.socket(entry.socket).emit('updatePlaceInLine', placeInLine, function(){});
+			numInLine++;
+		})
+	});
 };
 
 
