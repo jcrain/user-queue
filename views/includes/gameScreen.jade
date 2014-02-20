@@ -1,13 +1,15 @@
 div.user-que(ng-show="data.showGameScreen")
-	h3.que-header Your Up
+	h3.que-header You're Up,
 		br
 		| {{user.name}}!
 	img.down-arrow(src="/images/que_down_arrow.png")
 	div.container.playing-game.row
-		p.exercise-inst STEP IN FRONT OF THE CAMERA IN THE WINDOW NOW. WHEN YOU’RE READY, PRESS PLAY AND PERFORM YOUR EXERCISE FOR 15 SECONDS.
+		p.exercise-inst STEP IN FRONT OF THE MONITOR IN THE WINDOW. DECIDE WHICH EXERCISE YOU’LL PERFORM FOR 15 SECONDS: 
+
 		div
 			span.placeholder-box.exercise-box
 			span.placeholder-box.exercise-box
 		br
+		p WHEN YOU’RE READY, PRESS PLAY	
 		button.btn.btn-primary.span12(ng-click="playGame()")
 			span.submit-form PLAY

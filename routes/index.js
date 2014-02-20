@@ -205,16 +205,17 @@ exports.userFinishedGame = function(req, res){
 			});
 			if(err || !doc) {
 				throw res.json({ "message": "There was an error removeing the user"});
-			} else {
+			} else if(userScore !== "6") { // If the flag is 6 we just prompt the user to look at the screen
 				player = doc;
 				Que.remove( { id : player.id }, function(){});
 				res.send({ "message": "success"});
+			} else{
+				res.send({ "message": "success"}); // We are showing the user a prompt to watch the screen
 			}
 		} else{
 			res.json({ "message" : "fail" });
 		}
 	});
-
 }
 
 // API to show user game screen
@@ -262,11 +263,11 @@ exports.displayIsReady = function(req, res){
 exports.system = function(req, res){
 	var isOn = req.query.enable;
 	if ( isOn == "1" ){
-		isSystemOn = 0; 
-		res.send({ "message": "system is off"});
-	} else {
-		isSystemOn = 1;
+		isSystemOn = 1; 
 		res.send({ "message": "system is on"});
+	} else {
+		isSystemOn = 0;
+		res.send({ "message": "system is off"});
 	}
 };
 

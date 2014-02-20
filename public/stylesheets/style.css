@@ -6001,6 +6001,7 @@ button.btn.btn-primary {
 .terms-link {
   text-decoration: underline;
   color: #fff;
+  cursor: pointer;
 }
 div .placeholder-box:first-child {
   margin-right: 10px;
@@ -6017,6 +6018,9 @@ div .placeholder-box.exercise-box {
 }
 .css-form input {
   background-color: #d9ebe8;
+}
+.css-form input:focus:invalid:focus {
+  border-color: green;
 }
 .css-form input.sign-up {
   height: 50px;
@@ -6067,7 +6071,10 @@ div .placeholder-box.exercise-box {
   position: relative;
 }
 .sign-up-form .ng-invalid .btn.btn-primary {
-  background: #1d384b;
+  background: #244358;
+}
+.sign-up-form .ng-invalid .btn.btn-primary:disabled {
+  background: #244358;
 }
 .sign-up-form .ng-invalid .btn.btn-primary .submit-form {
   background: url('../images/btn_invalid_arrow.png') no-repeat 94px 6px;
@@ -6079,6 +6086,25 @@ div .placeholder-box.exercise-box {
 }
 .sign-up-form .email {
   position: relative;
+}
+.sign-up-form .email .error-message {
+  display: none;
+}
+.sign-up-form .email .error-message.show {
+  display: block;
+}
+.sign-up-form .name #name-error.show {
+  display: block !important;
+}
+.sign-up-form.badword .btn.btn-primary {
+  background: #244358;
+}
+.sign-up-form.badword .btn.btn-primary:disabled {
+  background: #244358;
+}
+.sign-up-form.badword .btn.btn-primary .submit-form {
+  background: url('../images/btn_invalid_arrow.png') no-repeat 94px 6px;
+  padding-right: 40px;
 }
 .submit-form {
   background: url('../images/btn_valid_arrow.png') no-repeat 71px 6px;
@@ -6129,6 +6155,7 @@ div .placeholder-box.exercise-box {
   top: 4px;
   right: 5px;
   color: #1d384b;
+  cursor: pointer;
 }
 .why-email img {
   width: 95%;
@@ -6146,13 +6173,13 @@ div .placeholder-box.exercise-box {
   margin: 0;
   box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.35);
   position: relative;
-  z-index: 1;
   padding: 30px;
   line-height: 30px;
 }
 .down-arrow {
   display: block;
   margin: 0 auto;
+  position: relative;
 }
 .place-in-line {
   color: #fff;

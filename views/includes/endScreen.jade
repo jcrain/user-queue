@@ -1,10 +1,13 @@
 div.user-que(ng-show="data.showEndScreen")
-	h3.que-header(ng-show="data.showEndMessage0") You win, {{user.name}}!!	
-	h3.que-header(ng-show="data.showEndMessage1") You are okay, {{user.name}}!!	
-	h3.que-header(ng-show="data.showEndMessage2") You could use some work, {{user.name}}!!	
+	h3.que-header(ng-show="data.showEndMessage0") YOU KICKED BUTT, {{user.name}}!!	
+	h3.que-header(ng-show="data.showEndMessage1") NICE TRY, {{user.name}}!!	
+	h3.que-header(ng-show="data.showEndMessage2") OH WELL, {{user.name}}!!	
 	img.down-arrow(src="/images/que_down_arrow.png")
 	div.container
-		p.exercise-inst Regular exercise, eating healthy, and getting screenings are you best chances to prevent colon cancer...
+		p.exercise-inst(ng-show="data.showEndMessage0") LOOKS LIKE YOU WORKED UP A SWEAT AND MADE IT THROUGH ALL THREE STEPS OF THE GAME. THAT’S NO EASY FEAT!
+		p.exercise-inst(ng-show="data.showEndMessage1") YOU GOT SOME GOOD MOMENTUM, BUT IT TAKES MORE THAN JUST MOVES TO BEAT COLON CANCER.
+		p.exercise-inst(ng-show="data.showEndMessage2") IT LOOKS LIKE YOUR HEART WASN’T IN IT THIS TIME, BUT THAT’S OKAY. 
+		p.exercise-inst Regular exercise, eating healthy, and getting screenings are your best chances to prevent colon cancer...
 		p.exercise-inst and don't forget to share this game and facts about colon cancer
 		div.share-box
 				span.share.facebook(ng-click="share('facebook')") share 

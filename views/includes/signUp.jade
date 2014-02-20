@@ -1,32 +1,26 @@
-div.container.sign-up-form.row(ng-show="data.showSignUp")
+.container.sign-up-form.row(ng-show="data.showSignUp")
 	h1.title 
-		| READY,
-		br
-		| SET, FIGHT 
-		br 
-		| COLORECTAL 
-		br 
-		| CANCER
-	form(name="form", class="css-form sign-up-form", ng-submit="addUser()", novalidate)
-		input(class="sign-up form-class span12", placeholder="Your Name", type="text", id="user-name", ng-model="user.name" name="uName", ng-maxlength="25" required)
+		| PLAY TO PREVENT COLORECTAL CANCER
+	form(id="sign-up", name="form", class="css-form form-class sign-up-form", ng-submit="addUser()", novalidate)
+		.name
+			input(class="sign-up span12", placeholder="YOUR FIRST NAME", type="text", id="user-name", ng-model="user.name" name="uName", ng-maxlength="10", ng-blur="blurFunction('name')", required)
+			p(ng-show="form.uName.$error.required && form.uName.$dirty && form.uName.$invalid", class="error-message", id="name-error") Tsk, tsk. Play nicely, please
 
-		div(ng-show="form.uName.$dirty && form.uName.$invalid" )
-			p(ng-show="form.uName.$error.required", class="error-message") Please Enter a Valid Name
-
-		div.email
-			input(class="sign-up form-class span12 email" ,placeholder="Your Email Address", type="email", id="user-email", ng-model="user.email" name="uEmail", required)
+		.email
+			input(class="sign-up span12 email" ,placeholder="Your Email Address", type="email", id="user-email", ng-model="user.email" name="uEmail", ng-blur="blurFunction('email')", required)
 			span.why-email(ng-click="showEmailReason()")
 				img(src="/images/why_email.png")
-		br
+			div(ng-show="form.uEmail.$invalid && !form.uEmail.$pristine" )
+				p(class="error-message", id="email-error") Must include valid name@provider.com
+		
 
-		div(ng-show="form.uEmail.$dirty && form.uEmail.$invalid" )
-			p(ng-show="form.uEmail.$error.required", class="error-message") Please Enter a Valid Email
+		
 
 		input(id="user_id", type="hidden", ng-model="user.id")
 		p.ts-and-cs 
-			| I accept the game 
-			span.terms-link(ng-click="showTerms()") terms and conditions
-			| &nbsp; by submitting my informations
+			| BY CLICKING SUBMIT, I AGREE TO THE GAME  
+			span.terms-link(ng-click="showTerms()") LEGAL NOTICES
+
 		button.btn.btn-primary.span12(id="play-game", ng-disabled="form.$invalid") 
 			span.submit-form submit 
 		//button.btn.btn-primary(ng-click="update(user)", ng-disabled="form.$invalid || isUnchanged(user)") Enter to Play 

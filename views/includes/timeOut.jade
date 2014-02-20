@@ -1,11 +1,9 @@
 div.user-que(ng-show="data.showUserTimedOut")
-	h3.que-header Sorry,
-		br 
-		| {{ user.name }}
+	h3.que-header SORRY, YOU TIMED OUT
+
 	img.down-arrow(src="/images/que_down_arrow.png")
 	div.container.timed-out.row
-		p.mdm.place-in-line IT LOOKS LIKE YOU TIMED OUT.
-		p.exercise-inst THANKS FOR STOPPING BY (AND FEEL FREE TO TRY AGAIN).
+		p.mdm.place-in-line THANKS FOR STOPPING BY
 		button.btn.btn-primary.span(ng-click="playAgain()") 
 			span.submit-form Play again
 		p.exercise-inst REMEMBER, THE BEST WAY TO PREVENT COLON CANCER IS TO STAY LEAN, EAT CLEAN AND GET SCREENED.
@@ -22,5 +20,5 @@ div.user-que(ng-show="data.showUserTimedOut")
 			span.share.twitter(ng-click="share()") share 
 				img(src="/images/share_twitter.png")
 		p.exercise-inst learn more at 
-			a(href="") cccf.com
+			a(href="") COLONCANCERCHALLENGE.ORG
 
