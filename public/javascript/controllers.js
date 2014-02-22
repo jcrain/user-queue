@@ -149,22 +149,23 @@ function WindowGame($scope, $http, socket){
 	$scope.playGame = function(){ // this is called from ng-click 
 		$scope.data.showPlayingGame = true;
 		$scope.data.showGameScreen = false;
-		// LET DASH 7 KNOW THE USER IS READY TO PLAY 
-		socket.emit('userHitPlay');
+		socket.emit('userHitPlay'); // user is ready to play
 	};
 
 	$scope.userTimedOut = function(){ // The user has 30 seconds to press the play game button or they are removed
-			$scope.data.showGameScreen = false;
-			$scope.data.showEndScreen = false;
-			$scope.data.showUserTimedOut = true;
-			// we need to remove the from the que
-			//$http.post('/deleteUser').success( function(){ });
-	}
-
-	$scope.userWatchGame = function(){ // tell the user to watch the screen after 15 seconds
-		$scope.data.showWatchGame = true;
+		$scope.data.showGameScreen = false;
 		$scope.data.showPlayingGame = false;
 		$scope.data.showEndScreen = false;
+		$scope.data.showUserTimedOut = true;
+		//$http.post('/deleteUser').success(function(){});
+	}
+
+	$scope.userTimedOutExercise = function(){ // tell the user to watch the screen after 15 seconds
+		$scope.data.showGameScreen = false;
+		$scope.data.showPlayingGame = false;
+		$scope.data.showEndScreen = false;
+		$scope.data.showUserTimedOut = true;
+		//$http.post('/deleteUser').success(function(){});
 	};
 	
 
@@ -184,10 +185,6 @@ function WindowGame($scope, $http, socket){
 		$scope.data.showUpNext = false;
 		$scope.data.showGameScreen = true;
 	});
-
-	// Show the user they timed out, dash7 will be controll this
-	//=====================================================
-
 
 	// Event when user is added
 	//=====================================================
@@ -211,10 +208,17 @@ function WindowGame($scope, $http, socket){
 		//$scope.playSound();
 	});
 
+	// Tell the user to watch the ball
+	//=====================================================
+	socket.on('watchBall', function(){
+		$scope.data.showWatchGame = true;
+		$scope.data.showPlayingGame = false;
+		$scope.data.showEndScreen = false;
+	});
+
 	// Show the user the different end screens end screen
 	//=====================================================
 	socket.on('showEndScreen', function(data){
-		console.log('your score was : ' + data);
 		$scope.data.showEndScreen = true;
 		$scope.data.showWatchGame = false; 
 		switch(data) {
@@ -235,12 +239,12 @@ function WindowGame($scope, $http, socket){
 				$scope.data.showEndScreen = false;
 				break;
 
-			case "5": // The user has timed out
+			case "5": // The user has timed out and did not press the play button
 				$scope.userTimedOut();
 				break;
 
-			case "6": // The user has timed out
-				$scope.userWatchGame();
+			case "6": // The user has timed out because they did not do the activity
+				$scope.userTimedOutExercise(); // change the name of this call
 				break;
 		}
 

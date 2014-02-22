@@ -72,7 +72,7 @@ exports.game  = function(req, res) {
 };
 
 // API to get users in Que
-//=================================================
+//==================================
 exports.getQue = function(req, res){
 	Que.find({}, { name: 1, userHitPlay: 1, timestampAdded: 1 }, function(e, doc){
 		if(e || !doc) {
@@ -85,7 +85,7 @@ exports.getQue = function(req, res){
 };
 
 // API to save user to database
-//=================================================
+//===================================
 exports.addUser = function(req, res){
 	var reqBody = req.body;
 	if (!req.body.isPlayingAgain){ // if we are playing for the first time save to both DBs
@@ -131,7 +131,7 @@ exports.removeUserFromQue = function(req, res){
 		});
 		// WE SHOULD SHOW THE NEXT PERSON THE GAME SCREEN
 		//=================================================
-		var myCurrentUser = Que.findOne(function(err, doc){
+		/*var myCurrentUser = Que.findOne(function(err, doc){
 			if (doc != null){
 				io.sockets.socket(doc.socket).emit('timeToPlay', function(){
 					console.log('these event is working somewhere');
@@ -140,7 +140,7 @@ exports.removeUserFromQue = function(req, res){
 			} else {
 				res.json({"message": "no one is que"});
 			}
-		});
+		});*/
 	});
 };
 
@@ -205,13 +205,11 @@ exports.userFinishedGame = function(req, res){
 			});
 			if(err || !doc) {
 				throw res.json({ "message": "There was an error removeing the user"});
-			} else if(userScore !== "6") { // If the flag is 6 we just prompt the user to look at the screen
+			} else{ 
 				player = doc;
 				Que.remove( { id : player.id }, function(){});
 				res.send({ "message": "success"});
-			} else{
-				res.send({ "message": "success"}); // We are showing the user a prompt to watch the screen
-			}
+			} 
 		} else{
 			res.json({ "message" : "fail" });
 		}
@@ -269,6 +267,19 @@ exports.system = function(req, res){
 		isSystemOn = 0;
 		res.send({ "message": "system is off"});
 	}
+};
+
+
+// PROMPT USER TO WATCH THE BALL
+exports.watchBall = function(req, res){
+	var userWatchBall = Que.findOne(function(err, doc){ // Find the next person to play
+		if (doc != null){
+			io.sockets.socket(doc.socket).emit('watchBall', function(){});
+			res.send({ "message": "success"});
+		} else{
+			res.send({ "message": "fail"});
+		}
+	});
 };
 
 

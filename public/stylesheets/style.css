@@ -6204,10 +6204,11 @@ div .placeholder-box.exercise-box {
   padding: 75px 0;
 }
 .dark-blue h1 {
-  font-size: 100px;
+  font-size: 115px;
   line-height: 100px;
   padding: 45px;
   background: url('../images/headerBg.png') no-repeat center 19px;
+  font-weight: 100;
 }
 .dark-blue h4 {
   margin: 25px 0;
@@ -6216,13 +6217,33 @@ div .placeholder-box.exercise-box {
   position: relative;
   top: -45px;
   cursor: pointer;
+  overflow: hidden;
 }
 .splash-twitter {
   margin-left: 10px;
 }
 .bottom {
-  background: #172a3b;
+  background: #fff;
   padding: 75px 0;
+  font-family: arial, sans serif;
+}
+.bottom p {
+  color: #26465f;
+}
+.bottom a {
+  color: #0b3352;
+  text-decoration: underline;
+}
+.bottom a:hover {
+  color: #114c7a;
+}
+.bottom .logos {
+  margin-bottom: 60px;
+}
+.bottom .ccf-logo {
+  padding-left: 56px;
+  margin-left: 56px;
+  border-left: 1px solid #bec7cf;
 }
 .georgia {
   font-family: Georgia, Times New Roman, Serif;
@@ -6232,15 +6253,20 @@ div .placeholder-box.exercise-box {
   font-style: italic;
 }
 .sub-head {
-  font-size: 45px;
+  font-size: 29px;
   line-height: 45px;
   color: #86e4f3;
+  font-weight: 500;
 }
 .video-inst {
-  font-size: 26px;
-  color: #b4d7ee;
+  font-size: 20px;
+  color: #fff;
   margin-top: 25px;
-  line-height: 26px;
+  line-height: 29px;
+}
+.video-sub {
+  font-size: 14px;
+  line-height: 40px;
 }
 .event-date {
   font-size: 50px;
@@ -6252,7 +6278,12 @@ div .placeholder-box.exercise-box {
   line-height: 30px;
   background: url('../images/splash_dot_title.png') no-repeat center center;
   padding: 24px 20px;
-  margin-bottom: 25px;
+  margin: 25px 0 ;
+}
+.play span {
+  font-size: 20px;
+  font-weight: 100px;
+  display: block;
 }
 .address {
   font-size: 26px;
@@ -6336,9 +6367,73 @@ div .placeholder-box.exercise-box {
   line-height: 20px;
   display: inline-block;
 }
+.donate-box {
+  border: 3px solid #5fd4fb;
+  text-align: left;
+  min-height: 100px;
+}
+.donate-box .phone-icon {
+  position: relative;
+  top: -15px;
+  left: -14px;
+}
+.donate-box .comp-icon {
+  margin-right: 20px;
+}
+.donate-box .comp-link {
+  margin-top: 32px;
+}
+.donate-box.computer {
+  padding-left: 20px;
+}
+.donate-box.text p {
+  margin-top: 10px;
+}
+.donate-box p {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 100;
+  color: #fff;
+}
+.donate-box a {
+  color: #5fd4fb;
+  text-decoration: underline;
+}
+.donate-box a:hover {
+  color: #fff;
+}
 /* really specific css rules applied by angular */
+@media only screen and (max-width: 979px) {
+  .fly-out {
+    display: none;
+  }
+}
 @media only screen and (min-width: 767px) {
   .container {
     margin: 0 auto;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .donate-box {
+    border: 3px solid #5fd4fb;
+    text-align: left;
+    min-height: 100px;
+  }
+  .donate-box.text {
+    margin-bottom: 25px;
+  }
+  .bottom .logos img {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .bottom .logos .ccf-logo {
+    margin-top: 50px;
+    padding-top: 50px;
+    border-top: 1px solid;
+    border-left: none;
+  }
+  .facts {
+    margin-bottom: 20px;
   }
 }

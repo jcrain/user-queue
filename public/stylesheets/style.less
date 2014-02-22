@@ -141,20 +141,31 @@ div											{
 	p 										{ color: #26465f; }
 }
 .dark-blue 									{ padding: 75px 0; 
-	h1 										{ font-size: 100px; line-height: 100px; padding: 45px; background: url('../images/headerBg.png') no-repeat center 19px; }
+	h1 										{ font-size: 115px; line-height: 100px; padding: 45px; background: url('../images/headerBg.png') no-repeat center 19px; font-weight: 100; }
 	h4 										{ margin: 25px 0; }
 }
-.home-share 								{ position: relative; top: -45px; cursor: pointer;  }
+.home-share 								{ position: relative; top: -45px; cursor: pointer; overflow: hidden; }
 .splash-twitter 							{ margin-left: 10px; }
-.bottom 									{ background: #172a3b; padding: 75px 0;  }
+.bottom 									{ background: #fff; padding: 75px 0; font-family: arial, sans serif; 
+	p 										{ color: #26465f; }
+	a 										{ color: #0b3352; text-decoration: underline; 
+		&:hover 							{ color: #114c7a; }
+	}
+	.logos 									{ margin-bottom: 60px; }
+	.ccf-logo 								{ padding-left: 56px; margin-left: 56px; border-left: 1px solid #bec7cf; }
+}
+
 .georgia 									{ font-family: Georgia, Times New Roman, Serif; font-size: 30px; color: #fdfe86; font-weight: 100; font-style: italic;  }
-.sub-head 									{ font-size: 45px; line-height: 45px; color: @lightblue; 
+.sub-head 									{ font-size: 29px; line-height: 45px; color: @lightblue; font-weight: 500;
 
 }
-.video-inst 								{ font-size: 26px; color: #b4d7ee; margin-top: 25px; line-height: 26px; }
+.video-inst 								{ font-size: 20px; color: #fff; margin-top: 25px; line-height: 29px; }
+.video-sub 									{ font-size: 14px; line-height: 40px; }
 .event-date 								{ font-size: 50px; line-height: 46px; margin-bottom: 20px; }
 .play 										{ font-size: 36px; line-height: 30px; background: url('../images/splash_dot_title.png') no-repeat center center;  
-											  padding: 24px 20px; margin-bottom: 25px;  }
+											  padding: 24px 20px; margin: 25px 0 ;  
+	span 									{ font-size: 20px; font-weight: 100px; display: block;  }
+}
 .address 									{ font-size: 26px; line-height: 26px; 
 	&.link 									{ margin-top: 15px; }
 }
@@ -179,6 +190,20 @@ div											{
 	.play-time 								{ font-size: 18px; line-height: 20px; display: inline-block;  }
 }
 
+.donate-box 								{ border: 3px solid #5fd4fb; text-align: left; min-height: 100px; 
+	.phone-icon 							{ position: relative; top: -15px; left: -14px;  }
+	.comp-icon 								{ margin-right: 20px; }
+	.comp-link 								{ margin-top: 32px; }
+	&.computer								{ padding-left: 20px; }
+	&.text 									{ 
+		p 									{ margin-top: 10px; }
+	}
+	p 										{ font-size: 18px; line-height: 24px; font-weight: 100; color: #fff; }
+	a 										{ color: #5fd4fb; text-decoration: underline;  
+		&:hover 							{ color: #fff; }
+	}
+}
+
 // ANGULAR STYLES
 .ng-valid 		{  }
 	.ng-invalid 	{  }
@@ -190,13 +215,47 @@ div											{
 	.ng-invalid-minlength 		{  }
 	.ng-valid-max-length 		{  }
 
+@media only screen and (max-width : 979px){
+	.fly-out 								{ display: none; }
+}
+
 @media only screen and (min-width : 767px){
 	.container 								{ margin: 0 auto;}
-	//.desktop 								{ display: block; }
-	//.game 									{ display: none; }
 }
 
 @media only screen and (max-width : 767px){
-	//.game 									{ display: block; }
-	//.desktop 								{ display: none; }
+	.donate-box 							{ border: 3px solid #5fd4fb; text-align: left; min-height: 100px; 
+		&.text								{ margin-bottom: 25px; }
+	}
+	.bottom 								{ 
+		.logos 								{ 
+			img 							{ display: block; margin: 0 auto; padding: 0;   }
+			.ccf-logo 						{ margin-top: 50px; padding-top: 50px; border-top: 1px solid; border-left: none; }
+		}
+	}
+	.facts 									{ margin-bottom: 20px; }
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
