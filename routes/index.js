@@ -9,6 +9,10 @@ if (process.env.VCAP_SERVICES) {
 } else {
    db = mongoose.createConnection('localhost', 'newUser');
 }
+var request = require('request');
+var Curl = require('node-curl/lib/Curl');
+//var Curl = require('node-curl');
+
 
 // Get User schema and model so we can query data
 //================================================
@@ -279,6 +283,63 @@ exports.watchBall = function(req, res){
 		} else{
 			res.send({ "message": "fail"});
 		}
+	});
+};
+
+// SAVE USER DATA TO EMAIL COLLECTOR
+exports.emailCollector = function(req, res){
+	/*console.log(req.body.input);
+	console.log(req.body.url);
+	var curl = new Curl();
+	curl.setopt('URL', req.body.url);
+	curl.setopt('POST', 1); // true?
+	//curl.setopt('POSTFIELDS', encodeURI(req.body.input));
+	curl.setopt('POSTFIELDS', 'asdfasdfasdfasdfasdfasdf');
+	curl.setopt('FOLLOWLOCATION', 1);
+    curl.setopt('HEADER', 0);
+    //curl.setopt('RETURNTRANSFER', 1);
+	// on 'data' must be returns chunk.length, or means interrupt the transfer
+	curl.on('data', function(chunk) {
+	    console.log("receive " + chunk.length)
+	    return chunk.length;
+	});
+	
+	// curl.close() should be called in event 'error' and 'end' if the curl won't use any more.
+	// or the resource will not release until V8 garbage mark sweep.
+	curl.on('error', function(e) {
+	    console.log("error: " + e.message)
+	    curl.close();
+	    res.json({"message": "error"});
+	});
+	
+	
+	curl.on('end', function() {
+	    console.log('code: ' + curl.getinfo('RESPONSE_CODE'));
+	    console.log('done.')
+	    curl.close();
+	    res.json({"message": "not error"});
+	});
+	curl.perform();*/
+
+	/*var spawn = require('child_process').exec;
+	var child = exec('php', ['~/Dev/NodeProjs/disconnectTest/public/test.php', 'john', 'some@gmail.com']);
+
+	child.stdout.on('data', function(chunk) {
+  		// output here
+  		console.log(chunk);
+	});*/
+
+	var exec = require('child_process').exec;
+	console.log(req.body.name);
+	console.log(req.body.email);
+	exec('php ~/Dev/NodeProjs/disconnectTest/public/test.php '+req.body.name+' '+req.body.email, function (error, stdout, stderr) {
+  		// output is in stdout
+  		console.log(stdout);
+  		if (stdout.trim() == "success"){
+  			res.send({"message": "success" });
+  		} else {
+  			res.send({"message": "error" });
+  		}
 	});
 };
 

@@ -54,6 +54,7 @@ app.get('/system', routes.system); // Turn the game on and off
 app.get('/watchBall', routes.watchBall);
 app.post('/deleteUser', routes.removeUserFromQue); // called when user times out
 app.post('/addUser', routes.addUser); // add a user to the que
+app.post('/emailCollector', routes.emailCollector);
 
 
 // We will put out event bindings in a controller

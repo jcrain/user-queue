@@ -106,8 +106,7 @@ function WindowGame($scope, $http, socket){
 		$scope.user.id = document.getElementById('user_id').getAttribute("value");
 		
 		if (thisUser.name.length > 0 && thisUser.email.length > 0 && thisUser.id.length > 0){
-			// we need to save the user to the server
-			$http.post('/addUser', thisUser).success(function(data, status, headers, config){
+			$http.post('/addUser', thisUser).success(function(data, status, headers, config){ // we need to save the user to the server
 				if (data.isFirst){
 					$scope.clearView();
 					$scope.data.showUpNext = true;
@@ -117,6 +116,46 @@ function WindowGame($scope, $http, socket){
 					$scope.data.showUserQue = true;
 					$scope.data.userPlaceQue = data.queNumber;
 				}
+			});
+			// Info for saving user name and email to email collector
+			//environment response
+    		var successresponse = "success";
+    		var errorresponse = "error";
+			var lastName = "";
+			var surveryId = "1721";
+			var postUrl = "http://events.coloncancerchallenge.org/site/Survey";
+			var userinputs = "cons_first_name="+thisUser.name+"&cons_last_name="+lastName+"&cons_email="+encodeURI(thisUser.email);
+			var surveyinputs = "SURVEY_ID="+surveryId+"&cons_info_component=t&denySubmit=&ACTION_SUBMIT_SURVEY_RESPONSE=Submit&NEXTURL=PageServer%3Fpagename%3Dcolonotron_mockapiresponse%26resp%3D"+successresponse+"%26pgwrap%3Dn&ERRORURL=PageServer%3Fpagename%3Dcolonotron_mockapiresponse%26resp%3D" + errorresponse + "%26pgwrap%3Dn";
+
+    		var postvars = userinputs + "&" + surveyinputs;
+    		var postJson = {
+    			  "name" : thisUser.name
+    			, "email" : thisUser.email 
+    		}
+    		/*var postJson = {
+    			  "cons_first_name" : thisUser.name
+    			, "cons_last_name" : lastName
+    			, "cons_email" : thisUser.email	
+    			, "SURVEY_ID":surveryId
+    			, "cons_info_component":"t"
+    			, "denySubmit":""
+    			, "ACTION_SUBMIT_SURVEY_RESPONSE":"Submit"
+    			, "NEXTURL=PageServer?pagename=colonotron_mockapiresponse&resp="+successresponse+"&pgwrap%3Dn&ERRORURL=PageServer?pagename=colonotron_mockapiresponse&resp=" + errorresponse + "&pgwrap=n";
+    		};*/
+			/*$http.post( postUrl , postvars ).success(function(data, status, headers, config){
+				console.log('our data :'+data);
+				console.log('our status :'+status);
+				console.log('our headers :'+headers);
+				console.log('we have saved data');
+			})
+			.error(function(data, status, headers, config){
+				console.log('our data :'+data);
+				console.log('our status :'+status);
+				console.log('our headers :'+headers);
+				console.log('no saved data');
+			});*/
+			$http.post('/emailCollector', postJson).success(function(data, status, headers, config){
+				console.log('we have stuff sent to /emailCollector');
 			});
 		}
 	};
