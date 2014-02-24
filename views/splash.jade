@@ -9,9 +9,9 @@ block content
 		.container
 			.home-share
 				.pull-right
-					span.splash-fb
+					span.splash-fb(ng-click="share('facebook')")
 						img(src="/images/splash_fb.png")
-					span.splash-twitter
+					span.splash-twitter(ng-click="share()")
 						img(src="/images/splash_twitter.png")
 			h3.georgia The super-awesome
 			h1 colon-o-tron
@@ -30,7 +30,8 @@ block content
 							|time of day
 					.arrow.pull-left
 						img(src="/images/splash_right_arrow.png")
-				img(src="images/video.jpg")
+				.video-responsive
+					iframe.video-iframe(width='674', height='389', src='http://www.youtube.com/embed/6xisazZX9bA', frameborder='0', allowfullscreen='')
 				.fly-out.right
 					.arrow.pull-left
 						img(src="/images/splash_left_arrow.png")
@@ -39,7 +40,7 @@ block content
 
 			p.video-inst We get that talking about colorectal cancer, sometimes called colon cancer, isn’t exactly easy. That’s why we created this game that lets you work up a quick sweat while spreading the word 
 			p.video-sub (&amp; hopefully learning a few things to help keep you healthy along the way).
-	.light-blue
+	.light-blue(id="user_id", val="")
 		.container
 			.row
 				.span5

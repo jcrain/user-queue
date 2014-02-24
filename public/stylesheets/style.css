@@ -6048,24 +6048,55 @@ div .placeholder-box.exercise-box {
   height: 45px;
   display: inline-block;
   padding: 0 10px;
+  cursor: pointer;
 }
 .footer {
   background: url('../images/footer_shadow.png') repeat-x #ffffff;
   padding: 20px;
   margin-top: 30px;
 }
+.footer .arial {
+  color: #315872;
+  font-family: Arial, Sans Serif;
+}
+.footer .arial a {
+  color: #315872;
+  text-decoration: underline;
+}
+.footer p {
+  color: #315a74;
+}
 .footer-logos {
   margin: 25px auto 0;
-  width: 280px;
+}
+.footer-logos img {
+  display: block;
+  margin: 0 auto;
+}
+.footer-logos img.footer-logo-2 {
+  margin-bottom: 30px;
 }
 .footer-logo-1 {
   width: 174px;
-  float: left;
-  margin: 0 15px;
 }
 .footer-logo-2 {
   width: 75px;
-  float: left;
+}
+.mry-logo {
+  width: 53px;
+  margin-left: 5px;
+  vertical-align: sub;
+}
+.dash-logo {
+  width: 83px;
+  margin-left: 5px;
+  vertical-align: sub;
+}
+.hr {
+  height: 2px;
+  background: #c1cdd5;
+  width: 100%;
+  margin: 30px 0;
 }
 .sign-up-form {
   position: relative;
@@ -6332,6 +6363,10 @@ div .placeholder-box.exercise-box {
   position: relative;
   margin-top: 40px;
 }
+.video-iframe {
+  border: 4px solid #89e4ff;
+  border-radius: 3px;
+}
 .fly-out {
   position: absolute;
   color: #26465f;
@@ -6406,6 +6441,19 @@ div .placeholder-box.exercise-box {
 @media only screen and (max-width: 979px) {
   .fly-out {
     display: none;
+  }
+  .video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+  }
+  .video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
   }
 }
 @media only screen and (min-width: 767px) {

@@ -63,7 +63,7 @@ function WindowGame($scope, $http, socket){
 					console.log('your name is a bad word');
 				}
 			}
-			if (hasBadWord) {
+			if (hasBadWord) { 
 				form.uName.$invalid = true;
 				$('#play-game').addClass('ng-disabled');
 				$('#play-game').attr('disabled', 'disabled');
@@ -75,6 +75,23 @@ function WindowGame($scope, $http, socket){
 				$('#name-error').removeClass('show');
 				$('#sign-up').removeClass('badword');
 			}
+	 }
+
+	 $scope.clearView = function(){ // Helper to clear all views
+	 	$scope.data.showSignUp = false 
+		$scope.data.showUserQue = false
+		$scope.data.showUpNext = false
+		$scope.data.showGameScreen = false
+		$scope.data.showTerms = false
+		$scope.data.showPlayingGame = false
+		$scope.data.showEmailReason =  false
+		$scope.data.showEndScreen = false
+		$scope.data.showEndMessage0 = false
+		$scope.data.showEndMessage1 = false
+		$scope.data.showEndMessage2 = false
+		$scope.data.showGameError = false
+		$scope.data.show404 = false
+		$scope.data.showUserTimedOut = false 
 	 }
 
 	/*
@@ -92,21 +109,21 @@ function WindowGame($scope, $http, socket){
 			// we need to save the user to the server
 			$http.post('/addUser', thisUser).success(function(data, status, headers, config){
 				if (data.isFirst){
-					$scope.data.showSignUp = false;
+					$scope.clearView();
 					$scope.data.showUpNext = true;
 					//$scope.playSound();
 				} else{
-					$scope.data.showSignUp = false;
+					$scope.clearView();
 					$scope.data.showUserQue = true;
 					$scope.data.userPlaceQue = data.queNumber;
 				}
 			});
 		}
 	};
+
 	$scope.playAgain = function(){
 		$scope.user.isPlayingAgain = true; // the user is playing again. add them to the que but not the user list
-		$scope.data.showUserTimedOut = false;
-		$scope.data.showEndScreen = false;
+		$scope.clearView();
 		$scope.addUser();
 	};
 
@@ -128,44 +145,37 @@ function WindowGame($scope, $http, socket){
 	 * STEP 1.1 USER CLICKS TO SEE TERMS OF SERVICE OR to read about emails
 	 */
 	$scope.showTerms = function(){
-		$scope.data.showSignUp = false;
+		$scope.clearView();
 		$scope.data.showTerms = true;
 	}
 
 	$scope.showEmailReason = function(){
-		$scope.data.showSignUp = false;
+		$scope.clearView();
 		$scope.data.showEmailReason = true;
 	}
 
 	$scope.backToSignUp = function(){
+		$scope.clearView();
 		$scope.data.showSignUp = true;
-		$scope.data.showTerms = false;
-		$scope.data.showEmailReason = false;
 	}
 
 	/*
 	 * STEP 2: User is promted to play the game
 	 */
 	$scope.playGame = function(){ // this is called from ng-click 
+		$scope.clearView();
 		$scope.data.showPlayingGame = true;
-		$scope.data.showGameScreen = false;
 		socket.emit('userHitPlay'); // user is ready to play
 	};
 
 	$scope.userTimedOut = function(){ // The user has 30 seconds to press the play game button or they are removed
-		$scope.data.showGameScreen = false;
-		$scope.data.showPlayingGame = false;
-		$scope.data.showEndScreen = false;
+		$scope.clearView();
 		$scope.data.showUserTimedOut = true;
-		//$http.post('/deleteUser').success(function(){});
 	}
 
 	$scope.userTimedOutExercise = function(){ // tell the user to watch the screen after 15 seconds
-		$scope.data.showGameScreen = false;
-		$scope.data.showPlayingGame = false;
-		$scope.data.showEndScreen = false;
+		$scope.clearView();
 		$scope.data.showUserTimedOut = true;
-		//$http.post('/deleteUser').success(function(){});
 	};
 	
 
@@ -182,7 +192,7 @@ function WindowGame($scope, $http, socket){
 	// this is called from /displayIsReady
 	//=====================================================
 	socket.on('showGameScreen', function(){
-		$scope.data.showUpNext = false;
+		$scope.clearView();
 		$scope.data.showGameScreen = true;
 	});
 
@@ -203,24 +213,23 @@ function WindowGame($scope, $http, socket){
 	// Show the user they are about to play
 	//=====================================================
 	socket.on('timeToPlay', function(data){
+		$scope.clearView();
 		$scope.data.showUpNext = true;
-		$scope.data.showUserQue = false;
 		//$scope.playSound();
 	});
 
 	// Tell the user to watch the ball
 	//=====================================================
 	socket.on('watchBall', function(){
+		$scope.clearView();
 		$scope.data.showWatchGame = true;
-		$scope.data.showPlayingGame = false;
-		$scope.data.showEndScreen = false;
 	});
 
 	// Show the user the different end screens end screen
 	//=====================================================
 	socket.on('showEndScreen', function(data){
+		$scope.clearView();
 		$scope.data.showEndScreen = true;
-		$scope.data.showWatchGame = false; 
 		switch(data) {
 			case "0": // The user got a high score
 				$scope.data.showEndMessage0 = true;
@@ -235,8 +244,8 @@ function WindowGame($scope, $http, socket){
 				break;
 
 			case "4": // There was an error during the game
+				$scope.clearView();
 				$scope.data.showGameError = true;
-				$scope.data.showEndScreen = false;
 				break;
 
 			case "5": // The user has timed out and did not press the play button
