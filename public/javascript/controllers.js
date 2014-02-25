@@ -22,6 +22,7 @@ function WindowGame($scope, $http, socket){
 		, showFatalGameError: false
 		, show404: false
 		, showUserTimedOut: false 
+		, showDonateLegal: false
 		, isTimedOut: false
 		, isPlayingAgain: false
 	};
@@ -273,18 +274,22 @@ function WindowGame($scope, $http, socket){
 	socket.on('showEndScreen', function(data){
 		$scope.clearView();
 		$scope.data.showEndScreen = true;
+		
 		switch(data) {
 			case "0": // The user got a high score
 				$scope.data.showEndMessage0 = true;
+				$scope.data.showDonateLegal = true;
 				break;
 
 			case "1": // The user got a middle score
 				$scope.data.showEndMessage1 = true;
+				$scope.data.showDonateLegal = true;
 				break;
 
 			case "2": // The user got a low score
 				$scope.data.showEndMessage2 = true;
-				break;
+				$scope.data.showDonateLegal = true;
+				break; 
 
 			case "4": // There was an error during the game
 				$scope.clearView();
@@ -293,10 +298,12 @@ function WindowGame($scope, $http, socket){
 
 			case "5": // The user has timed out and did not press the play button
 				$scope.userTimedOut();
+				$scope.data.showDonateLegal = true;
 				break;
 
 			case "6": // The user has timed out because they did not do the activity
 				$scope.userTimedOutExercise(); // change the name of this call
+				$scope.data.showDonateLegal = true;
 				break;
 		}
 
