@@ -10,19 +10,19 @@ div.user-que(ng-show="data.showEndScreen")
 		p.exercise-inst Regular exercise, eating healthy, and getting screenings are your best chances to prevent colon cancer...
 		p.exercise-inst and don't forget to share this game and facts about colon cancer
 		div.share-box
-				span.share.facebook(ng-click="share('facebook')") share 
+				span.share.facebook.splash(ng-click="share('facebook')") share 
 					img(src="/images/share_facebook.png")
-				span.share.twitter(ng-click="share('')") share 
+				span.share.twitter.splash(ng-click="share('')") share 
 					img(src="/images/share_twitter.png")
 		p.exercise-inst
 			| Visit the 
-			a.terms-link(href="http://www.coloncancerchallenge.org/", target="_blank") CCCF website
+			a.terms-link.challenge-site(href="http://www.coloncancerchallenge.org/", target="_blank") CCCF website
 			| &nbsp; for more information on colon cancer or to make an online donation
 		p.exercise-inst 
 			| You have 
 			span= daysLeft
 			| &nbsp; days left to place the Colon-a-Tron
-		button.btn.btn-primary(ng-click="playAgain()") Play Again
+		button.btn.btn-primary.play-again(ng-click="playAgain()") Play Again
 
 // Alternate screen is there is an error during the game
 div.user-que(ng-show="data.showGameError")
@@ -33,16 +33,16 @@ div.user-que(ng-show="data.showGameError")
 		p.exercise-inst Regular exercise, eating healthy, and getting screenings are you best chances to prevent colon cancer...
 		p.exercise-inst and don't forget to share this game and facts about colon cancer
 		div.share-box
-				span.share.facebook(ng-click="share('facebook')") share 
+				span.share.facebook.splash(ng-click="share('facebook')") share 
 					img(src="/images/share_facebook.png")
-				span.share.twitter(ng-click="share('')") share 
+				span.share.twitter.splash(ng-click="share('')") share 
 					img(src="/images/share_twitter.png")
 		p.exercise-inst
 			| Visit the 
-			a.terms-link(href="http://www.coloncancerchallenge.org/", target="_blank") CCCF website
+			a.terms-link.challenge-site(href="http://www.coloncancerchallenge.org/", target="_blank") CCCF website
 			| &nbsp; for more information on colon cancer or to make an online donation
 		p.exercise-inst 
 			| You have 
 			span= daysLeft
 			| &nbsp; days left to place the Colon-a-Tron
-		button.btn.btn-primary(ng-click="playAgain()") Play Again		
+		button.btn.btn-primary.play-again(ng-click="playAgain()") Play Again		

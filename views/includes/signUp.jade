@@ -8,7 +8,7 @@
 
 		.email
 			input(class="sign-up span12 email" ,placeholder="Your Email Address", type="email", id="user-email", ng-model="user.email" name="uEmail", ng-blur="blurFunction('email')", required)
-			span.why-email(ng-click="showEmailReason()")
+			span.why-email(ng-click="showEmailReason()", id="why-email")
 				img(src="/images/why_email.png")
 			div(ng-show="form.uEmail.$invalid && !form.uEmail.$pristine" )
 				p(class="error-message", id="email-error") Must include valid name@provider.com
@@ -19,7 +19,7 @@
 		input(id="user_id", type="hidden", ng-model="user.id")
 		p.ts-and-cs 
 			| BY CLICKING SUBMIT, I AGREE TO THE GAME  
-			span.terms-link(ng-click="showTerms()") LEGAL NOTICES
+			span.terms-link(ng-click="showTerms()", id="legal") LEGAL NOTICES
 
 		button.btn.btn-primary.span12(id="play-game", ng-disabled="form.$invalid") 
 			span.submit-form submit 

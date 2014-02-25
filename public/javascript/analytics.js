@@ -46,9 +46,56 @@ var Analytics = (function (angular) {
 
 	// Bind Events
 	var bindEvents = function () {
-		/*angular.element('#play-game').on('click', function(e){
-			alert('you be playin eh?');
-		});*/
+		$(document).on('click', '#why-email', function(e){
+			_gaq.push(['_trackEvent', 'Start Page', 'Question Mark on Email', 'Takes user to more info on why email address is necessary']);	
+		})
+		.on('submit', '#sign-up', function(){
+			_gaq.push(['_trackEvent', 'Start Page', $('#user-name').val(), 'Provide First Name']);
+			_gaq.push(['_trackEvent', 'Start Page', $('#user-email').val(), 'Provide Email Address']);
+			_gaq.push(['_trackEvent', 'Start Page', 'Submit Button', 'Takes visitor to queue to play queue']);
+		})
+		.on('click', '#legal', function(){
+			_gaq.push(['_trackEvent', 'Start Page', 'Legal Notices', 'Takes visitor to legal  notces page']);
+		})
+		.on('click', '#play-game', function(){
+			_gaq.push(['_trackEvent', 'Display is Ready Page', 'Play Button', 'Directs visitor to begin game on monitor on window']);
+		})
+		.on('click', '.share.facebook.splash', function(){
+			_gaq.push(['_trackEvent', 'Finished Game Page', 'Facebook Share', 'Takes visitor to share on FB']);
+		})
+		.on('click', '.share.twitter.splash', function(){
+			_gaq.push(['_trackEvent', 'Finished Game Page', 'Twitter Share', 'Takes visitor to share on TW']);
+		})
+		.on('click', '.play-again', function(){
+			_gaq.push(['_trackEvent', 'Finished Game Page', 'Play Again Button', 'Redirects visitor back into queue']);
+		})
+		.on('click', '.challenge-site', function(){
+			_gaq.push(['_trackEvent', 'Finished Game Page', 'CCCF Website Link', 'Takes visitor to the CCCF website']);
+		}) 
+		.on('click', '#ehealth', function(){
+			_gaq.push(['_trackEvent', 'Finished Game Page', 'Emblem Health Logo', 'Takes visitor to emblem health site']);
+		})
+		.on('click', '#challenge-site', function(){
+			_gaq.push(['_trackEvent', 'Finished Game Page', 'CCCF Logo', 'Takes visitor to CCCF site']);
+		}) //===================SPLASH PAGE TAGS =================//
+		.on('click', '#donate-online', function(){
+			_gaq.push(['_trackEvent', 'CCCF Homepage', 'Make an online donation', 'Takes visitor to online donation page']);
+		})
+		.on('click', '#home-ccc-link', function(){
+			_gaq.push(['_trackEvent', 'CCCF Homepage', 'Colon Cancer Challenge Page link in text to donate', 'Takes visitor to colon cancer challenge page']);
+		})
+		.on('click', '.share.facebook.home', function(){
+			_gaq.push(['_trackEvent', 'Finished Game Page', 'Facebook Share', 'Takes visitor to share on FB']);
+		})
+		.on('click', '.share.twitter.home', function(){
+			_gaq.push(['_trackEvent', 'Finished Game Page', 'Twitter Share', 'Takes visitor to share on TW']);
+		})
+		.on('click', '#ehealth-home', function(){
+			_gaq.push(['_trackEvent', 'CCCF Homepage', 'Emblem Health Logo', 'Takes visitor to emblem health site']);
+		})
+		.on('click', '#challenge-site-home', function(){
+			_gaq.push(['_trackEvent', 'CCCF Homepage', 'CCCF Logo', 'Takes visitor to CCCF site']);
+		});
 	};
     
 
@@ -62,3 +109,18 @@ var Analytics = (function (angular) {
 
 var _gaq = _gaq || [];	
 Analytics.init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

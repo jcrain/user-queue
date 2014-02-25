@@ -17,7 +17,9 @@ function WindowGame($scope, $http, socket){
 		, showEndMessage0: false
 		, showEndMessage1: false
 		, showEndMessage2: false
+		, showWatchGame: false
 		, showGameError: false
+		, showFatalGameError: false
 		, show404: false
 		, showUserTimedOut: false 
 		, isTimedOut: false
@@ -78,20 +80,22 @@ function WindowGame($scope, $http, socket){
 	 }
 
 	 $scope.clearView = function(){ // Helper to clear all views
-	 	$scope.data.showSignUp = false 
-		$scope.data.showUserQue = false
-		$scope.data.showUpNext = false
-		$scope.data.showGameScreen = false
-		$scope.data.showTerms = false
-		$scope.data.showPlayingGame = false
-		$scope.data.showEmailReason =  false
-		$scope.data.showEndScreen = false
-		$scope.data.showEndMessage0 = false
-		$scope.data.showEndMessage1 = false
-		$scope.data.showEndMessage2 = false
-		$scope.data.showGameError = false
-		$scope.data.show404 = false
-		$scope.data.showUserTimedOut = false 
+	 	$scope.data.showSignUp = false;
+		$scope.data.showUserQue = false;
+		$scope.data.showUpNext = false;
+		$scope.data.showGameScreen = false;
+		$scope.data.showTerms = false;
+		$scope.data.showPlayingGame = false;
+		$scope.data.showEmailReason =  false;
+		$scope.data.showEndScreen = false;
+		$scope.data.showEndMessage0 = false;
+		$scope.data.showEndMessage1 = false;
+		$scope.data.showEndMessage2 = false;
+		$scope.data.showGameError = false;
+		$scope.data.show404 = false;
+		$scope.data.showUserTimedOut = false;
+		$scope.data.showWatchGame = false;
+		$scope.data.showFatalGameError = false;
 	 }
 
 	/*
@@ -312,6 +316,14 @@ function WindowGame($scope, $http, socket){
 	socket.on('reconnect', function(){
 		console.log('this is reconnected and here is the id :' + socket.id);
 		socket.emit('reConnectedSocket', $scope.user.id);
+	});
+
+	// Show fatal game error screen
+	//============================
+	socket.on('showFatalGameError', function(){
+		console.log('why no error screen');
+		$scope.clearView();
+		$scope.data.showFatalGameError = true;
 	});
 	
 	/*

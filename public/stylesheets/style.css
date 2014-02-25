@@ -6098,6 +6098,9 @@ div .placeholder-box.exercise-box {
   width: 100%;
   margin: 30px 0;
 }
+.texting-info {
+  color: #000;
+}
 .sign-up-form {
   position: relative;
 }

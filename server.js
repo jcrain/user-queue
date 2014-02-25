@@ -46,7 +46,7 @@ function redirectUnmatched(req, res) {
 // APP ROUTES
 //============================================= 
 app.get('/', routes.splash); // Return splash page
-app.get('/game', routes.game); // Return the game
+app.get('/play', routes.game); // Return the game
 app.get('/getQue', routes.getQue); // Return the users in the queue 
 app.get('/userFinishedGame', routes.userFinishedGame); // we need to remove the user from the que and then show the end screen
 app.get('/displayIsReady', routes.displayIsReady); // show the user the screen to play the game

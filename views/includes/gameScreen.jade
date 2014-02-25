@@ -4,10 +4,10 @@ div.user-que(ng-show="data.showGameScreen")
 		| {{user.name}}!
 	img.down-arrow(src="/images/que_down_arrow.png")
 	div.container.playing-game.row
-		p.exercise-inst STEP IN FRONT OF THE MONITOR IN THE WINDOW. DECIDE WHICH EXERCISE YOU’LL PERFORM FOR 15 SECONDS: 
+		p.exercise-inst STEP IN FRONT OF THE MONITOR IN THE WINDOW. DECIDE WHICH exercise to do FOR 15 SECONDS: 
 		div 
 			img(src="/images/exercise.gif")
 		br
 		p WHEN YOU’RE READY, PRESS PLAY	
-		button.btn.btn-primary.span12(ng-click="playGame()")
+		button.btn.btn-primary.span12(id="play-game", ng-click="playGame()")
 			span.submit-form PLAY
