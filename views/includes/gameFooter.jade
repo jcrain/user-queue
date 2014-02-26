@@ -6,18 +6,22 @@ div.footer
 			.hr
 			a(href="http://www.coloncancerchallenge.org/", target="_blank", id='challenge-site')
 				img.footer-logo-2(src="/images/footer_logo_2.jpg")
-		p.arial(ng-show="data.showDonateLegal") *$10.00 donation to the Colon Cancer Challenge Foundation. Charges will appear on your wireless bill, or be deducted from your prepaid balance. All purchases must be authorized by account holder. Must be 18 years of age or have parental permission to participate. Message and Data Rates May Apply.
-			strong.texting-info &nbsp; Text STOP to 50555 to STOP. Text HELP to 50555 for HELP.
-		p Full Terms: 
-			a(href="") mGive.org/T. 
-			| Privacy Policy: 
-			a(href="") mGive.org/P
-		p.arial © 2014 Colon Cancer Challenge Foundation
+		div(ng-show="data.showDonateLegal")
+			p.arial *$10.00 donation to the Colon Cancer Challenge Foundation. Charges will appear on your wireless bill, or be deducted from your prepaid balance. All purchases must be authorized by account holder. Must be 18 years of age or have parental permission to participate. Message and Data Rates May Apply.
+				strong.texting-info &nbsp; Text STOP to 50555 to STOP. Text HELP to 50555 for HELP.
+			p Full Terms: 
+				a(href="") mGive.org/T. 
+				br
+				| Privacy Policy: 
+				a(href="") mGive.org/P
+		p.arial © 2014 
+			br 
+			| Colon Cancer Challenge Foundation
 		p.arial
 			a(href="") Privacy
 			|&nbsp; | &nbsp;
 			a(href="") Legal Notices
-		p POWERED BY
+		p.powered-by POWERED BY
 			a(href="http://www.mry.com/", target="_blank", id='')
 				img.mry-logo(src="/images/logo_mry.png")
 			| &amp;

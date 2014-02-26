@@ -15,17 +15,17 @@ body 										{ background-color:@bgblue ; text-align: center; padding: 0;
 
 //TYPOGRAPHY FANCYNESS
 //===========================================
-h1, h2, h3 									{ color: @lightblue; }
-p 											{ color: @grayblue; }
+h1, h2, h3 									{ color: @lightblue; font-weight: 100px; }
+p 											{ color: #fff; }
 .lrg 										{ font-size: 48px; line-height: 46px; }
-.mdm 										{ font-size: 24px; }
+.mdm 										{ font-size: 22px; }
 
 // BOOTSTRAP OVER RIDES
 //===========================================
 button 										{
 	&.btn 									{  
-		&.btn-primary 						{ border: none; background: @btnorange; color: #fff; font-size: 27px; font-family: SaaSeriesDD ; font-weight: normal; font-style: normal;
-											  text-transform: uppercase; line-height: 40px; border-radius: 0; text-shadow: none; margin-left: 0; }
+		&.btn-primary 						{ border: none; background: @btnorange; color: #fff; font-size: 26px; font-family: SaaSeriesDD ; font-weight: normal; font-style: normal;
+											  text-transform: uppercase; line-height: 40px; border-radius: 0; text-shadow: none; margin-left: 0; height: 50px; }
 	}
 }
 
@@ -34,12 +34,12 @@ button 										{
 //===========================================
 
 .main-container 							{ margin-top: 30px; }
-.title 										{ margin-bottom: 40px; font-size: 38.5px;  }
+.title 										{ margin: 20px 0 24px; font-size: 47.5px; line-height: 47px; font-weight: 100;  }
 .container 									{ padding: 0 20px; }
 .over-flow									{ overflow: hidden; }
 
 
-.terms-link 								{ text-decoration: underline; color: #fff; cursor: pointer; }
+.terms-link 								{ text-decoration: underline; color: #86e4f3; cursor: pointer; }
 div											{
 	.placeholder-box:first-child 			{ margin-right: 10px; }
 	.placeholder-box 						{ width: 50px; height: 50px; background: #eee; display: inline-block;  
@@ -48,14 +48,18 @@ div											{
 }
 
 .css-form									{									 
-	input									{ background-color: #d9ebe8; 
-		&:focus:invalid:focus 				{ border-color: green;}
-		&.sign-up 							{ height: 50px; margin: 0px 0 5px; border-radius: 0; padding: 0 6px; }
+	input									{ background-color: #d9ebe8; color: #325973; text-transform: uppercase; font-family: SaaSeriesDD ; font-weight: normal; font-style: normal; font-size: 18px;
+		&:focus:invalid:focus 				{ border-color: #fff; color: #325973;  }
+		&.sign-up 							{ height: 50px; margin: 0px 0 5px; border-radius: 0; padding: 0 8px; }
 		.ng-invalid.ng-dirty 				{ background-color: #FA787E; border-color: red; }
 		.ng-valid.ng-dirty 					{ background-color: #78FA89; }
 	}
-	.error-message 							{ color: red; }
+	.error-message 							{ color: #fad3d5; font-size: 15px; text-align: left; }
 }
+#user-name, #user-email						{ 
+	&.error 								{ border-color: #a01a1a; color: #a01a1a; background-color: #fad3d5; }
+}
+.name 										{ margin-bottom: 10px; }
 
 .share-box 									{
 	.share:first-child 						{ margin-right: 15px; }
@@ -75,12 +79,14 @@ div											{
 		&.footer-logo-2 					{ margin-bottom: 30px; }
 	}
 }
-.footer-logo-1 								{ width: 174px; }
-.footer-logo-2 								{ width: 75px; }
+.footer-logo-1 								{ width: 228px; }
+.footer-logo-2 								{ width: 165px; }
 .mry-logo 									{ width: 53px; margin-left: 5px; vertical-align: sub; }
 .dash-logo 									{ width: 83px; margin-left: 5px; vertical-align: sub; }
 .hr 										{ height: 2px; background: #c1cdd5; width: 100%; margin: 30px 0;}
 .texting-info 								{ color: #000; }
+.privacy-link 								{ text-decoration: underline; color: @lightblue; cursor: pointer;  }
+.powered-by 								{ margin-top: 18px; }
 
 
 // VIEW SPECIFIC STYLES
@@ -136,11 +142,17 @@ div											{
 
 // QUEUE SCREEN
 //===========================================
-.que-header  								{ background: #86e4f3; color: #1d384b; font-size: 30px; margin: 0; box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.35); 
-											  position: relative; padding: 30px; line-height: 30px; }
+.que-header  								{ background: #86e4f3; color: #315770; font-size: 30px; margin: 0; box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.35); 
+											  position: relative; padding: 30px; line-height: 30px; font-weight: 100; }
 .down-arrow									{ display: block; margin: 0 auto; position: relative; }
-.place-in-line 								{ color: #fff; line-height: 30px; margin-top: 25px; }
-.exercise-inst 								{ font-size: 15px; margin-top: 19px; }
+.place-in-line 								{ color: #fff; line-height: 27px; margin-top: 25px; }
+.playing-game 								{
+	.exercise-inst							{ margin-bottom: 18px; }
+}
+.exercise-inst 								{ font-size: 16px; margin-top: 19px; 
+	&.your-up-bottom 						{ margin: 0px 0 30px; font-size: 30px; line-height: 31px;  }
+}
+.exercise-gif 								{ margin-top: 25px; }
 
 
 // USER TIMED OUT
@@ -229,7 +241,7 @@ div											{
 }
 .info-boxes 								{ margin: 50px 0; }
 .disclaimer 								{ width: 91%; }
-.extra-margin 								{ margin-top: 135px; }
+.extra-margin 								{ margin: 135px 0; }
 
 
 

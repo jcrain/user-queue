@@ -60,7 +60,7 @@ var getPlaceInLine = function(num){
  * Show the splash screen without the game url
  */ 
 exports.splash  = function(req, res){
- 	res.render('splash');
+ 	res.render('splash', { daysLeft: day});
  };
 
 // Lemme get an index pageeeee

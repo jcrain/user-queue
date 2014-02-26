@@ -1,6 +1,22 @@
 extends layout
 
 block head
+	meta(charset='utf-8')
+	meta(http-equiv='X-UA-Compatible', content='IE=edge')
+	title The best Game ever
+	meta(name='description', content='')
+	meta(name='viewport', content='width=device-width, initial-scale=1')
+	meta(content='http://198.154.216.198/game', property='og:url')
+	meta(content='Play this awesome gameeeeee', property='og:description')
+	meta(content='company', property='og:type')
+	meta(content='Colon Cancer Challenge Foundation', property='og:title')
+	meta(content='Colon Cancer Challenge Foundation Game', property='og:site_name')
+	meta(content='http://alliday.mry.com/images/facebook_share.jpg', property='og:image')
+	meta(name='og:type', content='video')
+	meta(property='og:video:type', content='application/x-shockwave-flash')
+	meta(property='og:video:width', content='100')
+	meta(property='og:video:height', content='100')
+	meta(property='og:video', content='http://www.youtube.com/embed/6xisazZX9bA')
 	link(rel='stylesheet', href='/stylesheets/MyFontsWebfontsKit.css')
 	link(rel='stylesheet', href='/stylesheets/style.css')
 
@@ -35,7 +51,9 @@ block content
 				.fly-out.right
 					.arrow.pull-left
 						img(src="/images/splash_left_arrow.png")
-					.box.pull-left 14 DAYS LEFT TO PLAY!
+					.box.pull-left 
+						span=daysLeft 
+						| &nbsp;DAYS LEFT TO PLAY!
 
 
 			p.video-inst We get that talking about colorectal cancer, also called rectal, bowel, or colon cancer, isn’t exactly easy. That’s why we created this game that lets you work up a quick sweat while spreading the word 

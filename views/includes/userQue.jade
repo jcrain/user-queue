@@ -1,5 +1,5 @@
 div.user-que(ng-show="data.showUserQue")
-	h3.que-header Thanks
+	h3.que-header Thanks,
 		br
 		| {{user.name}}!
 	img.down-arrow(src="/images/que_down_arrow.png")
@@ -7,7 +7,13 @@ div.user-que(ng-show="data.showUserQue")
 		p.mdm.place-in-line 
 			| YOU’RE 
 			span.line-num {{ data.userPlaceQue }} 
-			| IN LINE TO PLAY, SO WATCH FOR YOUR NAME IN THE WINDOW.
-		p.exercise-inst IN THE MEANTIME, DECIDE WHICH exercise to do FOR 15 SECONDS:
-		div 
+			| TO PLAY. 
+			br
+			|WATCH FOR YOUR NAME  
+			br 
+			| IN THE WINDOW.
+		p.exercise-inst IN THE MEANTIME, DECIDE WHICH 
+			br 
+			| exercise to do FOR 15 SECONDS:
+		div.exercise-gif
 			img(src="/images/exercise.gif")

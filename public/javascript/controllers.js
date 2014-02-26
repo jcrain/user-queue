@@ -23,6 +23,7 @@ function WindowGame($scope, $http, socket){
 		, show404: false
 		, showUserTimedOut: false 
 		, showDonateLegal: false
+		, showPrivacy: false
 		, isTimedOut: false
 		, isPlayingAgain: false
 	};
@@ -51,8 +52,13 @@ function WindowGame($scope, $http, socket){
 	 		var EMAIL_REGX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 	 		if(EMAIL_REGX.test(email)){
 	 			$('#email-error').removeClass('show');
+	 			$('#user-email').removeClass('error');
+				$('#play-game').attr('disabled', 'disabled');
 	 		} else {
 	 			$('#email-error').addClass('show');
+	 			$('#user-email').addClass('error');
+	 			$('#play-game').prop("disabled", false);
+	 			
 	 		}
 	 	}
 	 		var userName = $scope.user.name;
@@ -72,11 +78,13 @@ function WindowGame($scope, $http, socket){
 				$('#play-game').attr('disabled', 'disabled');
 				$('#name-error').addClass('show');
 				$('#sign-up').addClass('badword');
+				$('#user-name').addClass('error');
 			} else {
 				$('#play-game').removeClass('ng-disabled');
 				$('#play-game').prop("disabled", false);
 				$('#name-error').removeClass('show');
 				$('#sign-up').removeClass('badword');
+				$('#user-name').removeClass('error');
 			}
 	 }
 
@@ -97,6 +105,7 @@ function WindowGame($scope, $http, socket){
 		$scope.data.showUserTimedOut = false;
 		$scope.data.showWatchGame = false;
 		$scope.data.showFatalGameError = false;
+		$scope.data.showPrivacy = false;
 	 }
 
 	/*
@@ -202,6 +211,11 @@ function WindowGame($scope, $http, socket){
 		$scope.clearView();
 		$scope.data.showSignUp = true;
 	}
+
+	$scope.showPrivacyPolicy = function(){
+		$scope.clearView();
+		$scope.data.showPrivacy = true;
+	};
 
 	/*
 	 * STEP 2: User is promted to play the game

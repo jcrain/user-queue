@@ -5960,22 +5960,23 @@ h1,
 h2,
 h3 {
   color: #86e4f3;
+  font-weight: 100px;
 }
 p {
-  color: #b4d7ee;
+  color: #fff;
 }
 .lrg {
   font-size: 48px;
   line-height: 46px;
 }
 .mdm {
-  font-size: 24px;
+  font-size: 22px;
 }
 button.btn.btn-primary {
   border: none;
   background: #f39c0d;
   color: #fff;
-  font-size: 27px;
+  font-size: 26px;
   font-family: SaaSeriesDD ;
   font-weight: normal;
   font-style: normal;
@@ -5984,13 +5985,16 @@ button.btn.btn-primary {
   border-radius: 0;
   text-shadow: none;
   margin-left: 0;
+  height: 50px;
 }
 .main-container {
   margin-top: 30px;
 }
 .title {
-  margin-bottom: 40px;
-  font-size: 38.5px;
+  margin: 20px 0 24px;
+  font-size: 47.5px;
+  line-height: 47px;
+  font-weight: 100;
 }
 .container {
   padding: 0 20px;
@@ -6000,7 +6004,7 @@ button.btn.btn-primary {
 }
 .terms-link {
   text-decoration: underline;
-  color: #fff;
+  color: #86e4f3;
   cursor: pointer;
 }
 div .placeholder-box:first-child {
@@ -6018,15 +6022,22 @@ div .placeholder-box.exercise-box {
 }
 .css-form input {
   background-color: #d9ebe8;
+  color: #325973;
+  text-transform: uppercase;
+  font-family: SaaSeriesDD ;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 18px;
 }
 .css-form input:focus:invalid:focus {
-  border-color: green;
+  border-color: #fff;
+  color: #325973;
 }
 .css-form input.sign-up {
   height: 50px;
   margin: 0px 0 5px;
   border-radius: 0;
-  padding: 0 6px;
+  padding: 0 8px;
 }
 .css-form input .ng-invalid.ng-dirty {
   background-color: #FA787E;
@@ -6036,7 +6047,18 @@ div .placeholder-box.exercise-box {
   background-color: #78FA89;
 }
 .css-form .error-message {
-  color: red;
+  color: #fad3d5;
+  font-size: 15px;
+  text-align: left;
+}
+#user-name.error,
+#user-email.error {
+  border-color: #a01a1a;
+  color: #a01a1a;
+  background-color: #fad3d5;
+}
+.name {
+  margin-bottom: 10px;
 }
 .share-box .share:first-child {
   margin-right: 15px;
@@ -6077,10 +6099,10 @@ div .placeholder-box.exercise-box {
   margin-bottom: 30px;
 }
 .footer-logo-1 {
-  width: 174px;
+  width: 228px;
 }
 .footer-logo-2 {
-  width: 75px;
+  width: 165px;
 }
 .mry-logo {
   width: 53px;
@@ -6100,6 +6122,14 @@ div .placeholder-box.exercise-box {
 }
 .texting-info {
   color: #000;
+}
+.privacy-link {
+  text-decoration: underline;
+  color: #86e4f3;
+  cursor: pointer;
+}
+.powered-by {
+  margin-top: 18px;
 }
 .sign-up-form {
   position: relative;
@@ -6202,13 +6232,14 @@ div .placeholder-box.exercise-box {
 }
 .que-header {
   background: #86e4f3;
-  color: #1d384b;
+  color: #315770;
   font-size: 30px;
   margin: 0;
   box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.35);
   position: relative;
   padding: 30px;
   line-height: 30px;
+  font-weight: 100;
 }
 .down-arrow {
   display: block;
@@ -6217,12 +6248,23 @@ div .placeholder-box.exercise-box {
 }
 .place-in-line {
   color: #fff;
-  line-height: 30px;
+  line-height: 27px;
   margin-top: 25px;
 }
+.playing-game .exercise-inst {
+  margin-bottom: 18px;
+}
 .exercise-inst {
-  font-size: 15px;
+  font-size: 16px;
   margin-top: 19px;
+}
+.exercise-inst.your-up-bottom {
+  margin: 0px 0 30px;
+  font-size: 30px;
+  line-height: 31px;
+}
+.exercise-gif {
+  margin-top: 25px;
 }
 .timed-out .submit-form {
   background-position: 155px 6px;
@@ -6472,7 +6514,7 @@ div .placeholder-box.exercise-box {
   width: 91%;
 }
 .extra-margin {
-  margin-top: 135px;
+  margin: 135px 0;
 }
 /* really specific css rules applied by angular */
 @media only screen and (max-width: 979px) {
