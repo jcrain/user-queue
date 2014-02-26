@@ -6,7 +6,7 @@ block head
 
 block content
 	.dark-blue
-		.container
+		.container.top-section
 			.home-share
 				.pull-right
 					span.splash-fb.home.share.facebook(ng-click="share('facebook')")
@@ -55,19 +55,26 @@ block content
 						| New York, NY 10020
 					p.address.link
 						a.place-icon(href="https://maps.google.com/maps?q=10+Rockefeller+Plaza+New+York,+NY+10020&oe=utf-8&client=firefox-a&channel=sb&hnear=10+Rockefeller+Plaza,+New+York,+10020&gl=us&t=m&z=16", target="_blank") GET DIRECTIONS
-	.dark-blue
-		.container
-			.row
+	.super-dark-blue
+		.container.donation-info
+			h3.share-facts we’ve raised lots so far
+			p thanks to generous people like you :)
+			.row.info-boxes
 				.span7.offset1.donate-box.text 
 					img.phone-icon.pull-left(src="/images/splash_phone_donate.png")
 					p TEXT CHALLENGE TO 50555 TO GIVE $10 TO THE CCCF &amp; sHOW YOUR SUPPORT FOR FINDING A CURE*
 					p learn more at 
-						a(href="http://www.coloncancerchallenge.org/", target="_blank", id="home-ccc-link") coloncancerchallenge.org
+						a(href="http://events.coloncancerchallenge.org/site/Donation2?1640.donation=form1&df_id=1640", target="_blank", id="home-ccc-link") coloncancerchallenge.org
 
 				.span3.donate-box.computer 
 					img.comp-icon.pull-left(src="/images/splash_comp_donate.png")
 					p.comp-link 
-						a(href="#", target="_blank", id="donate-online") MAKE AN ONLINE DONATION 
+						a(href="#", target="_blank", id="donate-online") MAKE AN ONLINE DONATION	
+			p a special thanks to our partners at Emblem Health 
+				br 
+				| for matching donations up to $50,000							
+	.dark-blue.bottom-facts
+		.container
 			h3.share-facts SHOW YOU CARE. SHARE THE FACTS.
 			p.awareness Preventing colorectal cancer starts with awareness, and we need your help. Talk to your family. Talk to your doctor. Get screened if you’re over 50, have a family history or certain risk factors like IBS or Crohn’s disease. Get the facts and share them.
 			.row.fact-bubbles
@@ -95,15 +102,22 @@ block content
 					img(src="/images/footer_logo_1.png")
 				a(href="http://www.coloncancerchallenge.org/", target="_blank", id='challenge-site-home')
 					img.ccf-logo(src="/images/footer_logo_2.jpg")
-			p *Charges will appear on your wireless bill, or be deducted from your prepaid balance. All purchases must be authorized by account holder. Must be 18 years of age or have parental permission to participate. Message and Data Rates May Apply. Text STOP to 50555 to STOP. Text HELP to 50555 for HELP.
-			p Full Terms: 
-				a(href="http://mGive.org/T", target="_blank") mGive.org/T   
-				|| Privacy Policy: 
-				a(href="http://mGive.org/P", target="_blank")  mGive.org/P 
+			p.disclaimer *$10.00 donation to the Colon Cancer Challenge Foundation. Charges will appear on your wireless bill, or be deducted from your prepaid balance. All purchases must be authorized by account holder. Must be 18 years of age or have parental permission to participate. Message and Data Rates May Apply.
 			p 
-				a(href="") Privacy   
-				| |   
-				a(href="") Legal Notices
+				strong Text STOP to 50555 to STOP. Text HELP to 50555 for HELP.
+			p Full Terms: 
+				a(href="http://mGive.org/T", target="_blank") 
+					strong mGive.org/T   
+				|&nbsp;| Privacy Policy: 
+				a(href="http://mGive.org/P", target="_blank")  
+					strong mGive.org/P 
+			p © 2014 Colon Cancer Challenge Foundation
+			p 
+				a(href="") 
+					strong Privacy 
+				| &nbsp; | &nbsp;   
+				a(href="") 
+					strong Legal Notices
 	
 block footer
 	include includes/splashFooter

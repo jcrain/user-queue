@@ -6229,27 +6229,40 @@ div .placeholder-box.exercise-box {
 }
 .light-blue {
   background: #89e4ff;
-  padding: 75px 0;
+  padding: 112px 0;
 }
 .light-blue p {
   color: #26465f;
 }
 .dark-blue {
   padding: 75px 0;
+  position: relative;
 }
 .dark-blue h1 {
   font-size: 115px;
   line-height: 100px;
   padding: 45px;
   background: url('../images/headerBg.png') no-repeat center 19px;
+  margin-bottom: 0;
   font-weight: 100;
 }
 .dark-blue h4 {
-  margin: 25px 0;
+  margin: 0 0 25px;
+}
+.dark-blue.bottom-facts {
+  padding: 93px 0;
+}
+.super-dark-blue {
+  background: #163047;
+  padding: 105px 0;
+}
+.top-section {
+  position: relative;
 }
 .home-share {
-  position: relative;
-  top: -45px;
+  position: absolute;
+  top: 20px;
+  right: 0;
   cursor: pointer;
   overflow: hidden;
 }
@@ -6263,6 +6276,10 @@ div .placeholder-box.exercise-box {
 }
 .bottom p {
   color: #26465f;
+  font-size: 12px;
+}
+.bottom strong {
+  color: #000;
 }
 .bottom a {
   color: #0b3352;
@@ -6295,8 +6312,9 @@ div .placeholder-box.exercise-box {
 .video-inst {
   font-size: 20px;
   color: #fff;
-  margin-top: 25px;
   line-height: 29px;
+  width: 71%;
+  margin: 25px auto 0;
 }
 .video-sub {
   font-size: 14px;
@@ -6320,7 +6338,7 @@ div .placeholder-box.exercise-box {
   display: block;
 }
 .address {
-  font-size: 26px;
+  font-size: 20px;
   line-height: 26px;
 }
 .address.link {
@@ -6343,10 +6361,11 @@ div .placeholder-box.exercise-box {
   color: #78deff;
 }
 .awareness {
-  font-size: 24px;
-  line-height: 30px;
+  font-size: 18px;
+  line-height: 27px;
   color: #fff;
-  margin: 25px 0;
+  margin: 25px auto;
+  width: 81%;
 }
 .fact-bubbles {
   text-align: left;
@@ -6440,6 +6459,21 @@ div .placeholder-box.exercise-box {
 .donate-box a:hover {
   color: #fff;
 }
+.donation-info p {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 100;
+  color: #fff;
+}
+.info-boxes {
+  margin: 50px 0;
+}
+.disclaimer {
+  width: 91%;
+}
+.extra-margin {
+  margin-top: 135px;
+}
 /* really specific css rules applied by angular */
 @media only screen and (max-width: 979px) {
   .fly-out {
@@ -6457,6 +6491,22 @@ div .placeholder-box.exercise-box {
     height: 100%;
     width: 100%;
     position: absolute;
+  }
+  .dark-blue {
+    padding: 75px 0;
+  }
+  .dark-blue h1 {
+    font-size: 105px;
+    line-height: 100px;
+    padding: 2px;
+    background: none;
+    font-weight: 100;
+  }
+  .dark-blue h4 {
+    margin: 25px 0;
+  }
+  .play {
+    background: none;
   }
 }
 @media only screen and (min-width: 767px) {
@@ -6486,5 +6536,13 @@ div .placeholder-box.exercise-box {
   }
   .facts {
     margin-bottom: 20px;
+  }
+  .dark-blue {
+    padding: 75px 0;
+  }
+  .dark-blue h1 {
+    font-size: 56px;
+    line-height: 46px;
+    padding: 2px;
   }
 }

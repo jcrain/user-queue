@@ -151,17 +151,23 @@ div											{
 
 // SPLASH PAGE STUFF
 //===========================================
-.light-blue 								{ background: #89e4ff; padding: 75px 0; 
+.light-blue 								{ background: #89e4ff; padding: 112px 0; 
 	p 										{ color: #26465f; }
 }
-.dark-blue 									{ padding: 75px 0; 
-	h1 										{ font-size: 115px; line-height: 100px; padding: 45px; background: url('../images/headerBg.png') no-repeat center 19px; font-weight: 100; }
-	h4 										{ margin: 25px 0; }
+.dark-blue 									{ padding: 75px 0; position: relative; 
+	h1 										{ font-size: 115px; line-height: 100px; padding: 45px; background: url('../images/headerBg.png') no-repeat center 19px; 
+											  margin-bottom: 0; font-weight: 100; }
+	h4 										{ margin: 0 0 25px; }
+	&.bottom-facts 							{ padding: 93px 0; }
 }
-.home-share 								{ position: relative; top: -45px; cursor: pointer; overflow: hidden; }
+
+.super-dark-blue							{ background: #163047; padding: 105px 0;  }
+.top-section 								{ position: relative; }
+.home-share 								{ position: absolute; top: 20px; right: 0; cursor: pointer; overflow: hidden; }
 .splash-twitter 							{ margin-left: 10px; }
 .bottom 									{ background: #fff; padding: 75px 0; font-family: arial, sans serif; 
-	p 										{ color: #26465f; }
+	p 										{ color: #26465f; font-size: 12px;  }
+	strong 									{ color: #000; }
 	a 										{ color: #0b3352; text-decoration: underline; 
 		&:hover 							{ color: #114c7a; }
 	}
@@ -173,14 +179,14 @@ div											{
 .sub-head 									{ font-size: 29px; line-height: 45px; color: @lightblue; font-weight: 500;
 
 }
-.video-inst 								{ font-size: 20px; color: #fff; margin-top: 25px; line-height: 29px; }
+.video-inst 								{ font-size: 20px; color: #fff; line-height: 29px; width: 71%; margin: 25px auto 0; }
 .video-sub 									{ font-size: 14px; line-height: 40px; }
 .event-date 								{ font-size: 50px; line-height: 46px; margin-bottom: 20px; }
 .play 										{ font-size: 36px; line-height: 30px; background: url('../images/splash_dot_title.png') no-repeat center center;  
 											  padding: 24px 20px; margin: 25px 0 ;  
 	span 									{ font-size: 20px; font-weight: 100px; display: block;  }
 }
-.address 									{ font-size: 26px; line-height: 26px; 
+.address 									{ font-size: 20px; line-height: 26px; 
 	&.link 									{ margin-top: 15px; }
 }
 .place-icon 								{ background: url('../images/place_icon.png') no-repeat 0 4px; padding-left: 24px; text-decoration: underline; 
@@ -188,7 +194,7 @@ div											{
 	&:hover 								{ color: #0088CC; }
 }
 .share-facts 								{ font-size: 50px; line-height: 50px; color: #78deff; }
-.awareness 									{ font-size: 24px; line-height: 30px; color: #fff; margin: 25px 0; }
+.awareness 									{ font-size: 18px; line-height: 27px; color: #fff; margin: 25px auto; width: 81%; }
 .fact-bubbles 								{ text-align: left; margin-bottom: 35px; 
 	img 									{ margin-right: 10px; }
 }
@@ -218,6 +224,12 @@ div											{
 		&:hover 							{ color: #fff; }
 	}
 }
+.donation-info 								{ 
+	p 										{ font-size: 18px; line-height: 24px; font-weight: 100; color: #fff; }
+}
+.info-boxes 								{ margin: 50px 0; }
+.disclaimer 								{ width: 91%; }
+.extra-margin 								{ margin-top: 135px; }
 
 
 
@@ -237,6 +249,11 @@ div											{
 	.video-responsive						{ overflow:hidden; padding-bottom:56.25%; position:relative; height:0;
 		iframe								{ left:0; top:0; height:100%; width:100%; position:absolute; }
 	}
+	.dark-blue 								{ padding: 75px 0; 
+		h1 									{ font-size: 105px; line-height: 100px; padding: 2px; background: none; font-weight: 100; }
+		h4 									{ margin: 25px 0; }
+	}
+	.play 									{ background: none; }
 }
 
 @media only screen and (min-width : 767px){
@@ -254,6 +271,9 @@ div											{
 		}
 	}
 	.facts 									{ margin-bottom: 20px; }
+	.dark-blue 								{ padding: 75px 0; 
+		h1 									{ font-size: 56px; line-height: 46px; padding: 2px;}
+	}
 	
 }
 
