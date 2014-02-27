@@ -42,9 +42,9 @@ function WindowGame($scope, $http, socket){
 	 */
 	 $scope.share = function(channel){
 	 	if ( channel == "facebook") {
-	 		window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgoogle.com','Facebook','toolbar=0,status=0,width=580,height=325');
+	 		window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.colonotron.org','Facebook','toolbar=0,status=0,width=580,height=325');
 	 	} else {
-	 		window.open('http://twitter.com/share/?url=google.com&text=we are shareing this','Twitter','toolbar=0,status=0,width=580,height=325');
+	 		window.open('http://twitter.com/share/?url=google.com&text=Play to prevent colorectal cancer and learn how you can help us beat it. www.colonotron.org','Twitter','toolbar=0,status=0,width=580,height=325');
 	 	}
 	 };
 
@@ -198,67 +198,19 @@ function WindowGame($scope, $http, socket){
 	}
 
 	$scope.showPrivacyPage = function(){ // Show the user the Privacy page
-		$scope.clearView();
+		$('html,body').scrollTop(0);
 		$scope.data.showPrivacy = true;
-		// jquery get the visible page 
-		// find the value of the ng-show
-		// send it to the back to view functions
-		// then when the user hitsback
-		// the back function will know which view to set to true 
-		// we do not need to listen for messages from the server
-		// if they send a message we will be taken to the next screen
-		var currentPage = $('.view:visible').attr('ng-show');
-		currentPage = currentPage.split('.');
-
-		currentPage = currentPage[1];
-		console.log('our current page is : ' + currentPage);
-		//$scope.data.currentPage = currentPage;
-		//$('.backButton.privacy').attr('ng-click','backToView('+currentPage+')'+'');
-		$scoe.data.currentView = currentPage;
-		//$scope.$apply( function(){
-
-		//});
-		//$scope.$apply();
-
-
-		// get the current view 
-		// update the parameter for back
 	};
 
 	$scope.showLegalPage = function(){ // Show the user the Legal page
-		$scope.clearView();
+		$('html,body').scrollTop(0);
 		$scope.data.showLegal = true; 
 	};
 
-	$scope.backToView = function(viewLast){
-		$scope.clearView();
-		//view = view.split('.');
-		//view = view[1];
-		switch($scope.data.currentView) {
-			case "showSignUp":
-				$scope.data.showSignUp = true;
-				//$scope.$apply();
-				break; 
-			case "showUserQue":
-				$scope.data.showUserQue = true;
-				//$scope.$apply();
-				break;
-		}
-		// for each data attribute in $scope.data
-		/*angular.forEach($scope.data, function(key, value){
-			//console.log(value);
-			var myValue = String(value);
-			//console.log(myValue +'and' +viewLast );
-			if (viewLast == myValue){
-				// build a string
-				// make not a string
-				$scope.data[value] = true;
-				//$scope.$apply();
-				console.log('we have a sign up screen');
-			}
-		});*/
-
-		//console.log(view);
+	$scope.backToView = function(viewLast){ // Hide the Legal or Privacy Pop-Over
+		$scope.data.showPrivacy = false;
+		$scope.data.showLegal = false;
+		$('html,body').scrollTop(0);
 	};
 
 	/*

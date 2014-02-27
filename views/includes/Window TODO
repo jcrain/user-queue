@@ -1,9 +1,17 @@
 Window TODO
--> Implement email collector
--> Analytics
--> implement 404
+-> Make sure count down working correctly
+-> Fix end screen
+-> add share copy
+-> create share image
+-> Manage drop connections that appear later
 -> redirect to slpash page for incorrect url
+-> responsive refinements on the landing page
+-> Facebook share image
 
+Catherine Notes
+-> Vertically center submit button
+-> Remove drop shadows
+-> 
 
 
 
@@ -34,3 +42,7 @@ cPanel License ID: 17695587
 Your name servers that must be registered are:
 ns1.colonatron.org (198.154.216.198)
 ns2.colonatron.org (198.154.216.216)
+
+ssh -p 2222 root@198.154.216.198
+
+

@@ -6072,6 +6072,14 @@ div .placeholder-box.exercise-box {
   padding: 0 10px;
   cursor: pointer;
 }
+.game {
+  position: relative;
+}
+.privacy {
+  position: absolute;
+  top: 0;
+  background-color: #315770;
+}
 .footer {
   background: url('../images/footer_shadow.png') repeat-x #ffffff;
   padding: 20px;
