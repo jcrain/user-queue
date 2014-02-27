@@ -34,13 +34,13 @@ app.configure(function(){
 	app.use(express.static(path.join(__dirname, '/public')));
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
-	//app.use(redirectUnmatched);
+	app.use(redirectUnmatched);
 });
 
 // SHOW THE SPLASH PAGE FOR INVALID REQ
 //=============================================
 function redirectUnmatched(req, res) {
-  res.redirect("http://198.154.216.198/");
+  res.redirect("http://colonotron.org/");
 }
 
 // APP ROUTES

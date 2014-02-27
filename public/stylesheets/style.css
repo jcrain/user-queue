@@ -6081,7 +6081,7 @@ div .placeholder-box.exercise-box {
   background-color: #315770;
 }
 .footer {
-  background: url('../images/footer_shadow.png') repeat-x #ffffff;
+  background: #fff;
   padding: 20px;
   margin-top: 30px;
 }
@@ -6243,7 +6243,6 @@ div .placeholder-box.exercise-box {
   color: #315770;
   font-size: 30px;
   margin: 0;
-  box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.35);
   position: relative;
   padding: 30px;
   line-height: 30px;
@@ -6259,6 +6258,9 @@ div .placeholder-box.exercise-box {
   line-height: 27px;
   margin-top: 25px;
 }
+.place-in-line.timeout {
+  margin: 18px 0;
+}
 .playing-game .exercise-inst {
   margin-bottom: 18px;
 }
@@ -6271,11 +6273,23 @@ div .placeholder-box.exercise-box {
   font-size: 30px;
   line-height: 31px;
 }
+.exercise-inst.timeout {
+  margin: 21px 0 20px;
+}
 .exercise-gif {
   margin-top: 25px;
 }
 .timed-out .submit-form {
-  background-position: 155px 6px;
+  background-position: 146px 6px;
+}
+.donate-box.text p {
+  margin-top: 9px;
+  font-size: 16px;
+  line-height: 23px;
+}
+.learn-more {
+  color: #86e4f3;
+  text-decoration: underline;
 }
 .light-blue {
   background: #89e4ff;

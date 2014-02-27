@@ -69,7 +69,7 @@ div											{
 
 .game 										{ position:relative; }
 .privacy 									{ position: absolute; top: 0; background-color: #315770; }
-.footer 									{ background: url('../images/footer_shadow.png') repeat-x #fff; padding: 20px; margin-top: 30px;  
+.footer 									{ background: #fff; padding: 20px; margin-top: 30px;  
 	.arial 									{ color: #315872; font-family: Arial, Sans Serif; 
 		a 									{ color: #315872; text-decoration: underline; }
 	}
@@ -143,15 +143,18 @@ div											{
 
 // QUEUE SCREEN
 //===========================================
-.que-header  								{ background: #86e4f3; color: #315770; font-size: 30px; margin: 0; box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.35); 
+.que-header  								{ background: #86e4f3; color: #315770; font-size: 30px; margin: 0;  
 											  position: relative; padding: 30px; line-height: 30px; font-weight: 100; }
 .down-arrow									{ display: block; margin: 0 auto; position: relative; }
-.place-in-line 								{ color: #fff; line-height: 27px; margin-top: 25px; }
+.place-in-line 								{ color: #fff; line-height: 27px; margin-top: 25px; 
+	&.timeout 								{ margin: 18px 0; }
+}
 .playing-game 								{
 	.exercise-inst							{ margin-bottom: 18px; }
 }
 .exercise-inst 								{ font-size: 16px; margin-top: 19px; 
 	&.your-up-bottom 						{ margin: 0px 0 30px; font-size: 30px; line-height: 31px;  }
+	&.timeout 								{ margin: 21px 0 20px; }
 }
 .exercise-gif 								{ margin-top: 25px; }
 
@@ -159,8 +162,14 @@ div											{
 // USER TIMED OUT
 //===========================================
 .timed-out 									{ 
-	.submit-form 							{ background-position: 155px 6px; }
+	.submit-form 							{ background-position: 146px 6px; }
 }
+.donate-box 								{  
+	&.text 									{ 
+		p 									{ margin-top: 9px; font-size: 16px; line-height: 23px;   }
+	}
+}
+.learn-more 								{ color: #86e4f3; text-decoration: underline; }
 
 // SPLASH PAGE STUFF
 //===========================================

@@ -25,7 +25,7 @@ var Que 	= db.model('que', QueUser);
 
 // Set up date object to have a date count down
 //=================================================
-var launchDay = new Date('Feburary 1, 2014 00:00:00');
+var launchDay = new Date('March 1, 2014 00:00:00');
 
 var getDayObj = function(){
 	var today = new Date();
