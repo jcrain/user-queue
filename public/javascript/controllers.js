@@ -89,6 +89,7 @@ function WindowGame($scope, $http, socket){
 	 }
 
 	 $scope.clearView = function(){ // Helper to clear all views
+	 	$('html,body').scrollTop(0);
 	 	$scope.data.showSignUp = false;
 		$scope.data.showUserQue = false;
 		$scope.data.showUpNext = false;
@@ -170,6 +171,7 @@ function WindowGame($scope, $http, socket){
 			});*/
 			$http.post('/emailCollector', postJson).success(function(data, status, headers, config){
 				console.log('we have stuff sent to /emailCollector');
+				// maybe if we have no call back this will not hang
 			});
 		}
 	};
