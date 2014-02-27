@@ -153,8 +153,9 @@ div											{
 	.exercise-inst							{ margin-bottom: 18px; }
 }
 .exercise-inst 								{ font-size: 16px; margin-top: 19px; 
-	&.your-up-bottom 						{ margin: 0px 0 30px; font-size: 30px; line-height: 31px;  }
+	&.your-up-bottom 						{ margin: 6px auto 25px; font-size: 30px; line-height: 31px; width: 81%; }
 	&.timeout 								{ margin: 21px 0 20px; }
+	&.light-blue-text 						{ color: #86E4F3; }
 }
 .exercise-gif 								{ margin-top: 25px; }
 
@@ -221,7 +222,12 @@ div											{
 	img 									{ margin-right: 10px; }
 }
 .fact-text 									{ padding-top: 12px; width: 61%; display: inline-block; font-size: 18px; text-transform: uppercase; }
-.video 										{ position: relative; margin-top: 40px; }
+.video 										{ position: relative; margin-top: 40px; 
+	&.left-align 							{ 
+		p 									{ text-align: left; font-size: 18px; font-weight: 100; line-height: 24px; }
+	}
+	h4 										{ color: #86E4F3; text-align: left;  }
+}
 .video-iframe 								{ border: 4px solid #89e4ff; border-radius: 3px; }
 .fly-out 									{ position: absolute; color: #26465f; 
 	&.left 									{ top: 184px; padding-right: 45px; left: -63px; font-size: 38px; line-height: 41px; }
@@ -276,6 +282,7 @@ div											{
 		h4 									{ margin: 25px 0; }
 	}
 	.play 									{ background: none; }
+	.home-share 							{ top: -40px; }
 }
 
 @media only screen and (min-width : 767px){

@@ -34,6 +34,7 @@ app.configure(function(){
 	app.use(express.static(path.join(__dirname, '/public')));
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
+	app.use(app.router);
 	app.use(redirectUnmatched);
 });
 
@@ -47,6 +48,8 @@ function redirectUnmatched(req, res) {
 //============================================= 
 app.get('/', routes.splash); // Return splash page
 app.get('/play', routes.game); // Return the game
+app.get('/legal', routes.legal); // Return Legal Notice for splash page
+app.get('/privacy', routes.privacy); // Return Privacy Policy
 app.get('/getQue', routes.getQue); // Return the users in the queue 
 app.get('/userFinishedGame', routes.userFinishedGame); // we need to remove the user from the que and then show the end screen
 app.get('/displayIsReady', routes.displayIsReady); // show the user the screen to play the game

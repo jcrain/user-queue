@@ -124,6 +124,7 @@ function WindowGame($scope, $http, socket){
 	 * TODO: app style page transitions
 	 */
 	$scope.addUser = function(){
+		document.activeElement.blur();
 		var thisUser = $scope.user;
 		$scope.submitted = true;
 		console.log(thisUser);

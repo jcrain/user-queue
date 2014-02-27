@@ -4,10 +4,10 @@ div.user-que.view(ng-show="data.showEndScreen")
 	h3.que-header(ng-show="data.showEndMessage2") OH WELL, {{user.name}}!!	
 	img.down-arrow(src="/images/que_down_arrow.png")
 	div.container
-		p.exercise-inst(ng-show="data.showEndMessage0") LOOKS LIKE YOU WORKED UP A SWEAT AND MADE IT THROUGH ALL THREE STEPS OF THE GAME. THAT’S NO EASY FEAT!
-		p.exercise-inst(ng-show="data.showEndMessage1") YOU GOT SOME GOOD MOMENTUM, BUT IT TAKES MORE THAN JUST MOVES TO BEAT COLON CANCER.
-		p.exercise-inst(ng-show="data.showEndMessage2") IT LOOKS LIKE YOUR HEART WASN’T IN IT THIS TIME, BUT THAT’S OKAY. 
-		p.exercise-inst Regular exercise, eating healthy, &amp; getting screenings are your best chances to prevent colon cancer...
+		p.mdm.place-in-line(ng-show="data.showEndMessage0") LOOKS LIKE YOU WORKED UP A SWEAT AND MADE IT THROUGH ALL THREE STEPS OF THE GAME. THAT’S NO EASY FEAT!
+		p.mdm.place-in-line(ng-show="data.showEndMessage1") YOU GOT SOME GOOD MOMENTUM, BUT IT TAKES MORE THAN JUST MOVES TO BEAT COLON CANCER.
+		p.mdm.place-in-line(ng-show="data.showEndMessage2") IT LOOKS LIKE YOUR HEART WASN’T IN IT THIS TIME, BUT THAT’S OKAY. 
+		p.exercise-inst.light-blue-text Regular exercise, eating healthy, &amp; getting screenings are your best chances to prevent colon cancer...
 		p.exercise-inst don't forget to share this game &amp; facts about colon cancer
 		div.share-box
 				span.share.facebook.splash(ng-click="share('facebook')") share 

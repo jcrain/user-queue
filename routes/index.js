@@ -17,9 +17,15 @@ if (process.env.VCAP_SERVICES) {
 var NewUser = require('../models/User.js').NewUser; // get our schema
 var User 	= db.model('users', NewUser); // get the data that should be based on the schema 
 
-// Get User schema and model to save the Que user
+// Get Que schema and model to save the Que user
+//================================================
 var QueUser = require('../models/User.js').QueUser; // get our schema
 var Que 	= db.model('que', QueUser); 
+
+// Get the Disconnected schema to save a disconnected user
+//================================================
+var DisUser = require('../models/User.js').DisconnectedQue; 
+var DisQue 	= db.model('disconnect', DisUser);
 
 
 
@@ -60,7 +66,16 @@ var getPlaceInLine = function(num){
  * Show the splash screen without the game url
  */ 
 exports.splash  = function(req, res){
- 	res.render('splash', { daysLeft: day});
+	var request = require('request');
+	var donations =  '';
+	request('http://events.coloncancerchallenge.org/site/PageServer?pagename=colonotron_progress&pgwrap=n', function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+		  console.log(body.trim()); // Print the google web page.
+
+		}
+	});
+
+ 	res.render('splash', { daysLeft: day, donation: donations});
  };
 
 // Lemme get an index pageeeee
@@ -131,18 +146,6 @@ exports.removeUserFromQue = function(req, res){
 		Que.remove( { id : player.id }, function(){
 			
 		});
-		// WE SHOULD SHOW THE NEXT PERSON THE GAME SCREEN
-		//=================================================
-		/*var myCurrentUser = Que.findOne(function(err, doc){
-			if (doc != null){
-				io.sockets.socket(doc.socket).emit('timeToPlay', function(){
-					console.log('these event is working somewhere');
-				});
-				res.json({"message": "user deleted from que"});
-			} else {
-				res.json({"message": "no one is que"});
-			}
-		});*/
 	});
 };
 
@@ -170,6 +173,13 @@ exports.socketsLogic = function(socket){
 				});
 			}	
 		});	
+
+		// We need to remove this person from the disconnected socket
+
+		// if we are reconnecting
+		// check to see if this user in is the disconnected BD
+		// if they are get their score and then show the appropriate message
+
 	});
 
 	socket.on('userHitPlay', function(){ // Update record to show the user is ready to play
@@ -193,6 +203,44 @@ exports.socketsLogic = function(socket){
 		socket.broadcast.emit('updateUserList',data, function(){
 			console.log('We have a mew user and it is :' + data);
 		});
+	});
+
+	socket.on('disconnect', function() {
+		// get the socket id
+		var thisId = socket.id;
+		var isInQue = Que.find({ id: thisId}, function(err, doc){
+			if(err || !doc) {
+				// this user is not in the que so we don't really care
+			} else {
+				// this user is in the que 
+				// add them to the disconnected que
+
+				var disDoc = { id: doc.id, name: doc.name, socket: doc.socket, score: '' }; // build user doc
+				var addDisconnectQue = new DisQue(disDoc);
+				addDisconnectQue.save(function(err, doc) { // save user to queue
+					if(err || !doc) {
+						console.log(err);
+						//throw 'Error';
+					} else {
+						/*Que.count(function(err, count){ // we need to get the place in line
+							if ( count > 1 ){ 
+								// We need to add the suffix the this day, ie st, nd, rd, th
+								count = getPlaceInLine(count); 
+								res.json({ isFirst: false, queNumber: count });
+							} else {
+								res.json({ isFirst: true });
+							}
+						});*/
+					}		
+				});
+
+				/*Que.update( { id: data }, { socket: socket.id}, function(){
+					console.log('this record has been updated');
+				});*/
+			}
+		})
+		// check to see if this id is in the que
+		// if it is in the que
 	});
 };
 
@@ -305,7 +353,15 @@ exports.emailCollector = function(req, res){
 	});
 };
 
+// RETURN THE LEGAL PAGE
+exports.legal = function(req, res){
+ 	res.render('legalPage');
+};
 
+// RETURN THE PRIVACY PAGE
+exports.privacy = function(req, res){
+ 	res.render('privacyPage');
+};
 
 
 
