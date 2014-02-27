@@ -8,6 +8,14 @@ var Analytics = (function (angular) {
 	        domain = 'none';
 	        gaqAccount = "UA-42049419-3";
 	        break;
+	    case ('colonotron.org'):
+	    	domain = 'colonotron.org';
+	        gaqAccount = "UA-48241809-1";
+	    	break;
+	    case ('www.colonotron.org'):
+	    	domain = 'colonotron.org';
+	        gaqAccount = "UA-48241809-1";
+	    	break;
 	    default: break;
 	}
 

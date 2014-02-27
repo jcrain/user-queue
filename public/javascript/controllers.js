@@ -24,8 +24,10 @@ function WindowGame($scope, $http, socket){
 		, showUserTimedOut: false 
 		, showDonateLegal: false
 		, showPrivacy: false
+		, showLegal: false
 		, isTimedOut: false
 		, isPlayingAgain: false
+		, currentView: ""
 	};
 
 	$scope.user = {
@@ -89,7 +91,7 @@ function WindowGame($scope, $http, socket){
 	 }
 
 	 $scope.clearView = function(){ // Helper to clear all views
-	 	$('html,body').scrollTop(0);
+	 	$('html,body').scrollTop(0); // we need the user's view to be at the top of the window
 	 	$scope.data.showSignUp = false;
 		$scope.data.showUserQue = false;
 		$scope.data.showUpNext = false;
@@ -107,6 +109,14 @@ function WindowGame($scope, $http, socket){
 		$scope.data.showWatchGame = false;
 		$scope.data.showFatalGameError = false;
 		$scope.data.showPrivacy = false;
+		$scope.data.showLegal = false;
+
+		/*var the_string = 'life.meaning';
+		var model = $parse(the_string);  // Get the model
+		model.assign($scope, 42);  // Assigns a value to it
+		$scope.$apply();  // Apply it to the scope
+		console.log($scope.life.meaning);  // Logs 42
+		$scope.data.+"view" = true;*/
 	 }
 
 	/*
@@ -125,6 +135,7 @@ function WindowGame($scope, $http, socket){
 				if (data.isFirst){
 					$scope.clearView();
 					$scope.data.showUpNext = true;
+					$('#legal, #privacy')
 					//$scope.playSound();
 				} else{
 					$scope.clearView();
@@ -133,42 +144,14 @@ function WindowGame($scope, $http, socket){
 				}
 			});
 			// Info for saving user name and email to email collector
-			//environment response
-    		var successresponse = "success";
-    		var errorresponse = "error";
-			var lastName = "";
-			var surveryId = "1721";
-			var postUrl = "http://events.coloncancerchallenge.org/site/Survey";
-			var userinputs = "cons_first_name="+thisUser.name+"&cons_last_name="+lastName+"&cons_email="+encodeURI(thisUser.email);
-			var surveyinputs = "SURVEY_ID="+surveryId+"&cons_info_component=t&denySubmit=&ACTION_SUBMIT_SURVEY_RESPONSE=Submit&NEXTURL=PageServer%3Fpagename%3Dcolonotron_mockapiresponse%26resp%3D"+successresponse+"%26pgwrap%3Dn&ERRORURL=PageServer%3Fpagename%3Dcolonotron_mockapiresponse%26resp%3D" + errorresponse + "%26pgwrap%3Dn";
+			
 
-    		var postvars = userinputs + "&" + surveyinputs;
+    		//var postvars = userinputs + "&" + surveyinputs;
     		var postJson = {
     			  "name" : thisUser.name
     			, "email" : thisUser.email 
     		}
-    		/*var postJson = {
-    			  "cons_first_name" : thisUser.name
-    			, "cons_last_name" : lastName
-    			, "cons_email" : thisUser.email	
-    			, "SURVEY_ID":surveryId
-    			, "cons_info_component":"t"
-    			, "denySubmit":""
-    			, "ACTION_SUBMIT_SURVEY_RESPONSE":"Submit"
-    			, "NEXTURL=PageServer?pagename=colonotron_mockapiresponse&resp="+successresponse+"&pgwrap%3Dn&ERRORURL=PageServer?pagename=colonotron_mockapiresponse&resp=" + errorresponse + "&pgwrap=n";
-    		};*/
-			/*$http.post( postUrl , postvars ).success(function(data, status, headers, config){
-				console.log('our data :'+data);
-				console.log('our status :'+status);
-				console.log('our headers :'+headers);
-				console.log('we have saved data');
-			})
-			.error(function(data, status, headers, config){
-				console.log('our data :'+data);
-				console.log('our status :'+status);
-				console.log('our headers :'+headers);
-				console.log('no saved data');
-			});*/
+    		
 			$http.post('/emailCollector', postJson).success(function(data, status, headers, config){
 				console.log('we have stuff sent to /emailCollector');
 				// maybe if we have no call back this will not hang
@@ -209,14 +192,73 @@ function WindowGame($scope, $http, socket){
 		$scope.data.showEmailReason = true;
 	}
 
-	$scope.backToSignUp = function(){
+	$scope.backToSignUp = function(){ // Legal notice and email question
 		$scope.clearView();
 		$scope.data.showSignUp = true;
 	}
 
-	$scope.showPrivacyPolicy = function(){
+	$scope.showPrivacyPage = function(){ // Show the user the Privacy page
 		$scope.clearView();
 		$scope.data.showPrivacy = true;
+		// jquery get the visible page 
+		// find the value of the ng-show
+		// send it to the back to view functions
+		// then when the user hitsback
+		// the back function will know which view to set to true 
+		// we do not need to listen for messages from the server
+		// if they send a message we will be taken to the next screen
+		var currentPage = $('.view:visible').attr('ng-show');
+		currentPage = currentPage.split('.');
+
+		currentPage = currentPage[1];
+		console.log('our current page is : ' + currentPage);
+		//$scope.data.currentPage = currentPage;
+		//$('.backButton.privacy').attr('ng-click','backToView('+currentPage+')'+'');
+		$scoe.data.currentView = currentPage;
+		//$scope.$apply( function(){
+
+		//});
+		//$scope.$apply();
+
+
+		// get the current view 
+		// update the parameter for back
+	};
+
+	$scope.showLegalPage = function(){ // Show the user the Legal page
+		$scope.clearView();
+		$scope.data.showLegal = true; 
+	};
+
+	$scope.backToView = function(viewLast){
+		$scope.clearView();
+		//view = view.split('.');
+		//view = view[1];
+		switch($scope.data.currentView) {
+			case "showSignUp":
+				$scope.data.showSignUp = true;
+				//$scope.$apply();
+				break; 
+			case "showUserQue":
+				$scope.data.showUserQue = true;
+				//$scope.$apply();
+				break;
+		}
+		// for each data attribute in $scope.data
+		/*angular.forEach($scope.data, function(key, value){
+			//console.log(value);
+			var myValue = String(value);
+			//console.log(myValue +'and' +viewLast );
+			if (viewLast == myValue){
+				// build a string
+				// make not a string
+				$scope.data[value] = true;
+				//$scope.$apply();
+				console.log('we have a sign up screen');
+			}
+		});*/
+
+		//console.log(view);
 	};
 
 	/*

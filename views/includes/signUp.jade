@@ -1,4 +1,4 @@
-.container.sign-up-form.row(ng-show="data.showSignUp")
+.container.sign-up-form.row.view(ng-show="data.showSignUp")
 	h1.title 
 		| PLAY TO PREVENT COLORECTAL CANCER
 	form(id="sign-up", name="form", class="css-form form-class sign-up-form", ng-submit="addUser()", novalidate)
@@ -20,7 +20,6 @@
 		p.ts-and-cs 
 			| BY CLICKING SUBMIT, I AGREE TO THE GAME  
 			span.terms-link(ng-click="showTerms()", id="legal") LEGAL NOTICES
-
 		button.btn.btn-primary.span12(id="play-game", ng-disabled="form.$invalid") 
 			span.submit-form submit 
 		//button.btn.btn-primary(ng-click="update(user)", ng-disabled="form.$invalid || isUnchanged(user)") Enter to Play 
