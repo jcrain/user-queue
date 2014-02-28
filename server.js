@@ -1,5 +1,5 @@
 /* 
- * Application: Colon-A-Tron
+ * Application: Colon-O-Tron
  * Company: MRY
  * Client: Colon Cancer Challenge Foundation
  * 
@@ -51,12 +51,13 @@ app.get('/play', routes.game); // Return the game
 app.get('/legal', routes.legal); // Return Legal Notice for splash page
 app.get('/privacy', routes.privacy); // Return Privacy Policy
 app.get('/getQue', routes.getQue); // Return the users in the queue 
-app.get('/userFinishedGame', routes.userFinishedGame); // we need to remove the user from the que and then show the end screen
+app.get('/userFinishedGame', routes.userFinishedGame); // we need to remove the user from the queue and then show the end screen
 app.get('/displayIsReady', routes.displayIsReady); // show the user the screen to play the game
 app.get('/system', routes.system); // Turn the game on and off
-app.get('/watchBall', routes.watchBall);
+app.get('/watchBall', routes.watchBall); // Prompt the user to watcht the ball go
+app.get('/donationAmount', routes.donationAmount) // get the amount of money we have raised so far
 app.post('/deleteUser', routes.removeUserFromQue); // called when user times out
-app.post('/addUser', routes.addUser); // add a user to the que
+app.post('/addUser', routes.addUser); // add a user to the queue
 app.post('/emailCollector', routes.emailCollector);
 
 

@@ -11,7 +11,6 @@ if (process.env.VCAP_SERVICES) {
 }
 
 
-
 // Get User schema and model so we can query data
 //================================================
 var NewUser = require('../models/User.js').NewUser; // get our schema
@@ -21,12 +20,6 @@ var User 	= db.model('users', NewUser); // get the data that should be based on 
 //================================================
 var QueUser = require('../models/User.js').QueUser; // get our schema
 var Que 	= db.model('que', QueUser); 
-
-// Get the Disconnected schema to save a disconnected user
-//================================================
-var DisUser = require('../models/User.js').DisconnectedQue; 
-var DisQue 	= db.model('disconnect', DisUser);
-
 
 
 // Set up date object to have a date count down
@@ -66,16 +59,22 @@ var getPlaceInLine = function(num){
  * Show the splash screen without the game url
  */ 
 exports.splash  = function(req, res){
+ 	res.render('splash', { daysLeft: day });
+ };
+
+ // Get the donation amount
+ //===============================================
+ exports.donationAmount = function(req, res){
 	var request = require('request');
 	var donations =  '';
 	request('http://events.coloncancerchallenge.org/site/PageServer?pagename=colonotron_progress&pgwrap=n', function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-		  console.log(body); // Print the google web page.
 		  donations = body;
+		  res.json({donation: body});
+		} else {
+			res.json({donation: "a lot"});
 		}
 	});
-
- 	res.render('splash', { daysLeft: day, dolla: donations});
  };
 
 // Lemme get an index pageeeee
@@ -87,6 +86,7 @@ exports.game  = function(req, res) {
 		res.render('broken', { daysLeft: day});
 	}
 };
+
 
 // API to get users in Que
 //==================================
@@ -167,19 +167,11 @@ exports.socketsLogic = function(socket){
 				socket.emit('updateYourId', socket.id);
 				throw 'Error';
 			} else {
-				// this user  
 				Que.update( { id: data }, { socket: socket.id}, function(){
 					console.log('this record has been updated');
 				});
 			}	
 		});	
-
-		// We need to remove this person from the disconnected socket
-
-		// if we are reconnecting
-		// check to see if this user in is the disconnected BD
-		// if they are get their score and then show the appropriate message
-
 	});
 
 	socket.on('userHitPlay', function(){ // Update record to show the user is ready to play
@@ -198,49 +190,11 @@ exports.socketsLogic = function(socket){
 
 	// After saving the user we will trigger a new user event on the client side and let 
 	// everyone else know that there is a new user
-	socket.on('newUser', function(data){
+	socket.on('newUser', function(data){ // 
 		console.log('NEW USER EVENT');
 		socket.broadcast.emit('updateUserList',data, function(){
 			console.log('We have a mew user and it is :' + data);
 		});
-	});
-
-	socket.on('disconnect', function() {
-		// get the socket id
-		var thisId = socket.id;
-		var isInQue = Que.find({ id: thisId}, function(err, doc){
-			if(err || !doc) {
-				// this user is not in the que so we don't really care
-			} else {
-				// this user is in the que 
-				// add them to the disconnected que
-
-				var disDoc = { id: doc.id, name: doc.name, socket: doc.socket, score: '' }; // build user doc
-				var addDisconnectQue = new DisQue(disDoc);
-				addDisconnectQue.save(function(err, doc) { // save user to queue
-					if(err || !doc) {
-						console.log(err);
-						//throw 'Error';
-					} else {
-						/*Que.count(function(err, count){ // we need to get the place in line
-							if ( count > 1 ){ 
-								// We need to add the suffix the this day, ie st, nd, rd, th
-								count = getPlaceInLine(count); 
-								res.json({ isFirst: false, queNumber: count });
-							} else {
-								res.json({ isFirst: true });
-							}
-						});*/
-					}		
-				});
-
-				/*Que.update( { id: data }, { socket: socket.id}, function(){
-					console.log('this record has been updated');
-				});*/
-			}
-		})
-		// check to see if this id is in the que
-		// if it is in the que
 	});
 };
 
@@ -261,7 +215,7 @@ exports.userFinishedGame = function(req, res){
 				res.send({ "message": "success"});
 			} 
 		} else{
-			res.json({ "message" : "fail" });
+			res.json({ "message" : "fail" }); // No one was removed from the queue
 		}
 	});
 }
@@ -269,9 +223,6 @@ exports.userFinishedGame = function(req, res){
 // API to show user game screen
 exports.displayIsReady = function(req, res){
 	var showUserPlayScreen = Que.findOne(function(err, doc){ // Find the next person to play
-		/*for (var key in doc) {
-  				console.log('here are the keys' + key);
-			}*/
 		if (doc != null){
 			io.sockets.socket(doc.socket).emit('showGameScreen', function(){});
 			res.send({ "message": "success"});
@@ -343,8 +294,7 @@ exports.emailCollector = function(req, res){
 	var exec = require('child_process').exec;
 	//exec('php ~/Dev/NodeProjs/disconnectTest/public/test.php '+req.body.name+' '+req.body.email, function (error, stdout, stderr) {
 	exec('php ~/cccf/public/test.php '+req.body.name+' '+req.body.email, function (error, stdout, stderr) {
-  		// output is in stdout
-  		console.log(stdout);
+  		console.log(stdout); // output is in stdout
   		if (stdout.trim() == "success"){
   			res.send({"message": "success" });
   		} else {

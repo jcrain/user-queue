@@ -1,18 +1,9 @@
 Window 
--> Put in amount raised
--> style legal and privacy
--> responsive refinements on the landing page
--> add new gif
--> Manage drop connections that appear later
--> make map a link
--> Thanks for playing screen for disconnected user
+-> clean up code
 
 
 Catherine Notes
--> Vertically center submit button
--> Remove drop shadows
--> 
-
+-> Vertically center submit button 
 
 
 Nice to have
@@ -46,3 +37,4 @@ ns2.colonatron.org (198.154.216.216)
 ssh -p 2222 root@198.154.216.198
 
 
+http://maps.google.com/maps?q=40.758094, -73.979237

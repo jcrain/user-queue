@@ -28,7 +28,13 @@ function WindowGame($scope, $http, socket){
 		, isTimedOut: false
 		, isPlayingAgain: false
 		, currentView: ""
+		, amountRised: ""
 	};
+
+	$http.get('/donationAmount').success(function(data){
+		var myData = data.donation.replace('\n', '');
+		$('.raised').html(myData);
+	});
 
 	$scope.user = {
 		'id'	: document.getElementById('user_id').getAttribute("value"), // there is probably a better way to do this
@@ -49,7 +55,7 @@ function WindowGame($scope, $http, socket){
 	 };
 
 	 $scope.blurFunction = function(type){ // Angular does not have a blur function built into their form validation
-	 	if (type === "email"){
+	 	if (type === "email"){ // We did not have time to properly do this the "angular" way.
 	 		var email = $scope.user.email;  
 	 		var EMAIL_REGX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 	 		if(EMAIL_REGX.test(email)){
@@ -66,14 +72,11 @@ function WindowGame($scope, $http, socket){
 	 		var userName = $scope.user.name;
 	 		var hasBadWord = false; // No bad words allowed.
 			for (var i = 0; i < badWords.length; i++){
-				/*if ( $scope.user.name.indexOf(badWords[i] !== -1)){
-					hasBadWord = true;
-				}*/
 				if ( $scope.user.name == badWords[i]){
 					hasBadWord = true;
-					console.log('your name is a bad word');
 				}
 			}
+
 			if (hasBadWord) { 
 				form.uName.$invalid = true;
 				$('#play-game').addClass('ng-disabled');
@@ -110,13 +113,6 @@ function WindowGame($scope, $http, socket){
 		$scope.data.showFatalGameError = false;
 		$scope.data.showPrivacy = false;
 		$scope.data.showLegal = false;
-
-		/*var the_string = 'life.meaning';
-		var model = $parse(the_string);  // Get the model
-		model.assign($scope, 42);  // Assigns a value to it
-		$scope.$apply();  // Apply it to the scope
-		console.log($scope.life.meaning);  // Logs 42
-		$scope.data.+"view" = true;*/
 	 }
 
 	/*
@@ -166,19 +162,6 @@ function WindowGame($scope, $http, socket){
 		$scope.addUser();
 	};
 
-	/*
-	 * VALIDATE USER INPUT
-	 * This is boiler plate from the angular docs, http://docs.angularjs.org/guide/forms
-	 */
-	$scope.master = {};
-
-	$scope.update = function(user) {
-		$scope.master = angular.copy(user);
-	};
-
-	$scope.isUnchanged = function(user) {
-		return angular.equals(user, $scope.master);
-	};
 
 	/*
 	 * STEP 1.1 USER CLICKS TO SEE TERMS OF SERVICE OR to read about emails
@@ -317,8 +300,6 @@ function WindowGame($scope, $http, socket){
 				$scope.data.showDonateLegal = true;
 				break;
 		}
-
-		//$scope.playSound();
 	});
 
 	// After disconnect udpate the user's id with socket 

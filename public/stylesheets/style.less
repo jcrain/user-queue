@@ -68,7 +68,10 @@ div											{
 }
 
 .game 										{ position:relative; }
-.privacy 									{ position: absolute; top: 0; background-color: #315770; }
+.privacy 									{ position: absolute; top: 0; background-color: #315770; padding: 20px; text-align: left; 
+	h4 										{ color: @lightblue;}
+
+}
 .footer 									{ background: #fff; padding: 20px; margin-top: 30px;  
 	.arial 									{ color: #315872; font-family: Arial, Sans Serif; 
 		a 									{ color: #315872; text-decoration: underline; }
@@ -88,6 +91,7 @@ div											{
 .texting-info 								{ color: #000; }
 .privacy-link 								{ text-decoration: underline; color: @lightblue; cursor: pointer;  }
 .powered-by 								{ margin-top: 18px; }
+.email-disclaimer, .ts-and-c 				{ text-align: left; }
 
 
 // VIEW SPECIFIC STYLES
@@ -257,11 +261,13 @@ div											{
 }
 .info-boxes 								{ margin: 50px 0; }
 .disclaimer 								{ width: 91%; }
-.extra-margin 								{ margin: 135px 0; }
+.extra-margin 								{ margin: 100px 0; }
 .splash-header 								{ text-decoration: none; 
 	a 										{ color: #86E4F3; text-decoration: none; }
 }
-
+.raised 									{ color: #fff; display: inline-block; }
+.small-phone 								{ display: none; }
+#home-ccc-link 								{ color: #5FD4FB; text-decoration: underline; }
 
 
 // ANGULAR STYLES
@@ -280,12 +286,65 @@ div											{
 	.video-responsive						{ overflow:hidden; padding-bottom:56.25%; position:relative; height:0;
 		iframe								{ left:0; top:0; height:100%; width:100%; position:absolute; }
 	}
-	.dark-blue 								{ padding: 75px 0; 
+	.dark-blue 								{ padding: 45px 0; 
 		h1 									{ font-size: 105px; line-height: 100px; padding: 2px; background: none; font-weight: 100; }
 		h4 									{ margin: 25px 0; }
+		&.bottom-facts 						{ padding: 27px 0 43px; }
+		.share-facts 						{ font-size: 36px; line-height: 34px; font-weight: 100; }
+		.awareness 							{ font-size: 20px; line-height: 23px; width: 95%; }
+
+		.fact-bubbles 						{ margin-bottom: 10px;
+			img 							{ width: 85px; }
+		}
+		.fact-text 							{ padding-top: 0; }
+		.bottom-text 						{ margin-top: 15px; }
+
 	}
+
 	.play 									{ background: none; }
-	.home-share 							{ top: -40px; }
+	.home-share 							{ position: relative;  top: inherit;
+		.pull-right 						{ float: none; }
+	}
+	.top-section 							{ 
+		h3 									{ font-size: 25px; }
+		h4 									{ font-size: 24px; line-height: 30px; }
+		.video-inst 						{ width: 95%; font-size: 20px; line-height: 27px; }
+		.video-sub 							{ margin-top: 11px; line-height: 20px; }
+	}
+	.light-blue 							{ padding: 34px 0 43px; 
+		.event-date 						{ font-size: 36px; line-height: 34px; margin: 20px 0 14px;}
+		.play 								{ margin: 0; padding: 12px 20px 17px; }
+		.span7 								{ margin-bottom: 21px; }
+	}
+
+	.bottom-facts 							{ padding: 27px 0 43px;}
+	.bottom 								{ padding: 57px 0;
+		.disclaimer 						{ width: inherit; }
+		p 									{ color: #000; }
+	}
+
+	.super-dark-blue 						{ padding: 27px 0 37px; 
+		.share-facts 						{ font-weight: 100; font-size: 36px; line-height: 34px; }
+		.donation-info p 					{ font-size: 20px; margin-top: 9px; 
+			&.top-text 						{ margin-top: 14px; }
+			span 							{ color: @lightblue; }
+		}
+		.donate-box							{
+			&.text 							{ padding: 1px; 
+				p 							{ font-size: 18px; }
+			}
+		}
+		.info-boxes 						{ margin: 30px 0 20px; 
+			.dark-blueness 					{ }
+		}
+		.donate-box 						{
+			.comp-link 						{ font-size: 18px; }
+			.comp-icon 						{ position: relative; top: -11px; }
+		}
+		.learn-more-link 					{ margin-top: 19px; }
+
+	}
+
 }
 
 @media only screen and (min-width : 767px){
@@ -303,8 +362,23 @@ div											{
 		}
 	}
 	.facts 									{ margin-bottom: 20px; }
-	.dark-blue 								{ padding: 75px 0; 
-		h1 									{ font-size: 56px; line-height: 46px; padding: 2px;}
+	.dark-blue 								{ 
+		h1 									{ font-size: 69px; line-height: 59px; padding: 2px;}
+	}
+	
+}
+
+@media only screen and (max-width : 320px){
+	.fact-text  							{ width: 55%; }
+	.dark-blue 								{  
+		//h1 									{ background: url('../images/lights.gif') no-repeat; margin-top: 0; padding: 24px 0 30px; background-size: 100%;  }
+	}
+	
+}
+
+@media only screen and (max-width : 290px){
+	.dark-blue 								{ 
+		h1 									{ background: none;}
 	}
 	
 }

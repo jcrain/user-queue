@@ -17,13 +17,5 @@ exports.QueUser = new mongoose.Schema ({
 	name			: { type: String, required: true },
 	socket			: { type: String, required: true },
 	userHitPlay 	: { type: Boolean, required: true },
-	//isConnected 	: { type: Boolean, required: true }, 
 	timestampAdded	: { type: String, required: true}
-});
-
-exports.DisconnectedQue = new mongoose.Schema ({
-	id				: { type: String, required: true },
-	name			: { type: String, required: true },
-	socket			: { type: String, required: true },
-	score 			: { type: String, required: false}
 });

@@ -6079,6 +6079,11 @@ div .placeholder-box.exercise-box {
   position: absolute;
   top: 0;
   background-color: #315770;
+  padding: 20px;
+  text-align: left;
+}
+.privacy h4 {
+  color: #86e4f3;
 }
 .footer {
   background: #fff;
@@ -6138,6 +6143,10 @@ div .placeholder-box.exercise-box {
 }
 .powered-by {
   margin-top: 18px;
+}
+.email-disclaimer,
+.ts-and-c {
+  text-align: left;
 }
 .sign-up-form {
   position: relative;
@@ -6550,7 +6559,7 @@ div .placeholder-box.exercise-box {
   width: 91%;
 }
 .extra-margin {
-  margin: 135px 0;
+  margin: 100px 0;
 }
 .splash-header {
   text-decoration: none;
@@ -6558,6 +6567,17 @@ div .placeholder-box.exercise-box {
 .splash-header a {
   color: #86E4F3;
   text-decoration: none;
+}
+.raised {
+  color: #fff;
+  display: inline-block;
+}
+.small-phone {
+  display: none;
+}
+#home-ccc-link {
+  color: #5FD4FB;
+  text-decoration: underline;
 }
 /* really specific css rules applied by angular */
 @media only screen and (max-width: 979px) {
@@ -6578,7 +6598,7 @@ div .placeholder-box.exercise-box {
     position: absolute;
   }
   .dark-blue {
-    padding: 75px 0;
+    padding: 45px 0;
   }
   .dark-blue h1 {
     font-size: 105px;
@@ -6590,11 +6610,120 @@ div .placeholder-box.exercise-box {
   .dark-blue h4 {
     margin: 25px 0;
   }
+  .dark-blue.bottom-facts {
+    padding: 27px 0 43px;
+  }
+  .dark-blue .share-facts {
+    font-size: 36px;
+    line-height: 34px;
+    font-weight: 100;
+  }
+  .dark-blue .awareness {
+    font-size: 20px;
+    line-height: 23px;
+    width: 95%;
+  }
+  .dark-blue .fact-bubbles {
+    margin-bottom: 10px;
+  }
+  .dark-blue .fact-bubbles img {
+    width: 85px;
+  }
+  .dark-blue .fact-text {
+    padding-top: 0;
+  }
+  .dark-blue .bottom-text {
+    margin-top: 15px;
+  }
   .play {
     background: none;
   }
   .home-share {
-    top: -40px;
+    position: relative;
+    top: inherit;
+  }
+  .home-share .pull-right {
+    float: none;
+  }
+  .top-section h3 {
+    font-size: 25px;
+  }
+  .top-section h4 {
+    font-size: 24px;
+    line-height: 30px;
+  }
+  .top-section .video-inst {
+    width: 95%;
+    font-size: 20px;
+    line-height: 27px;
+  }
+  .top-section .video-sub {
+    margin-top: 11px;
+    line-height: 20px;
+  }
+  .light-blue {
+    padding: 34px 0 43px;
+  }
+  .light-blue .event-date {
+    font-size: 36px;
+    line-height: 34px;
+    margin: 20px 0 14px;
+  }
+  .light-blue .play {
+    margin: 0;
+    padding: 12px 20px 17px;
+  }
+  .light-blue .span7 {
+    margin-bottom: 21px;
+  }
+  .bottom-facts {
+    padding: 27px 0 43px;
+  }
+  .bottom {
+    padding: 57px 0;
+  }
+  .bottom .disclaimer {
+    width: inherit;
+  }
+  .bottom p {
+    color: #000;
+  }
+  .super-dark-blue {
+    padding: 27px 0 37px;
+  }
+  .super-dark-blue .share-facts {
+    font-weight: 100;
+    font-size: 36px;
+    line-height: 34px;
+  }
+  .super-dark-blue .donation-info p {
+    font-size: 20px;
+    margin-top: 9px;
+  }
+  .super-dark-blue .donation-info p.top-text {
+    margin-top: 14px;
+  }
+  .super-dark-blue .donation-info p span {
+    color: #86e4f3;
+  }
+  .super-dark-blue .donate-box.text {
+    padding: 1px;
+  }
+  .super-dark-blue .donate-box.text p {
+    font-size: 18px;
+  }
+  .super-dark-blue .info-boxes {
+    margin: 30px 0 20px;
+  }
+  .super-dark-blue .donate-box .comp-link {
+    font-size: 18px;
+  }
+  .super-dark-blue .donate-box .comp-icon {
+    position: relative;
+    top: -11px;
+  }
+  .super-dark-blue .learn-more-link {
+    margin-top: 19px;
   }
 }
 @media only screen and (min-width: 767px) {
@@ -6625,12 +6754,19 @@ div .placeholder-box.exercise-box {
   .facts {
     margin-bottom: 20px;
   }
-  .dark-blue {
-    padding: 75px 0;
-  }
   .dark-blue h1 {
-    font-size: 56px;
-    line-height: 46px;
+    font-size: 69px;
+    line-height: 59px;
     padding: 2px;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .fact-text {
+    width: 55%;
+  }
+}
+@media only screen and (max-width: 290px) {
+  .dark-blue h1 {
+    background: none;
   }
 }
