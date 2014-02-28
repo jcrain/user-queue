@@ -6552,6 +6552,13 @@ div .placeholder-box.exercise-box {
 .extra-margin {
   margin: 135px 0;
 }
+.splash-header {
+  text-decoration: none;
+}
+.splash-header a {
+  color: #86E4F3;
+  text-decoration: none;
+}
 /* really specific css rules applied by angular */
 @media only screen and (max-width: 979px) {
   .fly-out {

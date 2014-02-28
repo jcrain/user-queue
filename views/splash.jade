@@ -30,7 +30,8 @@ block content
 					span.splash-twitter.home.share.twitter(ng-click="share()")
 						img(src="/images/splash_twitter.png")
 			h3.georgia The super-awesome
-			h1 colon-o-tron
+			h1.splash-header 
+				a(href="/") colon-o-tron
 			h4.sub-head PLAY TO PREVENT COLORECTAL CANCER
 			.video.hide
 				.fly-out.left
@@ -62,7 +63,8 @@ block content
 		.container
 			.row
 				.span5
-					img(src="/images/map.jpg")
+					a(href="https://www.google.com/maps/place/10+Rockefeller+Plaza/@40.7578596,-73.9794028,21z/data=!4m2!3m1!1s0x89c258fee5ee15dd:0x95c779525bf46068", target="_blank")
+						img(src="/images/map.jpg")
 				.span7
 					p.event-date Show you care &amp; join us in the fight to beat colorectal cancer 
 					p.play PLAY ANY TIME, ANY DAY
@@ -72,10 +74,12 @@ block content
 						br
 						| New York, NY 10020
 					p.address.link
-						a.place-icon(href="https://maps.google.com/maps?q=10+Rockefeller+Plaza+New+York,+NY+10020&oe=utf-8&client=firefox-a&channel=sb&hnear=10+Rockefeller+Plaza,+New+York,+10020&gl=us&t=m&z=16", target="_blank") GET DIRECTIONS
+						a.place-icon(href="https://www.google.com/maps/place/10+Rockefeller+Plaza/@40.7578596,-73.9794028,21z/data=!4m2!3m1!1s0x89c258fee5ee15dd:0x95c779525bf46068", target="_blank") GET DIRECTIONS
 	.super-dark-blue
 		.container.donation-info
-			h3.share-facts we’ve raised lots so far
+			h3.share-facts we’ve raised 
+				|lots so far
+			div=dolla
 			p thanks to generous people like you :)
 			.row.info-boxes
 				.span7.offset1.donate-box.text 

@@ -70,12 +70,12 @@ exports.splash  = function(req, res){
 	var donations =  '';
 	request('http://events.coloncancerchallenge.org/site/PageServer?pagename=colonotron_progress&pgwrap=n', function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-		  console.log(body.trim()); // Print the google web page.
-
+		  console.log(body); // Print the google web page.
+		  donations = body;
 		}
 	});
 
- 	res.render('splash', { daysLeft: day, donation: donations});
+ 	res.render('splash', { daysLeft: day, dolla: donations});
  };
 
 // Lemme get an index pageeeee
