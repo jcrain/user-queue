@@ -27,9 +27,9 @@ div.user-que.view(ng-show="data.showEndScreen", id="end-screen")
 		button.btn.btn-primary.play-again(ng-click="playAgain()") Play Again
 
 // Alternate screen is there is an error during the game
-div.user-que(ng-show="data.showGameError")
+div.user-que.error_screen(ng-show="data.showGameError")
 	h3.que-header We're Sorry {{user.name}}	
-	img.down-arrow(src="/images/que_down_arrow.png")
+	img.down-arrow(src="/images/que_down_arrow_error.png")
 	div.container
 		p.mdm.place-in-line	IT LOOKS LIKE THE COLON-O-TRON GOT STUCK IN YOUR GAME.
 		button.btn.btn-primary.play-again(ng-click="playAgain()") Play Again		

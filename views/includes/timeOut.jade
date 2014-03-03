@@ -1,7 +1,7 @@
-div.user-qued(ng-show="data.showUserTimedOut", id="timed-out-screen")
+div.user-qued.error_screen(ng-show="data.showUserTimedOut", id="timed-out-screen")
 	h3.que-header SORRY, YOU TIMED OUT
 
-	img.down-arrow(src="/images/que_down_arrow.png")
+	img.down-arrow(src="/images/que_down_arrow_error.png")
 	div.container.timed-out.row
 		p.mdm.place-in-line.timeout THANKS FOR STOPPING BY
 		button.btn.btn-primary.span(ng-click="playAgain()") 

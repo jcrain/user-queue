@@ -6091,7 +6091,7 @@ div .placeholder-box.exercise-box {
   margin-top: 30px;
 }
 .footer .arial {
-  color: #315872;
+  color: #000;
   font-family: Arial, Sans Serif;
 }
 .footer .arial a {
@@ -6256,6 +6256,10 @@ div .placeholder-box.exercise-box {
   padding: 30px;
   line-height: 30px;
   font-weight: 100;
+}
+.error_screen h3 {
+  background: #fad3d5;
+  color: #a01a1a;
 }
 .down-arrow {
   display: block;
