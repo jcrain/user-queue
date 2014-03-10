@@ -234,7 +234,7 @@ exports.displayIsReady = function(req, res){
 	var showNextUp = Que.find({}).skip(1).limit(1).select('socket').exec(function(err, doc){ // If we have a 2nd person in the queue they get the up next screen
 		if (doc != null){
 			doc =JSON.stringify(doc);
-			try{
+			try{ // this code below is a hack. For some reason I am not getting mongo objects returns from this call.
 				doc = doc.split(':');
 				doc = doc[1].split(',');
 				doc = doc[0].replace('"', '').replace('"', '');

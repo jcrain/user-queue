@@ -6066,11 +6066,13 @@ div .placeholder-box.exercise-box {
 .share-box .share {
   background: #f39c0d;
   color: #fff;
-  font-size: 24px;
-  height: 45px;
+  font-size: 22px;
+  height: 55px;
   display: inline-block;
   padding: 0 10px;
   cursor: pointer;
+  font-weight: 100px;
+  width: 115px;
 }
 .game {
   position: relative;
@@ -6159,11 +6161,11 @@ div .placeholder-box.exercise-box {
 }
 .sign-up-form .ng-invalid .btn.btn-primary .submit-form {
   background: url('../images/btn_invalid_arrow.png') no-repeat 94px 6px;
-  padding-right: 40px;
+  padding-right: 42px;
 }
 .sign-up-form .btn.btn-primary .submit-form {
   background: url('../images/btn_valid_arrow.png') no-repeat 94px 6px;
-  padding-right: 40px;
+  padding-right: 42px;
 }
 .sign-up-form .email {
   position: relative;
@@ -6303,6 +6305,9 @@ div .placeholder-box.exercise-box {
   margin-top: 9px;
   font-size: 16px;
   line-height: 23px;
+}
+.donate-box.text p span {
+  color: #5FD4FB;
 }
 .learn-more {
   color: #86e4f3;
@@ -6561,6 +6566,7 @@ div .placeholder-box.exercise-box {
 }
 .disclaimer {
   width: 91%;
+  margin: 10px auto;
 }
 .extra-margin {
   margin: 100px 0;
@@ -6762,6 +6768,9 @@ div .placeholder-box.exercise-box {
     font-size: 69px;
     line-height: 59px;
     padding: 2px;
+  }
+  .donate-box .phone-icon {
+    top: -25px;
   }
 }
 @media only screen and (max-width: 320px) {

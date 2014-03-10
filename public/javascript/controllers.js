@@ -50,7 +50,7 @@ function WindowGame($scope, $http, socket){
 	 	if ( channel == "facebook") {
 	 		window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.colonotron.org','Facebook','toolbar=0,status=0,width=580,height=325');
 	 	} else {
-	 		window.open('http://twitter.com/share/?url=google.com&text=Play to prevent colorectal cancer and learn how you can help us beat it. www.colonotron.org','Twitter','toolbar=0,status=0,width=580,height=325');
+	 		window.open('http://twitter.com/share/?url=google.com&text=Play to prevent colorectal cancer and learn how you can help us beat it. www.colonotron.org&hashtags=colonotron','Twitter','toolbar=0,status=0,width=580,height=325');
 	 	}
 	 };
 

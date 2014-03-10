@@ -63,8 +63,8 @@ div											{
 
 .share-box 									{
 	.share:first-child 						{ margin-right: 15px; }
-	.share 									{ background: @btnorange; color: #fff; font-size: 24px; height: 45px; display: inline-block; 
-											  padding: 0 10px; cursor: pointer; }
+	.share 									{ background: @btnorange; color: #fff; font-size: 22px; height: 55px; display: inline-block; 
+											  padding: 0 10px; cursor: pointer; font-weight: 100px; width: 115px; }
 }
 
 .game 										{ position:relative; }
@@ -103,11 +103,11 @@ div											{
 	.ng-invalid 							{
 		.btn.btn-primary 					{ background: #244358; 
 			&:disabled 						{ background: #244358; }
-			.submit-form 					{ background: url('../images/btn_invalid_arrow.png') no-repeat 94px 6px; padding-right: 40px;  }
+			.submit-form 					{ background: url('../images/btn_invalid_arrow.png') no-repeat 94px 6px; padding-right: 42px;  }
 	}
 	}
 	.btn.btn-primary 						{ 
-		.submit-form 						{ background: url('../images/btn_valid_arrow.png') no-repeat 94px 6px; padding-right: 40px; }
+		.submit-form 						{ background: url('../images/btn_valid_arrow.png') no-repeat 94px 6px; padding-right: 42px; }
 	}
 	.email 									{ position: relative; 
 		.error-message 						{ display: none; 
@@ -174,7 +174,9 @@ div											{
 }
 .donate-box 								{  
 	&.text 									{ 
-		p 									{ margin-top: 9px; font-size: 16px; line-height: 23px;   }
+		p 									{ margin-top: 9px; font-size: 16px; line-height: 23px;   
+			span 							{ color: #5FD4FB; }
+		}
 	}
 }
 .learn-more 								{ color: #86e4f3; text-decoration: underline; }
@@ -263,7 +265,7 @@ div											{
 	p 										{ font-size: 18px; line-height: 24px; font-weight: 100; color: #fff; }
 }
 .info-boxes 								{ margin: 50px 0; }
-.disclaimer 								{ width: 91%; }
+.disclaimer 								{ width: 91%; margin: 10px auto; }
 .extra-margin 								{ margin: 100px 0; }
 .splash-header 								{ text-decoration: none; 
 	a 										{ color: #86E4F3; text-decoration: none; }
@@ -367,6 +369,9 @@ div											{
 	.facts 									{ margin-bottom: 20px; }
 	.dark-blue 								{ 
 		h1 									{ font-size: 69px; line-height: 59px; padding: 2px;}
+	}
+	.donate-box 							{ 
+		.phone-icon 						{ top: -25px; }
 	}
 	
 }
