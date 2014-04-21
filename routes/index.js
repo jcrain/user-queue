@@ -119,6 +119,7 @@ exports.addUser = function(req, res){
 
 	var timeStamp = (new Date).getTime();
 	var queDoc = { id: reqBody.id, name: reqBody.name, socket: reqBody.id, userHitPlay: false, timestampAdded: timeStamp }; // build user doc
+	console.log('my user id is ' + reqBody.id);
 	var addQue = new Que(queDoc);
 	addQue.save(function(err, doc) { // save user to queue
 		if(err || !doc) {
