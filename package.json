@@ -1,6 +1,5 @@
 {
-  "name": "Colon-O-Tron",
-  "description": "Que for using interactive window dispaly",
+  "private": true,
   "version": "1.0.0",
   "dependencies": {
     "express": "3.x",
