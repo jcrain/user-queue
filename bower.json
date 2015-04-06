@@ -1,0 +1,10 @@
+{
+  "name": "window-display-queue",
+  "version": "1.0.0",
+  "description": "Updating queue for users waiting to use window display built for colon cancer foundation",
+  "license": "MIT",
+  "dependencies": {
+  	"jquery": "~1.9.0",
+  	"angular": "~1.2.0"
+  }
+}
